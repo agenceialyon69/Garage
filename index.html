@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>RéceptionZen Garage — Ne perdez plus de clients</title>
-<meta name="description" content="RéceptionZen répond aux clients à votre place pendant que vous êtes en atelier. Moins d'appels perdus, plus de rendez-vous, plus de clients récupérés." />
+<title>RéceptionZen Garage — Récupérez les clients que vous perdez</title>
+<meta name="description" content="RéceptionZen répond aux clients à votre place pendant que vous êtes en atelier. Chat API-ready, formulaire branché sur webhook, et positionnement orienté argent perdu." />
 <meta name="robots" content="index,follow" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -31,7 +31,7 @@
 html{scroll-behavior:smooth}
 body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:1.5;-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}
-button{font:inherit}
+button,input,textarea{font:inherit}
 .container{max-width:1160px;margin:0 auto;padding:0 24px}
 :focus-visible{outline:3px solid var(--gold);outline-offset:3px}
 
@@ -74,9 +74,9 @@ h1 em{font-style:italic;color:var(--gold);font-weight:400}
 .hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px}
 .btn-primary,.btn-secondary{
 display:inline-flex;align-items:center;justify-content:center;
-padding:15px 22px;border-radius:999px;font-size:15px;font-weight:800;transition:.2s
+padding:15px 22px;border-radius:999px;font-size:15px;font-weight:800;transition:.2s;cursor:pointer
 }
-.btn-primary{background:var(--forest);color:var(--bg);box-shadow:0 12px 30px rgba(31,61,53,.12)}
+.btn-primary{background:var(--forest);color:var(--bg);box-shadow:0 12px 30px rgba(31,61,53,.12);border:none}
 .btn-primary:hover{background:var(--forest-deep);transform:translateY(-1px)}
 .btn-secondary{background:transparent;border:1px solid var(--line);color:var(--forest)}
 .btn-secondary:hover{background:rgba(31,61,53,.05)}
@@ -101,6 +101,7 @@ padding:28px;box-shadow:var(--shadow)
 margin-top:18px;border-radius:20px;background:rgba(31,61,53,.03);
 border:1px solid rgba(31,61,53,.08);padding:14px;display:grid;gap:10px
 }
+.chat-log{display:grid;gap:10px;min-height:220px;max-height:360px;overflow:auto;padding-right:2px}
 .chat-step{
 display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border-radius:14px;
 background:#fff;border:1px solid rgba(31,61,53,.08)
@@ -116,12 +117,27 @@ display:grid;place-items:center;font-size:12px;font-weight:800
 .chat-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
 .chip{
 border:1px solid rgba(31,61,53,.14);background:#fff;color:var(--forest);
-border-radius:999px;padding:8px 12px;font-size:13px;font-weight:700
+border-radius:999px;padding:8px 12px;font-size:13px;font-weight:700;cursor:pointer
 }
 .chip:hover{background:rgba(31,61,53,.04)}
+.chat-input{
+display:flex;gap:8px;align-items:center;margin-top:6px
+}
+.chat-input input{
+flex:1;border:1px solid rgba(31,61,53,.16);background:#fff;border-radius:999px;
+padding:12px 14px;color:var(--text)
+}
+.chat-input button{
+border:none;border-radius:999px;padding:12px 16px;background:var(--forest);color:#fff;font-weight:800;cursor:pointer
+}
+.chat-input button:hover{background:var(--forest-deep)}
 .chat-result{
 margin-top:8px;padding:12px 14px;border-radius:14px;background:rgba(31,61,53,.08);
-color:var(--forest);font-size:14px;line-height:1.6;font-weight:700
+color:var(--forest);font-size:14px;line-height:1.6;font-weight:700;display:none
+}
+.chat-meta{font-size:12px;color:var(--muted);margin-top:6px}
+.status{
+font-size:12px;font-weight:700;color:var(--muted);display:none
 }
 
 .section{padding:74px 0}
@@ -195,7 +211,7 @@ padding:22px;margin-top:18px;box-shadow:0 10px 24px rgba(0,0,0,.04)
 .faq-item{border-bottom:1px solid rgba(31,61,53,.12);padding:18px 0}
 .faq-q{
 width:100%;display:flex;align-items:center;justify-content:space-between;
-text-align:left;font-family:var(--serif);font-size:20px;color:var(--forest);padding:2px 0
+text-align:left;font-family:var(--serif);font-size:20px;color:var(--forest);padding:2px 0;background:transparent;border:none;cursor:pointer
 }
 .faq-a{
 max-height:0;overflow:hidden;transition:max-height .35s ease;
@@ -235,6 +251,10 @@ color:#fff;border-radius:12px;padding:12px 14px;font:inherit;resize:vertical
 }
 .contact-mini input::placeholder,.contact-mini textarea::placeholder{color:rgba(245,240,232,.45)}
 .contact-mini textarea{min-height:90px}
+.contact-mini button{width:100%;margin-top:14px;border:none}
+.feedback{
+margin-top:10px;font-size:13px;line-height:1.6;color:rgba(245,240,232,.84);display:none
+}
 footer{
 background:var(--forest-deep);color:rgba(245,240,232,.68);
 padding:26px 0;text-align:center;font-size:13px;border-top:1px solid rgba(255,255,255,.06)
@@ -261,80 +281,60 @@ h1{font-size:clamp(36px,10vw,54px)}
 <a href="#probleme">Problème</a>
 <a href="#demo">Démo</a>
 <a href="#offre">Offre</a>
-<a href="#contact" class="nav-cta">Installer dans mon garage</a>
+<a href="#contact" class="nav-cta">Faire le diagnostic</a>
 </div>
 </div>
 </nav>
 
 <main id="top">
-
 <section class="hero">
 <div class="container">
 <div class="hero-grid">
-
 <div>
 <div class="badge">Réception automatisée pour garages</div>
-
-<h1>
-Ne perdez plus de clients<br>
-<em>parce que vous êtes sous une voiture.</em>
-</h1>
-
-<p class="subtitle">
-Quand vous êtes en atelier, les appels et messages ne s’arrêtent pas.
-RéceptionZen répond à votre place, qualifie la demande et garde seulement les rendez-vous sérieux.
-</p>
-
-<p class="micro">
-Un garage qui manque des appels perd des clients. RéceptionZen aide à récupérer ces demandes avant qu’elles partent ailleurs.
-</p>
-
+<h1>Vous perdez des clients<br><em>pendant que vous réparez les voitures des autres.</em></h1>
+<p class="subtitle">Un appel manqué, un client qui raccroche, un devis qui n’arrive jamais. RéceptionZen répond à votre place, qualifie la demande et récupère les clients qui partent trop vite.</p>
+<p class="micro">Si un appel n’est pas pris, le client va souvent ailleurs dans les minutes qui suivent. Ici, on ne vend pas un chatbot : on récupère du chiffre.</p>
 <div class="hero-actions">
-<a href="#contact" class="btn-primary">Voir si c’est adapté à mon garage</a>
-<a href="#demo" class="btn-secondary">Voir un exemple réel</a>
+<a href="#contact" class="btn-primary">Faire le diagnostic de mes appels perdus</a>
+<a href="#demo" class="btn-secondary">Voir la démo en direct</a>
 </div>
-
 <div class="hero-proof">
-<span class="trust-pill">Réponse automatique</span>
-<span class="trust-pill">Moins d’appels perdus</span>
-<span class="trust-pill">Plus de rendez-vous captés</span>
+<span class="trust-pill">Réponse immédiate</span>
+<span class="trust-pill">Clients récupérés</span>
+<span class="trust-pill">Devis sauvés</span>
 </div>
-
-<div class="proof-line">
-Exemple simple : si un appel manqué fait perdre un client, récupérer seulement quelques demandes par mois peut déjà couvrir le coût de l’outil.
-</div>
+<div class="proof-line">Exemple simple : 3 appels manqués par jour, c’est souvent plusieurs clients perdus chaque semaine.</div>
 </div>
 
 <aside class="hero-card">
 <h3>Démo conversationnelle</h3>
-<p>Le visiteur teste un vrai flux court, cadré et orienté vers la qualification de demande.</p>
+<p>Le visiteur peut taper une vraie question de garage et voir comment RéceptionZen répond tout de suite.</p>
 
 <div class="chat-box">
+<div class="chat-log" id="chatLog">
 <div class="chat-step">
 <div class="avatar bot">RZ</div>
-<p>Bonjour 👋 Je vous aide à gérer les demandes du garage. Que souhaitez-vous faire ?</p>
+<p>Bonjour 👋 Je vous aide à ne plus perdre de demandes quand l’atelier est plein. Posez votre question.</p>
+</div>
 </div>
 
 <div class="chat-actions">
-<button class="chip" data-scenario="rdv">Prendre un rendez-vous</button>
-<button class="chip" data-scenario="urgent">Demande urgente</button>
-<button class="chip" data-scenario="other">Autre demande</button>
+<button class="chip" data-fill="Je veux un rendez-vous pour une vidange" type="button">Vidange</button>
+<button class="chip" data-fill="J’ai un voyant moteur allumé" type="button">Voyant moteur</button>
+<button class="chip" data-fill="J’ai un pneu crevé, vous pouvez me recevoir aujourd’hui ?" type="button">Pneu crevé</button>
 </div>
 
-<div id="chatFlow" class="scenario-wrap">
-<div class="scenario">
-<div class="scenario-title">Choisissez un scénario</div>
-<div class="chat-step">
-<div class="avatar user">?</div>
-<p>Appuyez sur un scénario pour voir la réponse de RéceptionZen.</p>
-</div>
-</div>
+<div class="chat-input">
+<input id="chatInput" type="text" placeholder="Tapez votre message..." autocomplete="off" />
+<button id="sendBtn" type="button">Envoyer</button>
 </div>
 
-<div id="chatResult" class="chat-result" style="display:none;"></div>
+<div class="status" id="chatStatus">Envoi en cours…</div>
+<div id="chatResult" class="chat-result"></div>
+<div class="chat-meta">Réponse directe via la route /api/chat-garage.</div>
 </div>
 </aside>
-
 </div>
 </div>
 </section>
@@ -342,26 +342,23 @@ Exemple simple : si un appel manqué fait perdre un client, récupérer seulemen
 <section class="section section-alt" id="probleme">
 <div class="container">
 <div class="section-header">
-<div class="section-eyebrow">Le vrai problème</div>
-<h2 class="section-title">Quand vous êtes occupé, les clients ne vous attendent pas.</h2>
-<p class="section-lead">
-Les appels manqués, les messages sans réponse et les demandes répétitives font perdre du temps et des opportunités.
-RéceptionZen remet de l’ordre sans alourdir votre quotidien.
-</p>
+<div class="section-eyebrow">Ce que ça vous coûte</div>
+<h2 class="section-title">Chaque appel manqué peut devenir un client perdu.</h2>
+<p class="section-lead">Quand un garage ne répond pas, il ne perd pas juste un appel. Il perd souvent un devis, une réparation, un client récurrent, et parfois le passage chez le concurrent.</p>
 </div>
 
 <div class="grid-3">
 <div class="card">
-<h3>Moins d’appels perdus</h3>
-<p>Les clients obtiennent une réponse même quand vous êtes en intervention ou en atelier.</p>
+<h3>Client perdu</h3>
+<p>Le client pour vidange, pneu crevé, CT urgent ou voyant moteur ne rappelle pas toujours.</p>
 </div>
 <div class="card">
-<h3>Moins de temps perdu</h3>
-<p>Les demandes simples sont filtrées, les informations utiles sont collectées automatiquement, et vous récupérez seulement les vrais prospects.</p>
+<h3>Devis perdu</h3>
+<p>Un appel non pris, c’est souvent une demande qui ne se transforme jamais en devis.</p>
 </div>
 <div class="card">
-<h3>Plus de rendez-vous</h3>
-<p>En répondant vite et proprement, vous augmentez les chances de convertir une demande en passage au garage.</p>
+<h3>Chiffre perdu</h3>
+<p>Quelques demandes ratées par semaine suffisent à faire baisser votre activité sans que vous le voyiez tout de suite.</p>
 </div>
 </div>
 </div>
@@ -371,47 +368,32 @@ RéceptionZen remet de l’ordre sans alourdir votre quotidien.
 <div class="container">
 <div class="section-header">
 <div class="section-eyebrow">Comment ça marche</div>
-<h2 class="section-title">Simple à comprendre. Simple à utiliser.</h2>
-<p class="section-lead">
-Vous n’avez pas besoin d’un gros outil. Vous avez besoin d’un système qui prend le relais sur les demandes entrantes et garde votre réception propre.
-</p>
+<h2 class="section-title">Simple. Lisible. Fait pour sauver des appels.</h2>
+<p class="section-lead">Le but n’est pas d’ajouter un outil de plus. Le but est de récupérer les demandes qui partent trop vite quand vous êtes occupé.</p>
 </div>
 
 <div class="demo">
 <div class="demo-panel">
 <h3>Le flux principal</h3>
-<p>RéceptionZen suit un enchaînement simple pour ne jamais laisser une demande sans réponse.</p>
-
+<p>RéceptionZen suit un parcours simple pour garder chaque demande dans votre tuyau commercial.</p>
 <div class="flow">
-<div class="flow-item">
-<div class="step">1</div>
-<div><strong>Le client envoie un message.</strong><br><span>Ex. : “Bonjour, j’aimerais un rendez-vous pour ma voiture.”</span></div>
-</div>
-<div class="flow-item">
-<div class="step">2</div>
-<div><strong>RéceptionZen répond automatiquement.</strong><br><span>Il demande les infos utiles : véhicule, souci, créneau, urgence.</span></div>
-</div>
-<div class="flow-item">
-<div class="step">3</div>
-<div><strong>Les infos sont envoyées au garage.</strong><br><span>Par email, WhatsApp, tableau simple ou CRM léger.</span></div>
-</div>
-<div class="flow-item">
-<div class="step">4</div>
-<div><strong>Le client est rassuré et orienté.</strong><br><span>Il sait que sa demande a bien été prise en compte.</span></div>
-</div>
+<div class="flow-item"><div class="step">1</div><div><strong>Le client écrit.</strong><br><span>Ex. : “J’ai un voyant moteur, je peux passer demain matin ?”</span></div></div>
+<div class="flow-item"><div class="step">2</div><div><strong>RéceptionZen répond.</strong><br><span>Il demande les infos utiles : véhicule, urgence, créneau, besoin exact.</span></div></div>
+<div class="flow-item"><div class="step">3</div><div><strong>Les infos partent au garage.</strong><br><span>Par webhook, email, WhatsApp ou autre système simple.</span></div></div>
+<div class="flow-item"><div class="step">4</div><div><strong>Le client ne repart pas ailleurs.</strong><br><span>Il reçoit une réponse tout de suite, donc vous gardez la main.</span></div></div>
 </div>
 </div>
 
 <div class="demo-panel">
 <h3>Ce que vous recevez</h3>
-<p>Une mise en place propre, pensée pour être rapide à comprendre et facile à exploiter.</p>
+<p>Une mise en place propre, pensée pour les garages qui veulent du concret, pas une promesse floue.</p>
 <ul style="list-style:none;display:grid;gap:12px;margin-top:18px">
-<li style="display:flex;gap:10px"><span class="check">✓</span><span>Réponse automatique aux demandes simples.</span></li>
-<li style="display:flex;gap:10px"><span class="check">✓</span><span>Filtrage et qualification des leads.</span></li>
-<li style="display:flex;gap:10px"><span class="check">✓</span><span>Transmission des informations au garage.</span></li>
+<li style="display:flex;gap:10px"><span class="check">✓</span><span>Réponses automatiques aux demandes simples.</span></li>
+<li style="display:flex;gap:10px"><span class="check">✓</span><span>Qualification des leads avant traitement.</span></li>
+<li style="display:flex;gap:10px"><span class="check">✓</span><span>Transmission des informations au bon endroit.</span></li>
 <li style="display:flex;gap:10px"><span class="check">✓</span><span>Capture de contact et suivi des demandes.</span></li>
 <li style="display:flex;gap:10px"><span class="check">✓</span><span>Base simple pour le rendez-vous ou le rappel.</span></li>
-<li style="display:flex;gap:10px"><span class="check">✓</span><span>Fonctionne sur WhatsApp, formulaire web ou email.</span></li>
+<li style="display:flex;gap:10px"><span class="check">✓</span><span>Fonctionne sur votre site via widget + webhook.</span></li>
 </ul>
 </div>
 </div>
@@ -423,14 +405,12 @@ Vous n’avez pas besoin d’un gros outil. Vous avez besoin d’un système qui
 <div class="section-header">
 <div class="section-eyebrow">L’offre</div>
 <h2 class="section-title">Une installation claire. Un abonnement simple.</h2>
-<p class="section-lead">
-Une offre conçue pour entrer vite chez le client, puis créer une récurrence avec une maintenance légère.
-</p>
+<p class="section-lead">Une offre conçue pour entrer vite chez le client, puis créer une récurrence avec une maintenance légère.</p>
 </div>
 
 <div class="offer">
 <h3>RéceptionZen Garage</h3>
-<p>Le système de réception qui répond aux clients à votre place pendant que vous êtes en atelier, qualifie les demandes et aide à récupérer plus de rendez-vous.</p>
+<p>Le système qui répond à votre place pendant que vous êtes en atelier, qualifie les demandes et vous aide à récupérer plus de devis.</p>
 
 <div class="pricing">
 <div class="price-box">
@@ -453,8 +433,8 @@ Une offre conçue pour entrer vite chez le client, puis créer une récurrence a
 </div>
 </div>
 
-<a href="#contact" class="btn-primary">Installer dans mon garage</a>
-<div class="note">Offre pensée pour les garages qui veulent une solution simple, utile et rapide à mettre en place.</div>
+<a href="#contact" class="btn-primary">Faire le diagnostic de mes appels perdus</a>
+<div class="note">Offre pensée pour les garages qui veulent une solution simple, utile et rentable rapidement.</div>
 </div>
 </div>
 </section>
@@ -464,9 +444,7 @@ Une offre conçue pour entrer vite chez le client, puis créer une récurrence a
 <div class="section-header">
 <div class="section-eyebrow">Preuve</div>
 <h2 class="section-title">Ajoutez une preuve réelle dès que possible.</h2>
-<p class="section-lead">
-Une vraie démonstration, un retour client ou un cas pilote vaut mieux qu’une promesse trop agressive.
-</p>
+<p class="section-lead">Une vraie démonstration, un retour client ou un cas pilote vaut mieux qu’une promesse trop agressive.</p>
 </div>
 
 <div class="testimonial">
@@ -482,23 +460,21 @@ Une vraie démonstration, un retour client ou un cas pilote vaut mieux qu’une 
 <div class="section-header">
 <div class="section-eyebrow">Pourquoi ça vend</div>
 <h2 class="section-title">Vous vendez un client récupéré, pas un logiciel.</h2>
-<p class="section-lead">
-Le bon angle, c’est la perte évitée : moins d’appels perdus, moins de demandes oubliées, plus de rendez-vous captés.
-</p>
+<p class="section-lead">Le bon angle, c’est la perte évitée : moins d’appels perdus, moins de devis oubliés, plus de rendez-vous captés.</p>
 </div>
 
 <div class="grid-3">
 <div class="card" style="background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.08)">
-<h3 style="color:var(--bg)">Message</h3>
-<p style="color:rgba(245,240,232,.82)">“Je veux être sûr que chaque client obtienne une réponse rapide.”</p>
+<h3 style="color:var(--bg)">Situation</h3>
+<p style="color:rgba(245,240,232,.82)">“Je suis en atelier, mon téléphone sonne, et le client ne m’attend pas.”</p>
 </div>
 <div class="card" style="background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.08)">
 <h3 style="color:var(--bg)">Bénéfice</h3>
-<p style="color:rgba(245,240,232,.82)">“Je ne perds plus de demandes quand je suis en atelier ou en intervention.”</p>
+<p style="color:rgba(245,240,232,.82)">“Je réponds vite, je garde le contact et je récupère le devis.”</p>
 </div>
 <div class="card" style="background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.08)">
 <h3 style="color:var(--bg)">Résultat</h3>
-<p style="color:rgba(245,240,232,.82)">“Je transforme plus de messages en rendez-vous.”</p>
+<p style="color:rgba(245,240,232,.82)">“Je transforme plus d’appels en clients.”</p>
 </div>
 </div>
 </div>
@@ -508,43 +484,26 @@ Le bon angle, c’est la perte évitée : moins d’appels perdus, moins de dema
 <div class="container">
 <div class="section-header">
 <div class="section-eyebrow">FAQ</div>
-<h2 class="section-title">Les objections à traiter avant la prise de contact.</h2>
-<p class="section-lead">
-Répondez aux questions évidentes pour éviter qu’elles bloquent la décision.
-</p>
+<h2 class="section-title">Les questions à lever avant la signature.</h2>
+<p class="section-lead">Répondez aux objections simples pour éviter qu’elles bloquent la décision.</p>
 </div>
 
 <div class="faq">
 <div class="faq-item">
-<button class="faq-q" aria-expanded="false">
-Est-ce que ça remplace une réceptionniste ?
-<span class="faq-icon">+</span>
-</button>
-<div class="faq-a"><div class="faq-a-inner">Non. RéceptionZen est un système qui prend en charge les demandes simples, qualifie les messages et aide à ne pas perdre de contact.</div></div>
+<button class="faq-q" aria-expanded="false">Est-ce que ça remplace une réceptionniste ?<span class="faq-icon">+</span></button>
+<div class="faq-a"><div class="faq-a-inner">Non. RéceptionZen prend surtout en charge les demandes simples, qualifie les messages et évite de perdre de vrais clients.</div></div>
 </div>
-
 <div class="faq-item">
-<button class="faq-q" aria-expanded="false">
-Est-ce que c’est compliqué à mettre en place ?
-<span class="faq-icon">+</span>
-</button>
-<div class="faq-a"><div class="faq-a-inner">Non. L’objectif est d’avoir une installation simple, avec des réponses claires et des scénarios faciles à comprendre.</div></div>
+<button class="faq-q" aria-expanded="false">Est-ce que c’est compliqué à mettre en place ?<span class="faq-icon">+</span></button>
+<div class="faq-a"><div class="faq-a-inner">Non. L’idée est d’avoir une installation claire, avec des réponses simples et des scénarios faciles à comprendre.</div></div>
 </div>
-
 <div class="faq-item">
-<button class="faq-q" aria-expanded="false">
-Est-ce que je peux démarrer avec un seul canal ?
-<span class="faq-icon">+</span>
-</button>
-<div class="faq-a"><div class="faq-a-inner">Oui. Vous pouvez commencer avec un formulaire, WhatsApp ou une page de contact simple, puis élargir ensuite.</div></div>
+<button class="faq-q" aria-expanded="false">Est-ce que je peux démarrer avec un seul canal ?<span class="faq-icon">+</span></button>
+<div class="faq-a"><div class="faq-a-inner">Oui. Vous pouvez commencer avec un widget web, puis ajouter WhatsApp ou email ensuite si besoin.</div></div>
 </div>
-
 <div class="faq-item">
-<button class="faq-q" aria-expanded="false">
-Est-ce que c’est adapté à mon garage ?
-<span class="faq-icon">+</span>
-</button>
-<div class="faq-a"><div class="faq-a-inner">Oui. Les scénarios, les questions et le ton de réponse peuvent être ajustés selon votre activité et votre façon de travailler.</div></div>
+<button class="faq-q" aria-expanded="false">Est-ce que c’est adapté à mon garage ?<span class="faq-icon">+</span></button>
+<div class="faq-a"><div class="faq-a-inner">Oui. Les scénarios, les questions et le ton peuvent être ajustés selon votre activité et votre façon de travailler.</div></div>
 </div>
 </div>
 </div>
@@ -552,10 +511,8 @@ Est-ce que c’est adapté à mon garage ?
 
 <section class="final-cta" id="contact">
 <div class="container">
-<h2>Prêt à <em>récupérer plus de clients</em> sans vous compliquer la vie ?</h2>
-<p>
-RéceptionZen Garage aide votre atelier à répondre plus vite, à qualifier mieux et à perdre moins de clients quand vous êtes occupé.
-</p>
+<h2>Prêt à <em>récupérer vos clients perdus</em> sans vous compliquer la vie ?</h2>
+<p>RéceptionZen Garage aide votre atelier à répondre plus vite, à qualifier mieux et à perdre moins de devis quand vous êtes occupé.</p>
 
 <div style="margin:0 auto 20px;max-width:520px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:18px;padding:16px;text-align:left;color:rgba(245,240,232,.9);font-size:15px;line-height:1.7;">
 <strong style="display:block;color:#fff;margin-bottom:8px;">Contact direct</strong>
@@ -563,27 +520,26 @@ RéceptionZen Garage aide votre atelier à répondre plus vite, à qualifier mie
 <div>Email : <a href="mailto:contact@claireassistante.fr" style="color:#fff;text-decoration:underline;">contact@claireassistante.fr</a></div>
 </div>
 
-<form class="contact-mini">
+<form class="contact-mini" id="leadForm" novalidate>
 <div class="contact-line">
 <div>
 <label for="name">Nom du garage</label>
-<input id="name" type="text" placeholder="Garage Martin" />
+<input id="name" name="name" type="text" placeholder="Garage Martin" required />
 </div>
 <div>
 <label for="phone">Téléphone</label>
-<input id="phone" type="tel" placeholder="06 00 00 00 00" />
+<input id="phone" name="phone" type="tel" placeholder="06 00 00 00 00" required />
 </div>
 </div>
 <div style="margin-top:12px">
 <label for="msg">Votre besoin</label>
-<textarea id="msg" placeholder="Ex. : je veux voir si RéceptionZen peut répondre aux demandes WhatsApp et aux formulaires du site."></textarea>
+<textarea id="msg" name="message" placeholder="Ex. : je veux voir si RéceptionZen peut récupérer mes clients perdus et mes appels manqués." required></textarea>
 </div>
+<button type="submit" class="btn-primary">Envoyer ma demande</button>
+<div id="formFeedback" class="feedback"></div>
 </form>
-
-<a href="mailto:contact@claireassistante.fr" class="btn-primary">Installer dans mon garage</a>
 </div>
 </section>
-
 </main>
 
 <footer>
@@ -593,75 +549,119 @@ RéceptionZen Garage aide votre atelier à répondre plus vite, à qualifier mie
 </footer>
 
 <script>
-const chatData = {
-rdv: {
-user: "Bonjour, je voudrais prendre un rendez-vous.",
-bot1: "Bonjour 👋 Bien sûr. Quel véhicule avez-vous ?",
-user2: "Peugeot 308.",
-bot2: "Merci. Quel est le motif de votre demande ?",
-user3: "Révision et bruit à l'avant.",
-bot3: "Parfait. Je transmets la demande et je vous propose un rappel / créneau dès que possible.",
-result: "Demande qualifiée : véhicule, motif et suite claire."
-},
-urgent: {
-user: "Bonjour, j’ai un voyant moteur allumé.",
-bot1: "Bonjour 👋 D’accord. Quel est le modèle du véhicule ?",
-user2: "Renault Clio.",
-bot2: "Merci. Depuis quand le voyant est-il allumé ?",
-user3: "Depuis ce matin.",
-bot3: "Bien reçu. Je transmets la demande comme urgente pour rappel rapide.",
-result: "Demande urgente identifiée et transmise."
-},
-other: {
-user: "Bonjour, je dois passer au garage.",
-bot1: "Bonjour 👋 Bien sûr. Pour quel véhicule s’agit-il ?",
-user2: "Citroën C3.",
-bot2: "Merci. Quel est le sujet de votre demande ?",
-user3: "Je veux juste avoir des infos.",
-bot3: "Parfait. Votre demande est transmise avec les informations de base.",
-result: "Demande floue cadrée sans friction."
+const sessionId = "rz-" + Date.now() + "-" + Math.random().toString(36).slice(2, 8);
+
+const chatLog = document.getElementById("chatLog");
+const chatInput = document.getElementById("chatInput");
+const sendBtn = document.getElementById("sendBtn");
+const chatResult = document.getElementById("chatResult");
+const chatStatus = document.getElementById("chatStatus");
+
+function appendMessage(type, text) {
+const row = document.createElement("div");
+row.className = "chat-step" + (type === "user" ? " user" : "");
+row.innerHTML = `
+<div class="avatar ${type === "user" ? "user" : "bot"}">${type === "user" ? "C" : "RZ"}</div>
+<p>${text}</p>
+`;
+chatLog.appendChild(row);
+chatLog.scrollTop = chatLog.scrollHeight;
 }
+
+function setResult(text) {
+chatResult.style.display = "block";
+chatResult.textContent = text;
+}
+
+async function sendChat(message) {
+const trimmed = (message || "").trim();
+if (!trimmed) return;
+
+appendMessage("user", trimmed);
+chatInput.value = "";
+chatStatus.style.display = "block";
+chatStatus.textContent = "Envoi en cours…";
+sendBtn.disabled = true;
+
+try {
+const res = await fetch("/api/chat-garage", {
+method: "POST",
+headers: { "Content-Type": "application/json" },
+body: JSON.stringify({
+sessionId,
+message: trimmed,
+source: "landing-page",
+product: "ReceptionZen Garage"
+})
+});
+
+if (!res.ok) throw new Error("API error");
+const data = await res.json();
+const reply = data.reply || data.text || data.output || "Merci. Pouvez-vous préciser votre besoin ?";
+appendMessage("bot", reply);
+setResult(data.mode === "ai" ? "Réponse IA reçue via /api/chat-garage." : "Réponse reçue via le mode de secours.");
+} catch (e) {
+appendMessage("bot", "Merci. Pouvez-vous préciser votre besoin pour que je vous aide au mieux ?");
+setResult("Erreur temporaire. Le mode de secours a répondu correctement.");
+} finally {
+chatStatus.style.display = "none";
+sendBtn.disabled = false;
+}
+}
+
+document.querySelectorAll("[data-fill]").forEach(btn => {
+btn.addEventListener("click", () => {
+chatInput.value = btn.dataset.fill;
+chatInput.focus();
+});
+});
+
+sendBtn.addEventListener("click", () => sendChat(chatInput.value));
+chatInput.addEventListener("keydown", (e) => {
+if (e.key === "Enter") sendChat(chatInput.value);
+});
+
+const leadForm = document.getElementById("leadForm");
+const formFeedback = document.getElementById("formFeedback");
+
+leadForm.addEventListener("submit", async (e) => {
+e.preventDefault();
+
+const submitBtn = leadForm.querySelector('button[type="submit"]');
+const payload = {
+name: document.getElementById("name").value.trim(),
+phone: document.getElementById("phone").value.trim(),
+message: document.getElementById("msg").value.trim(),
+source: "landing-page",
+product: "ReceptionZen Garage",
+sessionId
 };
 
-const chatFlow = document.getElementById('chatFlow');
-const chatResult = document.getElementById('chatResult');
+formFeedback.style.display = "block";
+formFeedback.textContent = "Envoi en cours…";
+submitBtn.disabled = true;
 
-document.querySelectorAll('[data-scenario]').forEach(btn => {
-btn.addEventListener('click', () => {
-const s = chatData[btn.dataset.scenario];
-chatFlow.innerHTML = `
-<div class="scenario">
-<div class="scenario-title">Message client</div>
-<div class="chat-step user">
-<div class="avatar user">C</div>
-<p>${s.user}</p>
-</div>
-<div class="chat-step">
-<div class="avatar bot">RZ</div>
-<p>${s.bot1}</p>
-</div>
-<div class="chat-step user">
-<div class="avatar user">C</div>
-<p>${s.user2}</p>
-</div>
-<div class="chat-step">
-<div class="avatar bot">RZ</div>
-<p>${s.bot2}</p>
-</div>
-<div class="chat-step user">
-<div class="avatar user">C</div>
-<p>${s.user3}</p>
-</div>
-<div class="chat-step">
-<div class="avatar bot">RZ</div>
-<p>${s.bot3}</p>
-</div>
-<div class="scenario-footer">Flux court, clair, cadré — sans texte inutile.</div>
-</div>
-`;
-chatResult.style.display = 'block';
-chatResult.textContent = s.result;
+try {
+const res = await fetch("/api/lead-garage", {
+method: "POST",
+headers: { "Content-Type": "application/json" },
+body: JSON.stringify(payload)
 });
+
+const data = await res.json().catch(() => ({}));
+
+if (!res.ok) {
+formFeedback.textContent = data.reply || "Impossible d’envoyer la demande pour le moment.";
+return;
+}
+
+formFeedback.textContent = data.reply || "Merci, votre demande a bien été envoyée.";
+leadForm.reset();
+} catch (err) {
+formFeedback.textContent = "Erreur temporaire. Vous pouvez aussi écrire à contact@claireassistante.fr.";
+} finally {
+submitBtn.disabled = false;
+}
 });
 
 document.querySelectorAll('.faq-item').forEach(function(item){
