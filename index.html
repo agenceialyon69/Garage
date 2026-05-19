@@ -41,10 +41,7 @@ background:rgba(245,240,232,.9);
 backdrop-filter:blur(18px);
 border-bottom:1px solid rgba(31,61,53,.08);
 }
-.nav-inner{
-display:flex;align-items:center;justify-content:space-between;
-padding:16px 0;gap:16px
-}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;padding:16px 0;gap:16px}
 .logo{display:flex;align-items:center;gap:12px;font-family:var(--serif);font-size:22px;font-weight:600;color:var(--forest)}
 .logo-mark{
 width:36px;height:36px;border-radius:50%;
@@ -53,16 +50,12 @@ font-style:italic;font-size:15px;font-weight:600
 }
 .nav-links{display:flex;align-items:center;gap:18px;font-size:14px;font-weight:700;color:var(--muted)}
 .nav-links a:hover{color:var(--forest)}
-.nav-cta{
-padding:10px 18px;border-radius:999px;background:var(--forest);color:var(--bg)!important;
-}
+.nav-cta{padding:10px 18px;border-radius:999px;background:var(--forest);color:var(--bg)!important}
 .nav-cta:hover{background:var(--forest-deep)}
 @media (max-width:720px){.nav-links a:not(.nav-cta){display:none}}
 
 .hero{padding:86px 0 42px}
-.hero-grid{
-display:grid;grid-template-columns:1.15fr .85fr;gap:34px;align-items:center
-}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:34px;align-items:center}
 @media (max-width:900px){.hero-grid{grid-template-columns:1fr;gap:24px}}
 .badge{
 display:inline-flex;align-items:center;gap:8px;
@@ -77,8 +70,8 @@ margin-bottom:16px
 }
 h1 em{font-style:italic;color:var(--gold);font-weight:400}
 .subtitle{font-size:19px;line-height:1.65;color:var(--muted);max-width:650px;margin-bottom:18px}
-.micro{font-size:14px;line-height:1.7;color:var(--muted);max-width:680px;margin-bottom:24px}
-.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:18px}
+.micro{font-size:14px;line-height:1.7;color:var(--muted);max-width:680px;margin-bottom:20px}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px}
 .btn-primary,.btn-secondary{
 display:inline-flex;align-items:center;justify-content:center;
 padding:15px 22px;border-radius:999px;font-size:15px;font-weight:800;transition:.2s
@@ -87,14 +80,15 @@ padding:15px 22px;border-radius:999px;font-size:15px;font-weight:800;transition:
 .btn-primary:hover{background:var(--forest-deep);transform:translateY(-1px)}
 .btn-secondary{background:transparent;border:1px solid var(--line);color:var(--forest)}
 .btn-secondary:hover{background:rgba(31,61,53,.05)}
-.hero-proof{
-display:flex;flex-wrap:wrap;gap:12px;align-items:center;
-font-size:13px;color:var(--muted)
-}
+.hero-proof{display:flex;flex-wrap:wrap;gap:12px;align-items:center;font-size:13px;color:var(--muted)}
 .trust-pill{
 display:inline-flex;align-items:center;gap:8px;
 padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.7);
 border:1px solid rgba(31,61,53,.08)
+}
+.proof-line{
+margin-top:14px;padding:12px 14px;border-left:3px solid var(--gold);
+background:rgba(255,255,255,.6);border-radius:10px;font-size:14px;line-height:1.6;color:var(--muted)
 }
 
 .hero-card{
@@ -103,28 +97,39 @@ padding:28px;box-shadow:var(--shadow)
 }
 .hero-card h3{font-family:var(--serif);font-size:28px;color:var(--forest);margin-bottom:10px}
 .hero-card p{font-size:15px;line-height:1.7;color:var(--muted)}
-.scenario{
-margin-top:18px;border-radius:18px;background:rgba(31,61,53,.04);
-border:1px solid rgba(31,61,53,.08);padding:18px
+.chat-box{
+margin-top:18px;border-radius:20px;background:rgba(31,61,53,.03);
+border:1px solid rgba(31,61,53,.08);padding:14px;display:grid;gap:10px
 }
-.scenario-title{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.12em;color:var(--gold);margin-bottom:10px}
-.scenario-chat{display:grid;gap:10px}
-.bubble{max-width:100%;padding:12px 14px;border-radius:14px;font-size:14px;line-height:1.55}
-.bubble.client{background:#fff;border:1px solid rgba(31,61,53,.08)}
-.bubble.bot{background:var(--forest);color:var(--bg)}
+.chat-step{
+display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border-radius:14px;
+background:#fff;border:1px solid rgba(31,61,53,.08)
+}
+.chat-step.user{margin-left:24px;background:rgba(31,61,53,.04)}
+.avatar{
+width:26px;height:26px;border-radius:50%;flex:none;
+display:grid;place-items:center;font-size:12px;font-weight:800
+}
+.avatar.bot{background:var(--forest);color:var(--bg)}
+.avatar.user{background:rgba(196,148,90,.14);color:var(--gold)}
+.chat-step p{font-size:14px;line-height:1.55;color:var(--text)}
+.chat-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.chip{
+border:1px solid rgba(31,61,53,.14);background:#fff;color:var(--forest);
+border-radius:999px;padding:8px 12px;font-size:13px;font-weight:700
+}
+.chip:hover{background:rgba(31,61,53,.04)}
+.chat-result{
+margin-top:8px;padding:12px 14px;border-radius:14px;background:rgba(31,61,53,.08);
+color:var(--forest);font-size:14px;line-height:1.6;font-weight:700
+}
 
 .section{padding:74px 0}
 .section-alt{background:var(--bg-alt)}
 .section-dark{background:var(--forest);color:var(--bg)}
 .section-header{text-align:center;max-width:820px;margin:0 auto 34px}
-.section-eyebrow{
-display:inline-block;font-size:11px;font-weight:800;text-transform:uppercase;
-letter-spacing:.16em;color:var(--gold);margin-bottom:12px
-}
-.section-title{
-font-family:var(--serif);font-size:clamp(30px,4.5vw,52px);font-weight:500;line-height:1.08;
-letter-spacing:-.03em;margin-bottom:14px;color:var(--forest)
-}
+.section-eyebrow{display:inline-block;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.16em;color:var(--gold);margin-bottom:12px}
+.section-title{font-family:var(--serif);font-size:clamp(30px,4.5vw,52px);font-weight:500;line-height:1.08;letter-spacing:-.03em;margin-bottom:14px;color:var(--forest)}
 .section-dark .section-title{color:var(--bg)}
 .section-lead{font-size:17px;line-height:1.75;color:var(--muted)}
 .section-dark .section-lead{color:rgba(245,240,232,.82)}
@@ -137,9 +142,6 @@ padding:24px;box-shadow:0 10px 24px rgba(0,0,0,.04)
 }
 .card h3{font-family:var(--serif);font-size:22px;color:var(--forest);margin-bottom:10px}
 .card p{font-size:15px;line-height:1.75;color:var(--muted)}
-.card ul{list-style:none;display:grid;gap:10px;margin-top:14px}
-.card li{display:flex;gap:10px;font-size:14px;line-height:1.6;color:var(--muted)}
-.check{color:var(--green);font-weight:900;flex:none;margin-top:1px}
 
 .demo{
 display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:start
@@ -166,18 +168,14 @@ background:var(--forest);color:var(--bg);border-radius:26px;padding:32px;box-sha
 }
 .offer h3{font-family:var(--serif);font-size:30px;margin-bottom:10px}
 .offer p{font-size:16px;line-height:1.75;color:rgba(245,240,232,.84)}
-.pricing{
-display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:24px 0
-}
+.pricing{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:24px 0}
 @media (max-width:800px){.pricing{grid-template-columns:1fr}}
 .price-box{
 background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);
 border-radius:18px;padding:20px
 }
 .price-label{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.14em;color:var(--gold);margin-bottom:10px}
-.price{
-font-family:var(--serif);font-size:46px;line-height:1;color:#fff
-}
+.price{font-family:var(--serif);font-size:46px;line-height:1;color:#fff}
 .price small{font-size:15px;font-weight:500;opacity:.82}
 .price-box ul{list-style:none;display:grid;gap:10px;margin-top:14px}
 .price-box li{display:flex;gap:10px;font-size:14px;line-height:1.6;color:rgba(245,240,232,.86)}
@@ -185,10 +183,16 @@ font-family:var(--serif);font-size:46px;line-height:1;color:#fff
 .offer .btn-primary:hover{background:#b07d3e}
 .note{font-size:13px;color:rgba(245,240,232,.72);margin-top:10px}
 
-.faq{max-width:860px;margin:0 auto}
-.faq-item{
-border-bottom:1px solid rgba(31,61,53,.12);padding:18px 0
+.testimonial{
+background:var(--panel);border:1px solid rgba(31,61,53,.08);border-radius:18px;
+padding:22px;margin-top:18px;box-shadow:0 10px 24px rgba(0,0,0,.04)
 }
+.testimonial strong{display:block;margin-bottom:6px;color:var(--forest)}
+.testimonial p{font-size:15px;line-height:1.7;color:var(--muted)}
+.testimonial span{font-size:13px;color:var(--muted)}
+
+.faq{max-width:860px;margin:0 auto}
+.faq-item{border-bottom:1px solid rgba(31,61,53,.12);padding:18px 0}
 .faq-q{
 width:100%;display:flex;align-items:center;justify-content:space-between;
 text-align:left;font-family:var(--serif);font-size:20px;color:var(--forest);padding:2px 0
@@ -216,6 +220,21 @@ margin-bottom:16px
 .final-cta p{
 max-width:780px;margin:0 auto 26px;font-size:18px;line-height:1.8;color:rgba(245,240,232,.82)
 }
+.contact-mini{
+max-width:520px;margin:0 auto 18px;background:rgba(255,255,255,.06);
+border:1px solid rgba(255,255,255,.1);border-radius:18px;padding:18px;text-align:left
+}
+.contact-mini .contact-line{
+display:grid;grid-template-columns:1fr 1fr;gap:12px
+}
+@media (max-width:640px){.contact-mini .contact-line{grid-template-columns:1fr}}
+.contact-mini label{display:block;font-size:13px;font-weight:700;color:rgba(245,240,232,.78);margin-bottom:8px}
+.contact-mini input,.contact-mini textarea{
+width:100%;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);
+color:#fff;border-radius:12px;padding:12px 14px;font:inherit;resize:vertical
+}
+.contact-mini input::placeholder,.contact-mini textarea::placeholder{color:rgba(245,240,232,.45)}
+.contact-mini textarea{min-height:90px}
 footer{
 background:var(--forest-deep);color:rgba(245,240,232,.68);
 padding:26px 0;text-align:center;font-size:13px;border-top:1px solid rgba(255,255,255,.06)
@@ -280,25 +299,39 @@ Un garage qui manque des appels perd des clients. RéceptionZen aide à récupé
 <span class="trust-pill">Moins d’appels perdus</span>
 <span class="trust-pill">Plus de rendez-vous captés</span>
 </div>
+
+<div class="proof-line">
+Exemple simple : si un appel manqué fait perdre un client, récupérer seulement quelques demandes par mois peut déjà couvrir le coût de l’outil.
+</div>
 </div>
 
 <aside class="hero-card">
-<h3>Ce qui change tout de suite</h3>
+<h3>Démo conversationnelle</h3>
+<p>Le visiteur teste un vrai flux court, cadré et orienté vers la qualification de demande.</p>
 
+<div class="chat-box">
+<div class="chat-step">
+<div class="avatar bot">RZ</div>
+<p>Bonjour 👋 Je vous aide à gérer les demandes du garage. Que souhaitez-vous faire ?</p>
+</div>
+
+<div class="chat-actions">
+<button class="chip" data-scenario="rdv">Prendre un rendez-vous</button>
+<button class="chip" data-scenario="urgent">Demande urgente</button>
+<button class="chip" data-scenario="other">Autre demande</button>
+</div>
+
+<div id="chatFlow" class="scenario-wrap">
 <div class="scenario">
-<div class="scenario-title">Sans RéceptionZen</div>
-<div class="scenario-chat">
-<div class="bubble client">Bonjour, j’ai besoin d’un rendez-vous.</div>
-<div class="bubble client">Pas de réponse → le client appelle ailleurs.</div>
+<div class="scenario-title">Choisissez un scénario</div>
+<div class="chat-step">
+<div class="avatar user">?</div>
+<p>Appuyez sur un scénario pour voir la réponse de RéceptionZen.</p>
+</div>
 </div>
 </div>
 
-<div class="scenario" style="margin-top:14px">
-<div class="scenario-title">Avec RéceptionZen</div>
-<div class="scenario-chat">
-<div class="bubble client">Bonjour, j’ai besoin d’un rendez-vous.</div>
-<div class="bubble bot">Bonjour 👋 Quel véhicule ? Quel souci ? Quel créneau vous arrange ?</div>
-</div>
+<div id="chatResult" class="chat-result" style="display:none;"></div>
 </div>
 </aside>
 
@@ -352,31 +385,19 @@ Vous n’avez pas besoin d’un gros outil. Vous avez besoin d’un système qui
 <div class="flow">
 <div class="flow-item">
 <div class="step">1</div>
-<div>
-<strong>Le client envoie un message.</strong><br>
-<span>Ex. : “Bonjour, j’aimerais un rendez-vous pour ma voiture.”</span>
-</div>
+<div><strong>Le client envoie un message.</strong><br><span>Ex. : “Bonjour, j’aimerais un rendez-vous pour ma voiture.”</span></div>
 </div>
 <div class="flow-item">
 <div class="step">2</div>
-<div>
-<strong>RéceptionZen répond automatiquement.</strong><br>
-<span>Il demande les infos utiles : véhicule, souci, créneau, urgence.</span>
-</div>
+<div><strong>RéceptionZen répond automatiquement.</strong><br><span>Il demande les infos utiles : véhicule, souci, créneau, urgence.</span></div>
 </div>
 <div class="flow-item">
 <div class="step">3</div>
-<div>
-<strong>Les infos sont envoyées au garage.</strong><br>
-<span>Par email, WhatsApp, tableau simple ou CRM léger.</span>
-</div>
+<div><strong>Les infos sont envoyées au garage.</strong><br><span>Par email, WhatsApp, tableau simple ou CRM léger.</span></div>
 </div>
 <div class="flow-item">
 <div class="step">4</div>
-<div>
-<strong>Le client est rassuré et orienté.</strong><br>
-<span>Il sait que sa demande a bien été prise en compte.</span>
-</div>
+<div><strong>Le client est rassuré et orienté.</strong><br><span>Il sait que sa demande a bien été prise en compte.</span></div>
 </div>
 </div>
 </div>
@@ -385,12 +406,12 @@ Vous n’avez pas besoin d’un gros outil. Vous avez besoin d’un système qui
 <h3>Ce que vous recevez</h3>
 <p>Une mise en place propre, pensée pour être rapide à comprendre et facile à exploiter.</p>
 <ul style="list-style:none;display:grid;gap:12px;margin-top:18px">
-<li style="display:flex;gap:10px"><span class="check">✓</span><span>Assistant de réception intelligent.</span></li>
-<li style="display:flex;gap:10px"><span class="check">✓</span><span>Réponses automatiques aux demandes simples.</span></li>
+<li style="display:flex;gap:10px"><span class="check">✓</span><span>Réponse automatique aux demandes simples.</span></li>
 <li style="display:flex;gap:10px"><span class="check">✓</span><span>Filtrage et qualification des leads.</span></li>
 <li style="display:flex;gap:10px"><span class="check">✓</span><span>Transmission des informations au garage.</span></li>
 <li style="display:flex;gap:10px"><span class="check">✓</span><span>Capture de contact et suivi des demandes.</span></li>
 <li style="display:flex;gap:10px"><span class="check">✓</span><span>Base simple pour le rendez-vous ou le rappel.</span></li>
+<li style="display:flex;gap:10px"><span class="check">✓</span><span>Fonctionne sur WhatsApp, formulaire web ou email.</span></li>
 </ul>
 </div>
 </div>
@@ -434,6 +455,24 @@ Une offre conçue pour entrer vite chez le client, puis créer une récurrence a
 
 <a href="#contact" class="btn-primary">Installer dans mon garage</a>
 <div class="note">Offre pensée pour les garages qui veulent une solution simple, utile et rapide à mettre en place.</div>
+</div>
+</div>
+</section>
+
+<section class="section">
+<div class="container">
+<div class="section-header">
+<div class="section-eyebrow">Preuve</div>
+<h2 class="section-title">Ajoutez une preuve réelle dès que possible.</h2>
+<p class="section-lead">
+Une vraie démonstration, un retour client ou un cas pilote vaut mieux qu’une promesse trop agressive.
+</p>
+</div>
+
+<div class="testimonial">
+<strong>Retour à remplacer par un vrai témoignage</strong>
+<p>“Depuis qu’on a installé RéceptionZen, on rate beaucoup moins de demandes quand l’atelier est plein. Les clients sont rappelés plus vite, et on perd moins de devis.”</p>
+<span>— Garage test, Lyon</span>
 </div>
 </div>
 </section>
@@ -517,7 +556,31 @@ Est-ce que c’est adapté à mon garage ?
 <p>
 RéceptionZen Garage aide votre atelier à répondre plus vite, à qualifier mieux et à perdre moins de clients quand vous êtes occupé.
 </p>
-<a href="mailto:contact@votresite.fr" class="btn-primary">Installer dans mon garage</a>
+
+<div style="margin:0 auto 20px;max-width:520px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:18px;padding:16px;text-align:left;color:rgba(245,240,232,.9);font-size:15px;line-height:1.7;">
+<strong style="display:block;color:#fff;margin-bottom:8px;">Contact direct</strong>
+<div>Téléphone : <a href="tel:+33605800594" style="color:#fff;text-decoration:underline;">06 05 80 05 94</a></div>
+<div>Email : <a href="mailto:contact@claireassistante.fr" style="color:#fff;text-decoration:underline;">contact@claireassistante.fr</a></div>
+</div>
+
+<form class="contact-mini">
+<div class="contact-line">
+<div>
+<label for="name">Nom du garage</label>
+<input id="name" type="text" placeholder="Garage Martin" />
+</div>
+<div>
+<label for="phone">Téléphone</label>
+<input id="phone" type="tel" placeholder="06 00 00 00 00" />
+</div>
+</div>
+<div style="margin-top:12px">
+<label for="msg">Votre besoin</label>
+<textarea id="msg" placeholder="Ex. : je veux voir si RéceptionZen peut répondre aux demandes WhatsApp et aux formulaires du site."></textarea>
+</div>
+</form>
+
+<a href="mailto:contact@claireassistante.fr" class="btn-primary">Installer dans mon garage</a>
 </div>
 </section>
 
@@ -530,6 +593,77 @@ RéceptionZen Garage aide votre atelier à répondre plus vite, à qualifier mie
 </footer>
 
 <script>
+const chatData = {
+rdv: {
+user: "Bonjour, je voudrais prendre un rendez-vous.",
+bot1: "Bonjour 👋 Bien sûr. Quel véhicule avez-vous ?",
+user2: "Peugeot 308.",
+bot2: "Merci. Quel est le motif de votre demande ?",
+user3: "Révision et bruit à l'avant.",
+bot3: "Parfait. Je transmets la demande et je vous propose un rappel / créneau dès que possible.",
+result: "Demande qualifiée : véhicule, motif et suite claire."
+},
+urgent: {
+user: "Bonjour, j’ai un voyant moteur allumé.",
+bot1: "Bonjour 👋 D’accord. Quel est le modèle du véhicule ?",
+user2: "Renault Clio.",
+bot2: "Merci. Depuis quand le voyant est-il allumé ?",
+user3: "Depuis ce matin.",
+bot3: "Bien reçu. Je transmets la demande comme urgente pour rappel rapide.",
+result: "Demande urgente identifiée et transmise."
+},
+other: {
+user: "Bonjour, je dois passer au garage.",
+bot1: "Bonjour 👋 Bien sûr. Pour quel véhicule s’agit-il ?",
+user2: "Citroën C3.",
+bot2: "Merci. Quel est le sujet de votre demande ?",
+user3: "Je veux juste avoir des infos.",
+bot3: "Parfait. Votre demande est transmise avec les informations de base.",
+result: "Demande floue cadrée sans friction."
+}
+};
+
+const chatFlow = document.getElementById('chatFlow');
+const chatResult = document.getElementById('chatResult');
+
+document.querySelectorAll('[data-scenario]').forEach(btn => {
+btn.addEventListener('click', () => {
+const s = chatData[btn.dataset.scenario];
+chatFlow.innerHTML = `
+<div class="scenario">
+<div class="scenario-title">Message client</div>
+<div class="chat-step user">
+<div class="avatar user">C</div>
+<p>${s.user}</p>
+</div>
+<div class="chat-step">
+<div class="avatar bot">RZ</div>
+<p>${s.bot1}</p>
+</div>
+<div class="chat-step user">
+<div class="avatar user">C</div>
+<p>${s.user2}</p>
+</div>
+<div class="chat-step">
+<div class="avatar bot">RZ</div>
+<p>${s.bot2}</p>
+</div>
+<div class="chat-step user">
+<div class="avatar user">C</div>
+<p>${s.user3}</p>
+</div>
+<div class="chat-step">
+<div class="avatar bot">RZ</div>
+<p>${s.bot3}</p>
+</div>
+<div class="scenario-footer">Flux court, clair, cadré — sans texte inutile.</div>
+</div>
+`;
+chatResult.style.display = 'block';
+chatResult.textContent = s.result;
+});
+});
+
 document.querySelectorAll('.faq-item').forEach(function(item){
 const btn = item.querySelector('.faq-q');
 btn.addEventListener('click', function(){
