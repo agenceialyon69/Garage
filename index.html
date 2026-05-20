@@ -3,12 +3,13 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Développeur web basé à Lyon — sites simples pour garages indépendants</title>
-<meta name="description" content="Sites simples, clairs et crédibles pour garages indépendants à Lyon. Offre de lancement, preuve technique avec Claire et contact direct." />
+<title>Sites simples pour garages à Lyon — conçus pour générer des appels clients</title>
+<meta name="description" content="Une présence web claire et moderne qui transforme vos visiteurs en demandes de devis. Démo interactive, offre de lancement et contact direct." />
 <style>
 :root{
 --bg:#0b1220;
 --panel:#101a2d;
+--panel-2:#0d1526;
 --text:#eaf0ff;
 --muted:#a8b3c7;
 --line:rgba(255,255,255,.08);
@@ -42,8 +43,8 @@ z-index:20;
 .nav{display:flex;align-items:center;justify-content:space-between;gap:16px}
 .brand{font-weight:800;letter-spacing:.2px}
 .nav a{color:var(--muted);margin-left:18px}
-.hero{padding:84px 0 60px}
-.grid{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:start}
+.hero{padding:84px 0 48px}
+.grid{display:grid;grid-template-columns:1.05fr .95fr;gap:28px;align-items:start}
 .eyebrow{
 display:inline-block;
 padding:8px 12px;
@@ -54,13 +55,13 @@ background:rgba(125,211,252,.08);
 font-size:.92rem;
 }
 h1{
-font-size:clamp(2.25rem,5vw,4.3rem);
+font-size:clamp(2.25rem,5vw,4.1rem);
 line-height:1.02;
 margin:18px 0 16px;
 letter-spacing:-.04em;
 }
-.subtitle{font-size:1.08rem;color:var(--muted);max-width:60ch}
-.actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:28px}
+.subtitle{font-size:1.08rem;color:var(--muted);max-width:62ch}
+.actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:26px}
 .btn{
 padding:14px 18px;
 border-radius:14px;
@@ -72,6 +73,7 @@ justify-content:center;
 }
 .btn.primary{background:var(--white);color:#0b1220}
 .btn.secondary{background:rgba(255,255,255,.03)}
+.btn.whatsapp{background:#25d366;color:#0b1220;border-color:#25d366}
 .card{
 background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02));
 border:1px solid var(--line);
@@ -97,14 +99,14 @@ section{padding:18px 0 28px}
 .price small{display:block;color:var(--muted);font-size:1rem;font-weight:600}
 .pill{
 display:inline-block;
-padding:6px 10px;
+padding:8px 10px;
 border-radius:999px;
 background:rgba(34,197,94,.12);
 color:#86efac;
 font-size:.92rem;
 border:1px solid rgba(34,197,94,.25);
 }
-.portfolio{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.portfolio{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
 .mock{
 height:190px;
 border-radius:16px;
@@ -117,6 +119,16 @@ padding:14px;
 color:var(--muted);
 font-size:.95rem;
 }
+.demo-note{
+display:inline-block;
+margin-bottom:10px;
+padding:6px 10px;
+border-radius:999px;
+background:rgba(125,211,252,.12);
+color:#9bdcf6;
+border:1px solid rgba(125,211,252,.25);
+font-size:.85rem;
+}
 .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
 form{display:grid;gap:12px}
 input,textarea{
@@ -124,19 +136,60 @@ width:100%;
 padding:14px 15px;
 border-radius:14px;
 border:1px solid var(--line);
-background:#0d1526;
+background:var(--panel-2);
 color:var(--text);
 font:inherit;
 outline:none;
 }
 textarea{min-height:140px;resize:vertical}
+.chat-box{
+display:grid;
+gap:12px;
+margin-top:14px;
+}
+.chat-log{
+min-height:220px;
+max-height:360px;
+overflow:auto;
+padding:14px;
+border-radius:16px;
+border:1px solid var(--line);
+background:rgba(13,21,38,.8);
+display:grid;
+gap:10px;
+}
+.msg{
+padding:12px 14px;
+border-radius:14px;
+max-width:88%;
+white-space:pre-wrap;
+word-break:break-word;
+}
+.msg.user{
+justify-self:end;
+background:#233250;
+border:1px solid rgba(125,211,252,.18);
+}
+.msg.bot{
+justify-self:start;
+background:#14243b;
+border:1px solid rgba(255,255,255,.06);
+}
+.chat-actions{
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+}
+.small{font-size:.94rem}
 footer{
 padding:34px 0 48px;
 color:var(--muted);
 border-top:1px solid var(--line);
 margin-top:24px;
 }
-.small{font-size:.94rem}
+.status{font-size:.92rem;color:var(--muted)}
+.benefits{display:grid;gap:10px;margin-top:12px}
+.benefits li{color:var(--muted)}
 @media (max-width:900px){
 .grid,.cols,.portfolio,.contact-grid,.offer{grid-template-columns:1fr}
 header{position:static}
@@ -150,10 +203,11 @@ header{position:static}
 <body>
 <header>
 <div class="wrap nav">
-<div class="brand">Développeur web — Lyon</div>
+<div class="brand">Sites pour garages à Lyon</div>
 <div>
 <a href="#offre">Offre</a>
 <a href="#projet">Claire</a>
+<a href="#demo">Démo</a>
 <a href="#contact">Contact</a>
 </div>
 </div>
@@ -163,29 +217,30 @@ header{position:static}
 <section class="hero">
 <div class="wrap grid">
 <div>
-<span class="eyebrow">Sites simples pour garages indépendants</span>
-<h1>Je crée des sites simples pour garages indépendants à Lyon.</h1>
+<span class="eyebrow">Une présence web simple qui transforme vos visiteurs en appels clients</span>
+<h1>Des sites simples pour garages à Lyon, conçus pour générer des appels clients.</h1>
 <p class="subtitle">
-Un site clair, crédible et facile à comprendre pour présenter votre garage, rassurer vos clients et faciliter la prise de contact.
+Une présence web claire et moderne qui transforme vos visiteurs en demandes de devis sans changer votre quotidien.
 </p>
 <div class="actions">
-<a class="btn primary" href="#offre">Voir l’offre de lancement</a>
-<a class="btn secondary" href="#contact">Me contacter</a>
+<a class="btn primary" href="#offre">Recevoir un site exemple</a>
+<a class="btn whatsapp" href="https://wa.me/33605800594?text=Bonjour%20%2C%20je%20veux%20voir%20un%20exemple%20de%20site%20pour%20mon%20garage.">WhatsApp</a>
 </div>
 </div>
+
 <aside class="card hero-card">
 <div class="stat">
 <div class="stat-item">
-<strong>Développeur web basé à Lyon</strong>
-<span class="muted">Sites vitrines simples, clairs et crédibles.</span>
+<strong>Position local Lyon</strong>
+<span class="muted">Une approche simple, crédible et orientée appels clients.</span>
 </div>
 <div class="stat-item">
 <strong>Travail direct</strong>
 <span class="muted">Simplicité, rapidité et clarté sur chaque projet.</span>
 </div>
 <div class="stat-item">
-<strong>Offre de lancement</strong>
-<span class="muted">490 € + 99 €/mois, pour démarrer vite.</span>
+<strong>Contact direct</strong>
+<span class="muted">0605800594 · mdoutafsirbah11@gmail.com</span>
 </div>
 </div>
 </aside>
@@ -197,12 +252,13 @@ Un site clair, crédible et facile à comprendre pour présenter votre garage, r
 <article class="card box">
 <h2 class="section-title">Qui je suis</h2>
 <p class="muted">
-Je suis développeur web basé à Lyon. Je construis actuellement mes premiers projets clients locaux, avec une approche simple, honnête et orientée résultat.
+Je construis des sites simples pour garages à Lyon avec une logique très concrète : vous aider à convertir plus facilement les visiteurs en appels.
 </p>
 <p class="muted">
-Je travaille chaque projet de façon directe et je privilégie la simplicité, la rapidité et la clarté.
+Je privilégie une structure propre, lisible et orientée terrain.
 </p>
 </article>
+
 <article class="card box" id="offre">
 <h2 class="section-title">Offre de lancement</h2>
 <p class="muted">
@@ -211,10 +267,17 @@ Je vous propose un site simple et clair pour présenter votre garage, inspirer c
 <div class="offer">
 <div class="price">490 €<small>de mise en place</small></div>
 <div>
-<div class="pill">99 €/mois incluant hébergement, maintenance, modifications simples et assistance</div>
-<p class="muted small" style="margin:10px 0 0;">Idéal pour démarrer vite avec une présence propre, moderne et crédible.</p>
+<div class="pill">99 €/mois : sécurité, hébergement, modifications simples, ajout de services, photos, horaires et support rapide</div>
+<p class="muted small" style="margin:10px 0 0;">
+Idéal pour démarrer vite avec une présence propre, moderne et crédible.
+</p>
 </div>
 </div>
+<ul class="benefits">
+<li>Modifications simples incluses.</li>
+<li>Ajout de nouveaux services et mises à jour rapides.</li>
+<li>Support pratique pour garder le site à jour.</li>
+</ul>
 </article>
 </div>
 </section>
@@ -229,15 +292,42 @@ Je vous propose un site simple et clair pour présenter votre garage, inspirer c
 <p class="muted">HTML/CSS • Vercel • Supabase • IA</p>
 </article>
 <article class="card box">
-<div class="mock">Démo garage — maquette fictive et explicite</div>
+<div class="demo-note">Maquette fictive — démonstration</div>
+<div class="mock">Démo garage — exemple de rendu pour garage indépendant</div>
 <h3>RéceptionZen Garage</h3>
 <p class="muted">Landing page locale pour présentation et contact.</p>
 </article>
-<article class="card box">
-<div class="mock">Version mobile simple et claire</div>
-<h3>Focus conversion</h3>
-<p class="muted">Lecture rapide, offre visible, contact immédiat.</p>
-</article>
+</div>
+</div>
+</section>
+
+<section id="demo">
+<div class="wrap">
+<div class="card box">
+<h2 class="section-title">Démo conversationnelle</h2>
+<p class="muted">
+Testez ici une réception simple, courte et crédible. Le but est de montrer un vrai parcours d’accueil pour un garage.
+</p>
+
+<div class="chat-box">
+<div class="chat-log" id="chatLog">
+<div class="msg bot">Bonjour, je peux vous aider. Quel est le problème sur votre véhicule ?</div>
+</div>
+
+<div class="chat-actions">
+<button class="btn secondary" type="button" data-demo="Ma voiture fait un bruit quand je freine.">Frein qui fait du bruit</button>
+<button class="btn secondary" type="button" data-demo="Je voudrais un rendez-vous pour une révision.">Demander un rendez-vous</button>
+<button class="btn secondary" type="button" data-demo="J’ai une panne, la voiture ne démarre plus.">Panne urgente</button>
+</div>
+
+<div style="display:grid;gap:10px;">
+<textarea id="chatInput" placeholder="Écrivez le message client..."></textarea>
+<div class="chat-actions">
+<button class="btn primary" id="sendChat" type="button">Envoyer à la démo</button>
+<span class="status" id="chatStatus"></span>
+</div>
+</div>
+</div>
 </div>
 </div>
 </section>
@@ -246,16 +336,25 @@ Je vous propose un site simple et clair pour présenter votre garage, inspirer c
 <div class="wrap contact-grid">
 <div class="card box">
 <h2 class="section-title">Contact</h2>
-<p class="muted">Décrivez votre garage, je vous réponds avec une proposition simple et claire.</p>
-<p class="small">Téléphone : 0605800594<br>Email : mdoutafsirbah11@gmail.com</p>
+<p class="muted">
+Décrivez votre garage, je vous réponds avec une proposition simple et claire.
+</p>
+<p class="small">
+Téléphone : 0605800594<br />
+Email : mdoutafsirbah11@gmail.com<br />
+Zone : Lyon et alentours
+</p>
 </div>
+
 <div class="card box">
-<form>
-<input type="text" placeholder="Nom du garage" />
-<input type="text" placeholder="Votre nom" />
-<input type="email" placeholder="Votre email" />
-<textarea placeholder="Décrivez votre besoin"></textarea>
-<button class="btn primary" type="button">Envoyer</button>
+<h2 class="section-title">Demande de contact</h2>
+<form id="leadForm">
+<input type="text" name="garage" placeholder="Nom du garage" required />
+<input type="text" name="name" placeholder="Votre nom" required />
+<input type="email" name="email" placeholder="Votre email" required />
+<textarea name="message" placeholder="Décrivez votre besoin" required></textarea>
+<button class="btn primary" type="submit">Envoyer</button>
+<div class="status" id="formStatus"></div>
 </form>
 </div>
 </div>
@@ -267,6 +366,83 @@ Je vous propose un site simple et clair pour présenter votre garage, inspirer c
 Développeur web basé à Lyon — sites vitrines simples pour commerces locaux.
 </div>
 </footer>
+
+<script>
+const chatLog = document.getElementById("chatLog");
+const chatInput = document.getElementById("chatInput");
+const sendChat = document.getElementById("sendChat");
+const chatStatus = document.getElementById("chatStatus");
+const leadForm = document.getElementById("leadForm");
+const formStatus = document.getElementById("formStatus");
+
+function addMsg(text, type) {
+const div = document.createElement("div");
+div.className = `msg ${type}`;
+div.textContent = text;
+chatLog.appendChild(div);
+chatLog.scrollTop = chatLog.scrollHeight;
+}
+
+document.querySelectorAll("[data-demo]").forEach(btn => {
+btn.addEventListener("click", () => {
+chatInput.value = btn.getAttribute("data-demo");
+});
+});
+
+sendChat.addEventListener("click", async () => {
+const text = chatInput.value.trim();
+if (!text) return;
+
+addMsg(text, "user");
+chatInput.value = "";
+chatStatus.textContent = "Réflexion en cours...";
+
+try {
+const controller = new AbortController();
+const timer = setTimeout(() => controller.abort(), 15000);
+
+const res = await fetch("/api/chat-garage", {
+method: "POST",
+headers: { "Content-Type": "application/json" },
+body: JSON.stringify({ message: text, sessionId: crypto.randomUUID() }),
+signal: controller.signal
+});
+
+clearTimeout(timer);
+
+if (!res.ok) throw new Error("chat_error");
+
+const data = await res.json();
+addMsg(data.reply || "Bonjour, comment puis-je vous aider ?", "bot");
+} catch (e) {
+addMsg("Désolé, une erreur est survenue. Pouvez-vous reformuler ?", "bot");
+} finally {
+chatStatus.textContent = "";
+}
+});
+
+leadForm.addEventListener("submit", async (e) => {
+e.preventDefault();
+formStatus.textContent = "Envoi en cours...";
+
+const fd = new FormData(leadForm);
+const payload = Object.fromEntries(fd.entries());
+
+try {
+const res = await fetch("/api/lead-garage", {
+method: "POST",
+headers: { "Content-Type": "application/json" },
+body: JSON.stringify(payload)
+});
+
+if (!res.ok) throw new Error("lead_error");
+
+leadForm.reset();
+formStatus.textContent = "Merci. Votre demande a bien été envoyée.";
+} catch (err) {
+formStatus.textContent = "Le formulaire n'a pas pu être envoyé. Réessayez plus tard.";
+}
+});
+</script>
 </body>
 </html>
-
