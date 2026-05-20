@@ -1,78 +1,31 @@
-export const config = {
-runtime: "edge",
-};
-
-export default async function handler(req) {
+export default async function handler(req, res) {
 if (req.method !== "POST") {
-return new Response(JSON.stringify({
-ok: false,
-reply: "Method not allowed"
-}), {
-status: 405,
-headers: { "Content-Type": "application/json" }
-});
+return res.status(405).json({ ok: false, error: "Method not allowed" });
 }
 
 try {
-const body = await req.json();
+const { name = "", email = "", garage = "", message = "" } = req.body || {};
 
-const name = String(body?.name || "").trim();
-const phone = String(body?.phone || "").trim();
-const message = String(body?.message || "").trim();
-const sessionId = String(body?.sessionId || "");
-
-if (!name || !phone || !message) {
-return new Response(JSON.stringify({
-ok: false,
-sessionId,
-reply: "Merci de remplir le nom du garage, le téléphone et le besoin."
-}), {
-status: 400,
-headers: { "Content-Type": "application/json" }
-});
+const webhookUrl = process.env.MAKE_WEBHOOK_URL;
+if (!webhookUrl) {
+return res.status(500).json({ ok: false, error: "Missing webhook URL" });
 }
 
-const payload = {
-name,
-phone,
-message,
-sessionId,
-source: body?.source || "landing-page",
-product: body?.product || "ReceptionZen Garage",
-createdAt: new Date().toISOString()
-};
+const payload = { name, email, garage, message };
 
-// Optionnel : branche ici un webhook externe si tu veux envoyer le lead ailleurs.
-// Exemple:
-// if (process.env.LEAD_WEBHOOK_URL) {
-// await fetch(process.env.LEAD_WEBHOOK_URL, {
-// method: "POST",
-// headers: { "Content-Type": "application/json" },
-// body: JSON.stringify(payload)
-// });
-// }
-
-console.log("Lead garage reçu:", payload);
-
-return new Response(JSON.stringify({
-ok: true,
-sessionId,
-reply: "Merci, votre demande a bien été envoyée. On revient vers vous rapidement."
-}), {
-status: 200,
-headers: {
-"Content-Type": "application/json",
-"Cache-Control": "no-store"
-}
+const response = await fetch(webhookUrl, {
+method: "POST",
+headers: { "Content-Type": "application/json" },
+body: JSON.stringify(payload),
 });
+
+if (!response.ok) {
+return res.status(502).json({ ok: false, error: "Webhook failed" });
+}
+
+return res.status(200).json({ ok: true, message: "Lead sent" });
 } catch (error) {
-return new Response(JSON.stringify({
-ok: true,
-reply: "Votre demande a bien été prise en compte. Vous pouvez aussi nous contacter par email."
-}), {
-status: 200,
-headers: { "Content-Type": "application/json" }
-});
+return res.status(500).json({ ok: false, error: "Server error" });
 }
 }
 
