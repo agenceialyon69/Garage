@@ -1,333 +1,272 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8" />
+<meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Garage Martin Lyon — Maquette de démonstration</title>
-<meta name="description" content="Maquette fictive d'un garage à Lyon. Exemple de site vitrine clair, crédible et orienté demandes de devis." />
+<title>Développeur web basé à Lyon — sites simples pour garages indépendants</title>
+<meta name="description" content="Sites simples, clairs et crédibles pour garages indépendants à Lyon. Offre de lancement, preuve technique avec Claire et contact direct." />
 <style>
 :root{
---bg:#0f172a;
---panel:#111827;
---card:#1f2937;
---text:#e5e7eb;
---muted:#9ca3af;
---brand:#f59e0b;
---brand2:#22c55e;
---line:rgba(255,255,255,.10);
+--bg:#0b1220;
+--panel:#101a2d;
+--text:#eaf0ff;
+--muted:#a8b3c7;
+--line:rgba(255,255,255,.08);
+--accent:#7dd3fc;
+--accent-2:#22c55e;
 --white:#fff;
---max:1180px;
+--shadow:0 16px 40px rgba(0,0,0,.25);
+--radius:20px;
+--max:1120px;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{
 margin:0;
-font-family:Arial, Helvetica, sans-serif;
-background:linear-gradient(180deg,#0b1220 0%, #0f172a 100%);
+font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+background:radial-gradient(circle at top,#15213a 0%,var(--bg) 40%);
 color:var(--text);
 line-height:1.6;
 }
 a{color:inherit;text-decoration:none}
-.wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
-.topbar{
-position:sticky;top:0;z-index:50;
-backdrop-filter:blur(12px);
-background:rgba(15,23,42,.88);
+.wrap{width:min(var(--max),calc(100% - 40px));margin:0 auto}
+header{
+padding:20px 0;
+position:sticky;
+top:0;
+background:rgba(11,18,32,.82);
+backdrop-filter:blur(14px);
 border-bottom:1px solid var(--line);
+z-index:20;
 }
-.topbar .inner{display:flex;align-items:center;justify-content:space-between;padding:14px 0;gap:16px}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:16px}
 .brand{font-weight:800;letter-spacing:.2px}
-.nav{display:flex;gap:18px;flex-wrap:wrap;font-size:.95rem;color:var(--muted)}
-.cta{
-display:inline-flex;align-items:center;justify-content:center;
-padding:13px 18px;border-radius:999px;font-weight:700;
-background:var(--brand);color:#111827;border:0;
-}
-.cta.secondary{background:transparent;color:var(--text);border:1px solid var(--line)}
-.hero{padding:72px 0 30px}
-.grid-hero{display:grid;grid-template-columns:1.05fr .95fr;gap:28px;align-items:center}
-.badge{
-display:inline-flex;gap:8px;align-items:center;
-padding:8px 12px;border-radius:999px;
-background:rgba(245,158,11,.12);color:#fbbf24;font-weight:700;font-size:.92rem;
-border:1px solid rgba(245,158,11,.25);
-}
-h1{font-size:clamp(2.2rem,4.8vw,4.4rem);line-height:1.05;margin:16px 0 16px}
-.lead{font-size:1.08rem;color:#d1d5db;max-width:56ch}
-.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
-.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:26px}
-.kpi{background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:18px;padding:16px}
-.kpi strong{display:block;font-size:1.2rem}
-.kpi span{color:var(--muted);font-size:.94rem}
-.mock{
-background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
-border:1px solid var(--line);border-radius:24px;padding:18px;
-box-shadow:0 20px 60px rgba(0,0,0,.25);
-}
-.mock .shot{
-min-height:360px;border-radius:18px;
-background:
-linear-gradient(135deg, rgba(245,158,11,.18), rgba(34,197,94,.12)),
-radial-gradient(circle at 20% 20%, rgba(255,255,255,.10), transparent 25%),
-linear-gradient(180deg, #1f2937, #111827);
+.nav a{color:var(--muted);margin-left:18px}
+.hero{padding:84px 0 60px}
+.grid{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:start}
+.eyebrow{
+display:inline-block;
+padding:8px 12px;
 border:1px solid var(--line);
-padding:22px;
-display:flex;flex-direction:column;justify-content:space-between;
+border-radius:999px;
+color:var(--accent);
+background:rgba(125,211,252,.08);
+font-size:.92rem;
 }
-.tag{display:inline-block;background:rgba(255,255,255,.10);padding:7px 10px;border-radius:999px;font-size:.88rem}
-.shot h2{margin:14px 0 8px;font-size:1.8rem}
-.shot p{margin:0;color:#d1d5db;max-width:34ch}
-.shot .row{display:flex;gap:12px;flex-wrap:wrap}
-.section{padding:34px 0}
-.panel{
-background:rgba(17,24,39,.88);
+h1{
+font-size:clamp(2.25rem,5vw,4.3rem);
+line-height:1.02;
+margin:18px 0 16px;
+letter-spacing:-.04em;
+}
+.subtitle{font-size:1.08rem;color:var(--muted);max-width:60ch}
+.actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:28px}
+.btn{
+padding:14px 18px;
+border-radius:14px;
+font-weight:700;
 border:1px solid var(--line);
-border-radius:24px;padding:28px;
+display:inline-flex;
+align-items:center;
+justify-content:center;
 }
-.section h3{margin:0 0 12px;font-size:1.6rem}
-.section p{color:#d1d5db}
-.cols3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.cols2{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.btn.primary{background:var(--white);color:#0b1220}
+.btn.secondary{background:rgba(255,255,255,.03)}
 .card{
-background:rgba(255,255,255,.04);
+background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02));
 border:1px solid var(--line);
-border-radius:20px;padding:20px;
+border-radius:var(--radius);
+box-shadow:var(--shadow);
 }
-.card h4{margin:0 0 8px;font-size:1.1rem}
-.card p, .card li{color:#d1d5db}
-.list{margin:0;padding-left:18px}
-.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-.step{
-padding:18px;border-radius:18px;background:rgba(255,255,255,.04);border:1px solid var(--line)
+.hero-card{padding:24px}
+.stat{display:grid;gap:10px}
+.stat-item{
+padding:16px;
+border:1px solid var(--line);
+border-radius:16px;
+background:rgba(255,255,255,.03);
 }
-.step strong{display:block;font-size:1.1rem;margin-bottom:6px}
-.notice{
-margin-top:14px;padding:14px 16px;border-radius:16px;
-background:rgba(245,158,11,.10);border:1px solid rgba(245,158,11,.18);
-color:#fde68a
+.stat-item strong{display:block;font-size:1.05rem;margin-bottom:4px}
+section{padding:18px 0 28px}
+.section-title{font-size:1.7rem;margin:0 0 14px}
+.muted{color:var(--muted)}
+.cols{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.box{padding:24px}
+.offer{display:grid;grid-template-columns:1fr auto;gap:18px;align-items:center}
+.price{font-size:2rem;font-weight:900}
+.price small{display:block;color:var(--muted);font-size:1rem;font-weight:600}
+.pill{
+display:inline-block;
+padding:6px 10px;
+border-radius:999px;
+background:rgba(34,197,94,.12);
+color:#86efac;
+font-size:.92rem;
+border:1px solid rgba(34,197,94,.25);
 }
-.faq details{
-background:rgba(255,255,255,.04);border:1px solid var(--line);
-border-radius:16px;padding:16px 18px
+.portfolio{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.mock{
+height:190px;
+border-radius:16px;
+background:linear-gradient(135deg,#16233d,#0d1526);
+border:1px solid var(--line);
+margin-bottom:14px;
+display:flex;
+align-items:end;
+padding:14px;
+color:var(--muted);
+font-size:.95rem;
 }
-.faq summary{cursor:pointer;font-weight:700}
-.faq .item{display:grid;gap:12px}
-.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.footer{
-padding:28px 0 44px;color:var(--muted);font-size:.94rem
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+form{display:grid;gap:12px}
+input,textarea{
+width:100%;
+padding:14px 15px;
+border-radius:14px;
+border:1px solid var(--line);
+background:#0d1526;
+color:var(--text);
+font:inherit;
+outline:none;
 }
-.footer .small{
-padding:14px 16px;border-radius:16px;background:rgba(255,255,255,.04);border:1px solid var(--line)
+textarea{min-height:140px;resize:vertical}
+footer{
+padding:34px 0 48px;
+color:var(--muted);
+border-top:1px solid var(--line);
+margin-top:24px;
 }
-@media (max-width: 920px){
-.grid-hero,.cols3,.cols2,.steps,.contact-grid{grid-template-columns:1fr}
-.kpis{grid-template-columns:1fr}
-.topbar .inner{flex-direction:column;align-items:flex-start}
-.hero{padding-top:44px}
-.mock .shot{min-height:280px}
+.small{font-size:.94rem}
+@media (max-width:900px){
+.grid,.cols,.portfolio,.contact-grid,.offer{grid-template-columns:1fr}
+header{position:static}
+.nav{flex-direction:column;align-items:flex-start}
+.nav div{display:flex;flex-wrap:wrap;gap:12px}
+.nav a{margin-left:0}
+.hero{padding-top:48px}
 }
 </style>
 </head>
 <body>
-<header class="topbar">
-<div class="wrap inner">
-<div class="brand">Garage Martin Lyon</div>
-<nav class="nav">
-<a href="#demo">Démo</a>
-<a href="#services">Services</a>
-<a href="#process">Méthode</a>
-<a href="#faq">FAQ</a>
-</nav>
-<a class="cta" href="tel:+33400000000">Appeler : 04 00 00 00 00</a>
+<header>
+<div class="wrap nav">
+<div class="brand">Développeur web — Lyon</div>
+<div>
+<a href="#offre">Offre</a>
+<a href="#projet">Claire</a>
+<a href="#contact">Contact</a>
+</div>
 </div>
 </header>
 
 <main>
 <section class="hero">
-<div class="wrap grid-hero">
+<div class="wrap grid">
 <div>
-<span class="badge">Exemple fictif – maquette de démonstration</span>
-<h1>Un site clair pour un garage local qui veut inspirer confiance dès la première visite.</h1>
-<p class="lead">
-Cette page est une démo fictive pensée pour montrer le résultat final d’un site de garage à Lyon :
-rapide à comprendre, rassurant sur mobile, et orienté vers la demande de devis ou l’appel direct.
+<span class="eyebrow">Sites simples pour garages indépendants</span>
+<h1>Je crée des sites simples pour garages indépendants à Lyon.</h1>
+<p class="subtitle">
+Un site clair, crédible et facile à comprendre pour présenter votre garage, rassurer vos clients et faciliter la prise de contact.
 </p>
 <div class="actions">
-<a class="cta" href="#contact">Demander un devis</a>
-<a class="cta secondary" href="#demo">Voir la démo</a>
-</div>
-<div class="kpis">
-<div class="kpi"><strong>Réponse rapide</strong><span>Prise de contact simple et visible</span></div>
-<div class="kpi"><strong>Mobile first</strong><span>Lecture fluide sur téléphone</span></div>
-<div class="kpi"><strong>Transparent</strong><span>Maquette fictive clairement assumée</span></div>
+<a class="btn primary" href="#offre">Voir l’offre de lancement</a>
+<a class="btn secondary" href="#contact">Me contacter</a>
 </div>
 </div>
+<aside class="card hero-card">
+<div class="stat">
+<div class="stat-item">
+<strong>Développeur web basé à Lyon</strong>
+<span class="muted">Sites vitrines simples, clairs et crédibles.</span>
+</div>
+<div class="stat-item">
+<strong>Travail direct</strong>
+<span class="muted">Simplicité, rapidité et clarté sur chaque projet.</span>
+</div>
+<div class="stat-item">
+<strong>Offre de lancement</strong>
+<span class="muted">490 € + 99 €/mois, pour démarrer vite.</span>
+</div>
+</div>
+</aside>
+</div>
+</section>
 
-<div class="mock" id="demo">
-<div class="shot">
+<section>
+<div class="wrap cols">
+<article class="card box">
+<h2 class="section-title">Qui je suis</h2>
+<p class="muted">
+Je suis développeur web basé à Lyon. Je construis actuellement mes premiers projets clients locaux, avec une approche simple, honnête et orientée résultat.
+</p>
+<p class="muted">
+Je travaille chaque projet de façon directe et je privilégie la simplicité, la rapidité et la clarté.
+</p>
+</article>
+<article class="card box" id="offre">
+<h2 class="section-title">Offre de lancement</h2>
+<p class="muted">
+Je vous propose un site simple et clair pour présenter votre garage, inspirer confiance et faciliter le contact.
+</p>
+<div class="offer">
+<div class="price">490 €<small>de mise en place</small></div>
 <div>
-<span class="tag">Projet démo</span>
-<h2>Garage Martin Lyon</h2>
-<p>Maquette fictive avec contenu non contractuel, photos libres de droit et présentation réaliste.</p>
-</div>
-<div>
-<div class="row">
-<span class="tag">Entretien</span>
-<span class="tag">Pneus</span>
-<span class="tag">Réparation</span>
-</div>
-<p style="margin-top:16px;">Lyon et alentours • Devis rapide • Site vitrine de démonstration</p>
+<div class="pill">99 €/mois incluant hébergement, maintenance, modifications simples et assistance</div>
+<p class="muted small" style="margin:10px 0 0;">Idéal pour démarrer vite avec une présence propre, moderne et crédible.</p>
 </div>
 </div>
-<div class="notice">Mention visible : “Exemple fictif – maquette de démonstration”.</div>
+</article>
+</div>
+</section>
+
+<section id="projet">
+<div class="wrap">
+<h2 class="section-title">Projet web développé récemment</h2>
+<div class="portfolio">
+<article class="card box">
+<div class="mock">Claire — assistante virtuelle pour cabinets dentaires</div>
+<h3>Claire</h3>
+<p class="muted">HTML/CSS • Vercel • Supabase • IA</p>
+</article>
+<article class="card box">
+<div class="mock">Démo garage — maquette fictive et explicite</div>
+<h3>RéceptionZen Garage</h3>
+<p class="muted">Landing page locale pour présentation et contact.</p>
+</article>
+<article class="card box">
+<div class="mock">Version mobile simple et claire</div>
+<h3>Focus conversion</h3>
+<p class="muted">Lecture rapide, offre visible, contact immédiat.</p>
+</article>
 </div>
 </div>
 </section>
 
-<section class="section">
-<div class="wrap panel">
-<h3>Pourquoi cette page fonctionne</h3>
-<p>
-L’objectif n’est pas d’inventer une preuve sociale, mais de rendre l’offre crédible grâce à la clarté :
-une proposition simple, une démo honnête, des services bien listés, et un contact immédiat.
-</p>
-</div>
-</section>
-
-<section class="section" id="problem-solution">
-<div class="wrap cols2">
-<div class="card">
-<h4>Avant</h4>
-<p>Un site ancien, trop chargé, difficile à lire sur mobile, sans message clair ni appel à l’action évident.</p>
-</div>
-<div class="card">
-<h4>Après</h4>
-<p>Une page simple, professionnelle et rassurante, conçue pour donner envie d’appeler ou de demander un devis.</p>
-</div>
-</div>
-</section>
-
-<section class="section" id="deliverables">
-<div class="wrap panel">
-<h3>Ce que comprend la prestation</h3>
-<div class="cols3">
-<div class="card">
-<h4>Site vitrine</h4>
-<p>Une page claire pour présenter le garage, les services et la zone couverte.</p>
-</div>
-<div class="card">
-<h4>Contact immédiat</h4>
-<p>Numéro cliquable, formulaire simple et bouton d’action visible partout.</p>
-</div>
-<div class="card">
-<h4>Version mobile</h4>
-<p>Une mise en page pensée pour les visiteurs qui consultent depuis leur téléphone.</p>
-</div>
-</div>
-</div>
-</section>
-
-<section class="section" id="process">
-<div class="wrap panel">
-<h3>Comment ça marche</h3>
-<div class="steps">
-<div class="step"><strong>1. Échange</strong><span>On définit le besoin, le style et les services à mettre en avant.</span></div>
-<div class="step"><strong>2. Maquette</strong><span>Je structure la page et j’intègre les contenus dans une version propre.</span></div>
-<div class="step"><strong>3. Validation</strong><span>Vous relisez, on ajuste les textes et les visuels si nécessaire.</span></div>
-<div class="step"><strong>4. Mise en ligne</strong><span>Le site est prêt à être diffusé et à recevoir des demandes.</span></div>
-</div>
-</div>
-</section>
-
-<section class="section" id="services">
-<div class="wrap cols2">
-<div class="card">
-<h4>Services mis en avant</h4>
-<ul class="list">
-<li>Entretien et révision.</li>
-<li>Réparation mécanique.</li>
-<li>Freinage et diagnostic.</li>
-<li>Montage et remplacement de pneus.</li>
-<li>Dépannage léger.</li>
-</ul>
-</div>
-<div class="card">
-<h4>Zone et positionnement</h4>
-<p>
-Garage de proximité basé à Lyon, pensé pour une clientèle locale qui cherche un interlocuteur simple,
-réactif et facile à contacter.
-</p>
-<p>
-L’approche est sobre, directe et sans surpromesse : on montre le métier, le sérieux et le chemin vers la prise de contact.
-</p>
-</div>
-</div>
-</section>
-
-<section class="section" id="differentiation">
-<div class="wrap panel">
-<h3>Ce qui rassure le visiteur</h3>
-<div class="cols3">
-<div class="card"><h4>Transparence</h4><p>Le caractère fictif de la démo est indiqué clairement.</p></div>
-<div class="card"><h4>Lisibilité</h4><p>Un message simple et sans jargon inutile.</p></div>
-<div class="card"><h4>Crédibilité</h4><p>Des blocs concrets au lieu de faux témoignages.</p></div>
-</div>
-</div>
-</section>
-
-<section class="section faq" id="faq">
-<div class="wrap panel">
-<h3>FAQ</h3>
-<div class="item">
-<details>
-<summary>Le garage existe-t-il vraiment ?</summary>
-<p>Non. Il s’agit d’une maquette fictive de démonstration, présentée ouvertement comme telle.</p>
-</details>
-<details>
-<summary>Le site est-il adapté au mobile ?</summary>
-<p>Oui. La structure est pensée pour rester claire et rapide à lire sur smartphone.</p>
-</details>
-<details>
-<summary>Les textes peuvent-ils être modifiés ?</summary>
-<p>Oui. Les services, la zone géographique et les appels à l’action peuvent être adaptés à votre activité.</p>
-</details>
-<details>
-<summary>Peut-on ajouter une vraie galerie photo ?</summary>
-<p>Oui. Il est possible d’intégrer des photos de l’atelier, de l’équipe ou des prestations réalisées.</p>
-</details>
-</div>
-</div>
-</section>
-
-<section class="section" id="contact">
+<section id="contact">
 <div class="wrap contact-grid">
-<div class="card">
-<h4>Contact direct</h4>
-<p><strong>Téléphone :</strong> <a href="tel:+33400000000">04 00 00 00 00</a></p>
-<p><strong>Email :</strong> <a href="mailto:contact@garagemartin-lyon.fr">contact@garagemartin-lyon.fr</a></p>
-<p><strong>Ville :</strong> Lyon et alentours</p>
-<p><strong>Horaires :</strong> Lun-Ven, 8h30-18h30</p>
+<div class="card box">
+<h2 class="section-title">Contact</h2>
+<p class="muted">Décrivez votre garage, je vous réponds avec une proposition simple et claire.</p>
+<p class="small">Téléphone : 0605800594<br>Email : mdoutafsirbah11@gmail.com</p>
 </div>
-<div class="card">
-<h4>Demande de devis</h4>
-<p>Décrivez votre besoin en quelques lignes. Je vous recontacte avec une proposition claire et simple.</p>
+<div class="card box">
 <form>
-<label>Nom<br><input type="text" style="width:100%;padding:12px;border-radius:12px;border:1px solid #374151;background:#0b1220;color:#fff;margin-top:6px"></label><br><br>
-<label>Téléphone<br><input type="tel" style="width:100%;padding:12px;border-radius:12px;border:1px solid #374151;background:#0b1220;color:#fff;margin-top:6px"></label><br><br>
-<label>Message<br><textarea rows="5" style="width:100%;padding:12px;border-radius:12px;border:1px solid #374151;background:#0b1220;color:#fff;margin-top:6px"></textarea></label><br><br>
-<button class="cta" type="submit">Envoyer la demande</button>
+<input type="text" placeholder="Nom du garage" />
+<input type="text" placeholder="Votre nom" />
+<input type="email" placeholder="Votre email" />
+<textarea placeholder="Décrivez votre besoin"></textarea>
+<button class="btn primary" type="button">Envoyer</button>
 </form>
 </div>
 </div>
 </section>
 </main>
 
-<footer class="footer">
-<div class="wrap">
-<div class="small">
-Garage Martin Lyon est un exemple fictif de maquette de présentation. Photos, noms et contenus sont fournis à titre illustratif.
-</div>
+<footer>
+<div class="wrap small">
+Développeur web basé à Lyon — sites vitrines simples pour commerces locaux.
 </div>
 </footer>
 </body>
 </html>
+
