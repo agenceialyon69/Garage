@@ -1,448 +1,710 @@
-<!doctype html>
+      
+<!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="utf-8" />
+<meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Sites simples pour garages à Lyon — conçus pour générer des appels clients</title>
-<meta name="description" content="Une présence web claire et moderne qui transforme vos visiteurs en demandes de devis. Démo interactive, offre de lancement et contact direct." />
+<title>Sites web simples pour garages à Lyon | Plus d'appels clients</title>
+<meta name="description" content="Création de sites web simples pour garages indépendants à Lyon, Vénissieux, Bron et Villeurbanne. Plus d'appels clients, WhatsApp intégré, livraison rapide." />
+<link rel="canonical" href="https://sitesgarages-lyon.fr/">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Sites web simples pour garages à Lyon">
+<meta property="og:description" content="Sites clairs, rapides et crédibles pour garages indépendants à Lyon.">
+
+<script type="application/ld+json">
+{
+"@context": "https://schema.org",
+"@type": "ProfessionalService",
+"name": "Sites web pour garages — Lyon",
+"description": "Création de sites web simples pour garages automobiles indépendants à Lyon",
+"address": {
+"@type": "PostalAddress",
+"addressLocality": "Vénissieux",
+"postalCode": "69200",
+"addressRegion": "Auvergne-Rhône-Alpes",
+"addressCountry": "FR"
+},
+"telephone": "+33605800594",
+"email": "mdoutafsirbah11@gmail.com",
+"areaServed": [
+"Lyon",
+"Vénissieux",
+"Villeurbanne",
+"Saint-Priest",
+"Bron",
+"Caluire",
+"Oullins"
+],
+"priceRange": "€€"
+}
+</script>
+
 <style>
 :root{
---bg:#0b1220;
---panel:#101a2d;
---panel-2:#0d1526;
---text:#eaf0ff;
---muted:#a8b3c7;
---line:rgba(255,255,255,.08);
---accent:#7dd3fc;
---accent-2:#22c55e;
---white:#fff;
---shadow:0 16px 40px rgba(0,0,0,.25);
---radius:20px;
---max:1120px;
+--bg:#0a0f1c; --bg-2:#0f172a; --text:#e8eef9; --muted:#94a3b8; --muted-2:#64748b;
+--line:rgba(255,255,255,.08); --line-2:rgba(255,255,255,.14);
+--accent:#22d3ee; --accent-2:#7dd3fc; --success:#22c55e; --whatsapp:#25d366; --white:#fff;
+--radius:16px; --radius-sm:10px; --max:1080px;
 }
-*{box-sizing:border-box}
+*{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{
-margin:0;
-font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-background:radial-gradient(circle at top,#15213a 0%,var(--bg) 40%);
+font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Inter,sans-serif;
+background:radial-gradient(ellipse at top,#1e2a44 0%,var(--bg) 50%);
 color:var(--text);
 line-height:1.6;
+padding-bottom:90px;
 }
 a{color:inherit;text-decoration:none}
-.wrap{width:min(var(--max),calc(100% - 40px));margin:0 auto}
+button{cursor:pointer;font:inherit;border:none;background:none}
+.wrap{width:min(var(--max),calc(100% - 32px));margin:0 auto}
+
+/* HEADER */
 header{
-padding:20px 0;
-position:sticky;
-top:0;
-background:rgba(11,18,32,.82);
-backdrop-filter:blur(14px);
-border-bottom:1px solid var(--line);
-z-index:20;
+position:sticky;top:0;z-index:50;padding:14px 0;background:rgba(10,15,28,.88);
+backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line);
 }
 .nav{display:flex;align-items:center;justify-content:space-between;gap:16px}
-.brand{font-weight:800;letter-spacing:.2px}
-.nav a{color:var(--muted);margin-left:18px}
-.hero{padding:84px 0 48px}
-.grid{display:grid;grid-template-columns:1.05fr .95fr;gap:28px;align-items:start}
-.eyebrow{
-display:inline-block;
-padding:8px 12px;
-border:1px solid var(--line);
-border-radius:999px;
-color:var(--accent);
-background:rgba(125,211,252,.08);
-font-size:.92rem;
+.brand{display:flex;align-items:center;gap:10px;font-weight:800}
+.brand-mark{
+width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;
+background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#0a0f1c;font-weight:900;font-size:.88rem;
 }
-h1{
-font-size:clamp(2.25rem,5vw,4.1rem);
-line-height:1.02;
-margin:18px 0 16px;
-letter-spacing:-.04em;
+.nav-links{display:flex;gap:22px;align-items:center}
+.nav-links a{color:var(--muted);font-size:.94rem}
+.nav-links a:hover{color:var(--accent)}
+.nav-cta{
+padding:9px 16px;background:var(--whatsapp);color:#0a0f1c!important;border-radius:999px;font-weight:700;font-size:.9rem
 }
-.subtitle{font-size:1.08rem;color:var(--muted);max-width:62ch}
-.actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:26px}
+
+/* HERO */
+.hero{padding:86px 0 44px;text-align:center}
+.hero h1{
+font-size:clamp(2.2rem,5.5vw,3.8rem);line-height:1.05;letter-spacing:-.035em;font-weight:800;margin-bottom:18px;
+}
+.hero h1 span{
+background:linear-gradient(135deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.hero-sub{font-size:1.08rem;color:var(--muted);max-width:56ch;margin:0 auto 24px}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-bottom:22px}
 .btn{
-padding:14px 18px;
-border-radius:14px;
-font-weight:700;
-border:1px solid var(--line);
-display:inline-flex;
-align-items:center;
-justify-content:center;
+padding:14px 22px;border-radius:12px;font-weight:700;font-size:.96rem;display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);
+transition:transform .15s;
 }
-.btn.primary{background:var(--white);color:#0b1220}
-.btn.secondary{background:rgba(255,255,255,.03)}
-.btn.whatsapp{background:#25d366;color:#0b1220;border-color:#25d366}
+.btn:hover{transform:translateY(-1px)}
+.btn-primary{background:var(--white);color:#0a0f1c;border-color:var(--white)}
+.btn-secondary{background:transparent;color:var(--text);border-color:var(--line-2)}
+.btn-whatsapp{background:var(--whatsapp);color:#0a0f1c;border-color:var(--whatsapp)}
+.hero-proof{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;font-size:.92rem;color:var(--muted)}
+.hero-proof span{display:inline-flex;align-items:center;gap:6px}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--success);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+
+/* SECTIONS */
+section{padding:28px 0}
+.section-title{font-size:clamp(1.45rem,3vw,1.9rem);font-weight:800;margin-bottom:8px;letter-spacing:-.02em}
+.section-lead{color:var(--muted);font-size:1rem;max-width:58ch;margin-bottom:18px}
+.section-pill{
+display:inline-block;padding:6px 12px;background:rgba(34,211,238,.10);color:var(--accent);
+border:1px solid rgba(34,211,238,.22);border-radius:999px;font-size:.82rem;font-weight:600;margin-bottom:10px;
+}
 .card{
-background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02));
-border:1px solid var(--line);
-border-radius:var(--radius);
-box-shadow:var(--shadow);
+background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.015));
+border:1px solid var(--line);border-radius:var(--radius);padding:22px;
 }
-.hero-card{padding:24px}
-.stat{display:grid;gap:10px}
-.stat-item{
-padding:16px;
-border:1px solid var(--line);
-border-radius:16px;
-background:rgba(255,255,255,.03);
+
+/* VALUE GRID 4 */
+.value-grid,.portfolio-grid,.contact-grid{display:grid;gap:14px}
+.value-grid{grid-template-columns:repeat(4,1fr)}
+.value-card{padding:22px;background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:var(--radius)}
+.value-icon{
+width:44px;height:44px;border-radius:12px;background:rgba(34,211,238,.12);color:var(--accent);
+display:flex;align-items:center;justify-content:center;font-size:1.25rem;margin-bottom:12px;
 }
-.stat-item strong{display:block;font-size:1.05rem;margin-bottom:4px}
-section{padding:18px 0 28px}
-.section-title{font-size:1.7rem;margin:0 0 14px}
-.muted{color:var(--muted)}
-.cols{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
-.box{padding:24px}
-.offer{display:grid;grid-template-columns:1fr auto;gap:18px;align-items:center}
-.price{font-size:2rem;font-weight:900}
-.price small{display:block;color:var(--muted);font-size:1rem;font-weight:600}
-.pill{
-display:inline-block;
-padding:8px 10px;
-border-radius:999px;
-background:rgba(34,197,94,.12);
-color:#86efac;
-font-size:.92rem;
-border:1px solid rgba(34,197,94,.25);
+.value-card h3{font-size:1rem;margin-bottom:6px}
+.value-card p{color:var(--muted);font-size:.92rem}
+
+/* OFFER */
+.offer-card{
+position:relative;padding:28px;border-radius:var(--radius);border:1px solid rgba(34,211,238,.4);
+background:linear-gradient(180deg,rgba(34,211,238,.08),rgba(125,211,252,.02));max-width:540px;margin:0 auto;
 }
-.portfolio{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
-.mock{
-height:190px;
-border-radius:16px;
-background:linear-gradient(135deg,#16233d,#0d1526);
-border:1px solid var(--line);
-margin-bottom:14px;
-display:flex;
-align-items:end;
-padding:14px;
-color:var(--muted);
-font-size:.95rem;
+.offer-tag{
+position:absolute;top:-12px;left:24px;padding:5px 12px;background:var(--accent);color:#0a0f1c;
+border-radius:999px;font-size:.74rem;font-weight:700;text-transform:uppercase;
 }
-.demo-note{
-display:inline-block;
-margin-bottom:10px;
-padding:6px 10px;
-border-radius:999px;
-background:rgba(125,211,252,.12);
-color:#9bdcf6;
-border:1px solid rgba(125,211,252,.25);
-font-size:.85rem;
+.offer-card h3{font-size:1.1rem;margin-bottom:8px}
+.offer-price{font-size:2.2rem;font-weight:900;letter-spacing:-.02em;margin:10px 0 4px}
+.offer-price small{display:block;font-size:.84rem;color:var(--muted);font-weight:500}
+.offer-list{list-style:none;margin:12px 0}
+.offer-list li{padding:4px 0;color:var(--muted);font-size:.92rem}
+.offer-list li::before{content:"✓ ";color:var(--success);font-weight:900}
+.offer-note{
+font-size:.84rem;color:var(--muted);padding:12px;background:rgba(0,0,0,.2);border-radius:var(--radius-sm);margin-top:12px;
 }
-.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-form{display:grid;gap:12px}
-input,textarea{
-width:100%;
-padding:14px 15px;
-border-radius:14px;
-border:1px solid var(--line);
-background:var(--panel-2);
-color:var(--text);
-font:inherit;
-outline:none;
+
+/* PORTFOLIO */
+.portfolio-grid{grid-template-columns:1fr 1fr}
+.portfolio-card{padding:0;overflow:hidden}
+.portfolio-thumb{
+height:220px;background:linear-gradient(135deg,#1e2a44,#0f172a);overflow:hidden;display:flex;align-items:flex-end;padding:18px;position:relative;
 }
-textarea{min-height:140px;resize:vertical}
-.chat-box{
-display:grid;
-gap:12px;
-margin-top:14px;
+.portfolio-thumb::before{
+content:"";position:absolute;inset:0;background:radial-gradient(circle at top right,rgba(34,211,238,.18),transparent 55%);
 }
+.portfolio-thumb-inner{position:relative;z-index:1}
+.portfolio-thumb small{display:block;color:var(--accent);font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px}
+.portfolio-thumb strong{font-size:1rem;font-weight:700}
+.portfolio-content{padding:18px}
+.portfolio-content h3{font-size:1rem;margin-bottom:6px}
+.portfolio-content p{color:var(--muted);font-size:.88rem;margin-bottom:12px}
+
+/* BONUS IA */
+.bonus-toggle{
+width:100%;padding:16px 20px;background:rgba(255,255,255,.03);
+border:1px solid var(--line);border-radius:var(--radius);
+display:flex;align-items:center;justify-content:space-between;text-align:left;transition:.15s;
+}
+.bonus-toggle:hover{background:rgba(255,255,255,.05);border-color:var(--line-2)}
+.bonus-toggle strong{font-size:.97rem}
+.bonus-toggle span{display:block;color:var(--muted);font-size:.86rem;margin-top:4px}
+.bonus-icon{font-size:1.35rem;color:var(--accent);transition:transform .2s;flex-shrink:0}
+.bonus-toggle.open .bonus-icon{transform:rotate(45deg)}
+.bonus-content{
+display:none;margin-top:12px;padding:18px;background:rgba(255,255,255,.03);
+border:1px solid var(--line);border-radius:var(--radius);
+}
+.bonus-content.open{display:block}
+.chat-box{margin-top:10px}
 .chat-log{
-min-height:220px;
-max-height:360px;
-overflow:auto;
-padding:14px;
-border-radius:16px;
-border:1px solid var(--line);
-background:rgba(13,21,38,.8);
-display:grid;
-gap:10px;
+height:210px;overflow-y:auto;display:flex;flex-direction:column;gap:8px;
+padding:14px;background:var(--bg-2);border-radius:var(--radius-sm);
+border:1px solid var(--line);margin-bottom:12px;
 }
-.msg{
-padding:12px 14px;
-border-radius:14px;
-max-width:88%;
-white-space:pre-wrap;
-word-break:break-word;
+.msg{max-width:80%;padding:9px 13px;border-radius:12px;font-size:.92rem;line-height:1.45;word-wrap:break-word;animation:msgIn .25s ease}
+@keyframes msgIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.msg.bot{align-self:flex-start;background:rgba(125,211,252,.12);border:1px solid rgba(125,211,252,.25);border-bottom-left-radius:4px}
+.msg.user{align-self:flex-end;background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.3);border-bottom-right-radius:4px}
+.chat-typing{
+align-self:flex-start;background:rgba(125,211,252,.12);border:1px solid rgba(125,211,252,.25);
+border-radius:12px;border-bottom-left-radius:4px;padding:10px 14px;display:inline-flex;gap:5px;
 }
-.msg.user{
-justify-self:end;
-background:#233250;
-border:1px solid rgba(125,211,252,.18);
+.chat-typing span{width:6px;height:6px;background:var(--accent-2);border-radius:50%;animation:typing 1.4s infinite}
+.chat-typing span:nth-child(2){animation-delay:.2s}
+.chat-typing span:nth-child(3){animation-delay:.4s}
+@keyframes typing{0%,60%,100%{opacity:.3;transform:translateY(0)}30%{opacity:1;transform:translateY(-3px)}}
+.chat-suggestions{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.chat-suggestion{
+padding:6px 12px;background:rgba(255,255,255,.04);border:1px solid var(--line);
+border-radius:999px;color:var(--muted);font-size:.8rem;cursor:pointer;transition:.15s;
 }
-.msg.bot{
-justify-self:start;
-background:#14243b;
-border:1px solid rgba(255,255,255,.06);
+.chat-suggestion:hover{background:rgba(34,211,238,.1);border-color:rgba(34,211,238,.3);color:var(--accent)}
+.chat-input-row{display:flex;gap:8px}
+.chat-input-row input{
+flex:1;padding:10px 14px;background:var(--bg-2);border:1px solid var(--line);
+border-radius:999px;color:var(--text);font:inherit;font-size:.92rem;outline:none;
 }
-.chat-actions{
-display:flex;
-gap:10px;
-flex-wrap:wrap;
+.chat-input-row input:focus{border-color:var(--accent)}
+.chat-send{
+width:40px;height:40px;background:var(--accent);color:#0a0f1c;border-radius:50%;
+display:flex;align-items:center;justify-content:center;font-weight:900;cursor:pointer;
 }
-.small{font-size:.94rem}
+.chat-send:disabled{opacity:.5;cursor:not-allowed}
+
+/* FAQ */
+.faq-item{border-bottom:1px solid var(--line);padding:14px 0}
+.faq-question{
+width:100%;display:flex;justify-content:space-between;align-items:center;text-align:left;
+font-weight:600;font-size:.95rem;color:var(--text);
+}
+.faq-question:hover{color:var(--accent)}
+.faq-icon{font-size:1.35rem;color:var(--accent);transition:transform .2s}
+.faq-item.open .faq-icon{transform:rotate(45deg)}
+.faq-answer{max-height:0;overflow:hidden;transition:max-height .25s ease;color:var(--muted);font-size:.9rem}
+.faq-item.open .faq-answer{max-height:240px;padding-top:8px}
+
+/* MINIBLOCK */
+.miniblock p{color:var(--muted);margin-top:10px}
+
+/* CONTACT */
+.contact-grid{grid-template-columns:1fr 1fr;margin-top:12px}
+.contact-info{padding:22px}
+.contact-row{display:flex;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
+.contact-row:last-of-type{border-bottom:none}
+.contact-row strong{color:var(--accent);min-width:90px;font-size:.84rem}
+.contact-row a:hover{color:var(--accent)}
+
+form{display:grid;gap:12px}
+label{display:block;font-weight:600;font-size:.88rem;margin-bottom:4px}
+input,textarea{
+width:100%;padding:11px 14px;background:var(--bg-2);border:1px solid var(--line);
+border-radius:var(--radius-sm);color:var(--text);font:inherit;font-size:.92rem;outline:none;transition:border-color .15s;
+}
+input:focus,textarea:focus{border-color:var(--accent)}
+textarea{min-height:100px;resize:vertical}
+.form-status{
+font-size:.88rem;padding:10px;border-radius:var(--radius-sm);text-align:center;display:none;
+}
+.form-status.show{display:block}
+.form-status.success{background:rgba(34,197,94,.1);color:var(--success);border:1px solid rgba(34,197,94,.3)}
+.form-status.error{background:rgba(251,113,133,.1);color:#fda4af;border:1px solid rgba(251,113,133,.3)}
+
+/* FOOTER */
 footer{
-padding:34px 0 48px;
-color:var(--muted);
-border-top:1px solid var(--line);
-margin-top:24px;
+padding:28px 0 34px;border-top:1px solid var(--line);margin-top:28px;
+color:var(--muted-2);text-align:center;font-size:.84rem;
 }
-.status{font-size:.92rem;color:var(--muted)}
-.benefits{display:grid;gap:10px;margin-top:12px}
-.benefits li{color:var(--muted)}
+
+/* STICKY MOBILE */
+.sticky-mobile{
+position:fixed;bottom:14px;left:14px;right:14px;display:none;gap:10px;z-index:999;
+}
+.sticky-mobile a{
+flex:1;display:flex;align-items:center;justify-content:center;
+padding:14px;border-radius:14px;font-weight:800;
+box-shadow:0 10px 30px rgba(0,0,0,.4);
+}
+.sticky-call{background:#fff;color:#0a0f1c}
+.sticky-wa{background:#25d366;color:#0a0f1c}
+
 @media (max-width:900px){
-.grid,.cols,.portfolio,.contact-grid,.offer{grid-template-columns:1fr}
+.value-grid{grid-template-columns:repeat(2,1fr)}
+.portfolio-grid,.contact-grid{grid-template-columns:1fr}
+.nav-links{display:none}
 header{position:static}
-.nav{flex-direction:column;align-items:flex-start}
-.nav div{display:flex;flex-wrap:wrap;gap:12px}
-.nav a{margin-left:0}
-.hero{padding-top:48px}
+.hero{padding:54px 0 34px}
+}
+@media (max-width:700px){
+.sticky-mobile{display:flex}
+}
+@media (max-width:560px){
+.value-grid{grid-template-columns:1fr}
+.hero-cta{flex-direction:column}
+.btn{width:100%;justify-content:center}
 }
 </style>
 </head>
 <body>
+
+<!-- HEADER -->
 <header>
 <div class="wrap nav">
-<div class="brand">Sites pour garages à Lyon</div>
-<div>
-<a href="#offre">Offre</a>
-<a href="#projet">Claire</a>
-<a href="#demo">Démo</a>
-<a href="#contact">Contact</a>
+<div class="brand">
+<span class="brand-mark">MT</span>
+Sites Garages Lyon
 </div>
+<nav class="nav-links">
+<a href="#valeur">Services</a>
+<a href="#offre">Tarif</a>
+<a href="#portfolio">Portfolio</a>
+<a href="#contact">Contact</a>
+</nav>
+<a class="nav-cta" href="https://wa.me/33605800594?text=Bonjour%2C%20je%20veux%20discuter%20de%20mon%20projet%20de%20site%20pour%20mon%20garage." target="_blank" rel="noopener">💬 WhatsApp</a>
 </div>
 </header>
 
 <main>
+
+<!-- HERO -->
 <section class="hero">
-<div class="wrap grid">
-<div>
-<span class="eyebrow">Une présence web simple qui transforme vos visiteurs en appels clients</span>
-<h1>Des sites simples pour garages à Lyon, conçus pour générer des appels clients.</h1>
-<p class="subtitle">
-Une présence web claire et moderne qui transforme vos visiteurs en demandes de devis sans changer votre quotidien.
-</p>
-<div class="actions">
-<a class="btn primary" href="#offre">Recevoir un site exemple</a>
-<a class="btn whatsapp" href="https://wa.me/33605800594?text=Bonjour%20%2C%20je%20veux%20voir%20un%20exemple%20de%20site%20pour%20mon%20garage.">WhatsApp</a>
+<div class="wrap">
+<h1>Plus d'appels clients pour <span>votre garage à Lyon</span>.</h1>
+<p class="hero-sub">Un site simple, rapide et crédible pour aider vos clients à vous contacter.</p>
+<div class="hero-cta">
+<a class="btn btn-whatsapp" href="https://wa.me/33605800594?text=Bonjour%2C%20je%20veux%20discuter%20de%20mon%20projet%20de%20site%20pour%20mon%20garage." target="_blank" rel="noopener">💬 WhatsApp</a>
+<a class="btn btn-secondary" href="#offre">Voir l'offre</a>
 </div>
+<div class="hero-proof">
+<span><span class="dot"></span> Basé à Vénissieux</span>
+<span>⚡ Livraison 7 jours</span>
+<span>📞 Contact direct</span>
 </div>
-
-<aside class="card hero-card">
-<div class="stat">
-<div class="stat-item">
-<strong>Position local Lyon</strong>
-<span class="muted">Une approche simple, crédible et orientée appels clients.</span>
-</div>
-<div class="stat-item">
-<strong>Travail direct</strong>
-<span class="muted">Simplicité, rapidité et clarté sur chaque projet.</span>
-</div>
-<div class="stat-item">
-<strong>Contact direct</strong>
-<span class="muted">0605800594 · mdoutafsirbah11@gmail.com</span>
-</div>
-</div>
-</aside>
 </div>
 </section>
 
+<!-- BÉNÉFICES (4 cards) -->
+<section id="valeur">
+<div class="wrap">
+<span class="section-pill">Bénéfices</span>
+<h2 class="section-title">Ce que votre site vous apporte</h2>
+<p class="section-lead">Une vitrine claire qui transforme vos visiteurs en appels.</p>
+<div class="value-grid">
+<div class="value-card">
+<div class="value-icon">📞</div>
+<h3>Plus d'appels</h3>
+<p>Horaires et contact visibles immédiatement.</p>
+</div>
+<div class="value-card">
+<div class="value-icon">💬</div>
+<h3>WhatsApp direct</h3>
+<p>Contact rapide en un clic.</p>
+</div>
+<div class="value-card">
+<div class="value-icon">📍</div>
+<h3>Crédibilité locale</h3>
+<p>Un site propre qui rassure vos clients.</p>
+</div>
+<div class="value-card">
+<div class="value-icon">🔎</div>
+<h3>Visible sur Google</h3>
+<p>Vos clients trouvent rapidement votre garage.</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- SEO LOCAL -->
 <section>
-<div class="wrap cols">
-<article class="card box">
-<h2 class="section-title">Qui je suis</h2>
-<p class="muted">
-Je construis des sites simples pour garages à Lyon avec une logique très concrète : vous aider à convertir plus facilement les visiteurs en appels.
+<div class="wrap">
+<div class="card miniblock">
+<span class="section-pill">Référencement local</span>
+<h2 class="section-title">Création de site internet pour garage automobile à Lyon</h2>
+<p>
+J'aide les garages indépendants de Lyon, Vénissieux, Villeurbanne, Bron et Saint-Priest à avoir un site simple et crédible pour être trouvés plus facilement par leurs clients.
 </p>
-<p class="muted">
-Je privilégie une structure propre, lisible et orientée terrain.
-</p>
-</article>
+</div>
+</div>
+</section>
 
-<article class="card box" id="offre">
-<h2 class="section-title">Offre de lancement</h2>
-<p class="muted">
-Je vous propose un site simple et clair pour présenter votre garage, inspirer confiance et faciliter le contact.
-</p>
-<div class="offer">
-<div class="price">490 €<small>de mise en place</small></div>
-<div>
-<div class="pill">99 €/mois : sécurité, hébergement, modifications simples, ajout de services, photos, horaires et support rapide</div>
-<p class="muted small" style="margin:10px 0 0;">
-Idéal pour démarrer vite avec une présence propre, moderne et crédible.
-</p>
+<!-- PORTFOLIO -->
+<section id="portfolio">
+<div class="wrap">
+<span class="section-pill">Portfolio</span>
+<h2 class="section-title">Mes projets concrets</h2>
+<div class="portfolio-grid">
+<article class="card portfolio-card">
+<div class="portfolio-thumb">
+<div class="portfolio-thumb-inner">
+<small>Projet en ligne</small>
+<strong>claireassistante.fr</strong>
 </div>
 </div>
-<ul class="benefits">
-<li>Modifications simples incluses.</li>
-<li>Ajout de nouveaux services et mises à jour rapides.</li>
-<li>Support pratique pour garder le site à jour.</li>
+<div class="portfolio-content">
+<h3>Claire — Assistante IA dentaire</h3>
+<p>Plateforme web complète, en ligne et testable.</p>
+<a class="btn btn-secondary" href="https://claireassistante.fr" target="_blank" rel="noopener">Voir →</a>
+</div>
+</article>
+<article class="card portfolio-card">
+<div class="portfolio-thumb">
+<div class="portfolio-thumb-inner">
+<small>Démo</small>
+<strong>Garage Martin Lyon</strong>
+</div>
+</div>
+<div class="portfolio-content">
+<h3>Démo garage indépendant</h3>
+<p>Exemple de rendu moderne pour garage automobile.</p>
+<a class="btn btn-secondary" href="/garage">Voir →</a>
+</div>
+</article>
+</div>
+</div>
+</section>
+
+<!-- OFFRE (position basse) -->
+<section id="offre">
+<div class="wrap">
+<span class="section-pill">Offre de lancement</span>
+<h2 class="section-title" style="text-align:center">Tarif réduit pour 3 garages partenaires</h2>
+<p class="section-lead" style="text-align:center;margin:0 auto 18px">
+Je construis mon offre locale pour les garages indépendants de Lyon. Pour mes 3 premiers partenaires, je propose un tarif réduit en échange d'un retour honnête.
+</p>
+<div class="offer-card">
+<span class="offer-tag">3 places</span>
+<h3>Site Vitrine Garage</h3>
+<div class="offer-price">290€ <small>tout compris · paiement à la livraison</small></div>
+<ul class="offer-list">
+<li>Site vitrine 1 page</li>
+<li>Coordonnées et horaires</li>
+<li>Formulaire de contact</li>
+<li>Boutons WhatsApp et appel</li>
+<li>Lien Google Maps</li>
+<li>Optimisé mobile</li>
+<li>Hébergement 1 an inclus</li>
+<li>Livraison 7 jours</li>
 </ul>
-</article>
-</div>
-</section>
-
-<section id="projet">
-<div class="wrap">
-<h2 class="section-title">Projet web développé récemment</h2>
-<div class="portfolio">
-<article class="card box">
-<div class="mock">Claire — assistante virtuelle pour cabinets dentaires</div>
-<h3>Claire</h3>
-<p class="muted">HTML/CSS • Vercel • Supabase • IA</p>
-</article>
-<article class="card box">
-<div class="demo-note">Maquette fictive — démonstration</div>
-<div class="mock">Démo garage — exemple de rendu pour garage indépendant</div>
-<h3>RéceptionZen Garage</h3>
-<p class="muted">Landing page locale pour présentation et contact.</p>
-</article>
+<div class="offer-note">Tarif standard : 490€. En échange du tarif réduit : retour honnête + autorisation portfolio.</div>
+<div class="offer-note">📍 Offre réservée aux garages indépendants autour de Lyon.</div>
+<a class="btn btn-primary" href="https://wa.me/33605800594?text=Bonjour%2C%20je%20suis%20int%C3%A9ress%C3%A9%20par%20l%27offre%20%C3%A0%20290%E2%82%AC%20pour%20mon%20garage." target="_blank" rel="noopener" style="width:100%;justify-content:center;margin-top:14px">💬 Réserver ma place</a>
 </div>
 </div>
 </section>
 
-<section id="demo">
+<!-- BONUS IA (accordéon) -->
+<section>
 <div class="wrap">
-<div class="card box">
-<h2 class="section-title">Démo conversationnelle</h2>
-<p class="muted">
-Testez ici une réception simple, courte et crédible. Le but est de montrer un vrai parcours d’accueil pour un garage.
+<button class="bonus-toggle" id="bonusToggle">
+<div>
+<strong>🤖 En option : assistance IA pour vos visiteurs</strong>
+<span>Démo discrète, en bonus du site principal</span>
+</div>
+<span class="bonus-icon">+</span>
+</button>
+<div class="bonus-content" id="bonusContent">
+<p style="color:var(--muted);font-size:.92rem;margin-bottom:12px">
+Optionnel. Le cœur de l'offre reste le site qui fait appeler.
 </p>
-
 <div class="chat-box">
 <div class="chat-log" id="chatLog">
-<div class="msg bot">Bonjour, je peux vous aider. Quel est le problème sur votre véhicule ?</div>
+<div class="msg bot">Bonjour ! Comment puis-je vous aider ?</div>
 </div>
-
-<div class="chat-actions">
-<button class="btn secondary" type="button" data-demo="Ma voiture fait un bruit quand je freine.">Frein qui fait du bruit</button>
-<button class="btn secondary" type="button" data-demo="Je voudrais un rendez-vous pour une révision.">Demander un rendez-vous</button>
-<button class="btn secondary" type="button" data-demo="J’ai une panne, la voiture ne démarre plus.">Panne urgente</button>
+<div class="chat-suggestions" id="chatSuggestions">
+<button class="chat-suggestion" data-msg="Vos horaires ?">Horaires</button>
+<button class="chat-suggestion" data-msg="J'ai un bruit au freinage">Bruit freins</button>
+<button class="chat-suggestion" data-msg="Combien pour une vidange ?">Prix vidange</button>
 </div>
-
-<div style="display:grid;gap:10px;">
-<textarea id="chatInput" placeholder="Écrivez le message client..."></textarea>
-<div class="chat-actions">
-<button class="btn primary" id="sendChat" type="button">Envoyer à la démo</button>
-<span class="status" id="chatStatus"></span>
-</div>
+<div class="chat-input-row">
+<input type="text" id="chatInput" placeholder="Posez une question..." maxlength="300" autocomplete="off">
+<button class="chat-send" id="chatSend" aria-label="Envoyer">→</button>
 </div>
 </div>
 </div>
 </div>
 </section>
 
-<section id="contact">
-<div class="wrap contact-grid">
-<div class="card box">
-<h2 class="section-title">Contact</h2>
-<p class="muted">
-Décrivez votre garage, je vous réponds avec une proposition simple et claire.
-</p>
-<p class="small">
-Téléphone : 0605800594<br />
-Email : mdoutafsirbah11@gmail.com<br />
-Zone : Lyon et alentours
+<!-- FAQ -->
+<section>
+<div class="wrap">
+<span class="section-pill">FAQ</span>
+<h2 class="section-title">Questions fréquentes</h2>
+<div class="faq">
+<div class="faq-item">
+<button class="faq-question">Combien de temps pour livrer ?<span class="faq-icon">+</span></button>
+<div class="faq-answer"><p>7 jours après l'appel et la réception de vos infos (photos, horaires, services).</p></div>
+</div>
+<div class="faq-item">
+<button class="faq-question">Vous faites le suivi après livraison ?<span class="faq-icon">+</span></button>
+<div class="faq-answer"><p>Oui, sur WhatsApp pour les petites modifications (horaires, photos, services).</p></div>
+</div>
+<div class="faq-item">
+<button class="faq-question">Et si je ne suis pas satisfait ?<span class="faq-icon">+</span></button>
+<div class="faq-answer"><p>On retravaille jusqu'à votre satisfaction. Le paiement se fait à la livraison, donc vous ne payez que si vous êtes content du résultat.</p></div>
+</div>
+<div class="faq-item">
+<button class="faq-question">Le site est-il à moi ?<span class="faq-icon">+</span></button>
+<div class="faq-answer"><p>Oui. Le domaine est à votre nom et le code vous appartient. Vous pouvez tout récupérer à tout moment.</p></div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- POURQUOI MOI -->
+<section>
+<div class="wrap card miniblock">
+<span class="section-pill">Pourquoi moi ?</span>
+<h2 class="section-title">Pourquoi je fais ça</h2>
+<p>
+Je suis basé à Vénissieux et je travaille directement avec les petits garages indépendants de Lyon.
+Pas d'agence compliquée, pas de commercial.
+Vous échangez directement avec la personne qui crée votre site.
 </p>
 </div>
+</section>
 
-<div class="card box">
-<h2 class="section-title">Demande de contact</h2>
+<!-- CONTACT -->
+<section id="contact">
+<div class="wrap">
+<span class="section-pill">Contact direct</span>
+<h2 class="section-title">Discutons de votre projet</h2>
+<p class="section-lead">Le plus rapide : WhatsApp. Sinon téléphone ou formulaire.</p>
+<div class="contact-grid">
+<div class="card contact-info">
+<h3 style="margin-bottom:14px">Mes coordonnées</h3>
+<div class="contact-row"><strong>📞 Téléphone</strong><a href="tel:+33605800594">06 05 80 05 94</a></div>
+<div class="contact-row"><strong>💬 WhatsApp</strong><a href="https://wa.me/33605800594" target="_blank" rel="noopener">06 05 80 05 94</a></div>
+<div class="contact-row"><strong>📧 Email</strong><a href="mailto:mdoutafsirbah11@gmail.com">mdoutafsirbah11@gmail.com</a></div>
+<div class="contact-row"><strong>📍 Zone</strong><span>Lyon et alentours</span></div>
+<a class="btn btn-whatsapp" href="https://wa.me/33605800594?text=Bonjour%2C%20je%20veux%20discuter%20de%20mon%20projet%20de%20site%20pour%20mon%20garage." target="_blank" rel="noopener" style="width:100%;justify-content:center;margin-top:16px">💬 Démarrer sur WhatsApp</a>
+</div>
+
+<div class="card">
+<h3 style="margin-bottom:12px">Ou laissez vos infos</h3>
+<p class="section-lead" style="margin-bottom:14px">Remplissez uniquement ce qui est nécessaire pour être recontacté rapidement.</p>
 <form id="leadForm">
-<input type="text" name="garage" placeholder="Nom du garage" required />
-<input type="text" name="name" placeholder="Votre nom" required />
-<input type="email" name="email" placeholder="Votre email" required />
-<textarea name="message" placeholder="Décrivez votre besoin" required></textarea>
-<button class="btn primary" type="submit">Envoyer</button>
-<div class="status" id="formStatus"></div>
+<div>
+<label for="garage">Nom du garage *</label>
+<input id="garage" type="text" name="garage" required placeholder="Ex: Garage Dupont" />
+</div>
+<div>
+<label for="name">Votre prénom *</label>
+<input id="name" type="text" name="name" required placeholder="Ex: Jean" />
+</div>
+<div>
+<label for="phone">Téléphone *</label>
+<input id="phone" type="tel" name="phone" required placeholder="06 12 34 56 78" />
+</div>
+<div>
+<label for="email">Email</label>
+<input id="email" type="email" name="email" placeholder="optionnel" />
+</div>
+<button class="btn btn-primary" type="submit" style="width:100%;justify-content:center">Envoyer</button>
+<div class="form-status" id="formStatus"></div>
 </form>
 </div>
 </div>
+</div>
 </section>
+
 </main>
 
+<!-- FOOTER -->
 <footer>
-<div class="wrap small">
-Développeur web basé à Lyon — sites vitrines simples pour commerces locaux.
+<div class="wrap">
+<p><strong>Mamadou Tafsir Bah</strong> · Sites web pour garages à Lyon</p>
+<p>📍 Vénissieux · 📞 06 05 80 05 94 · 📧 mdoutafsirbah11@gmail.com</p>
+<p style="margin-top:10px;font-size:.8rem;color:var(--muted-2)">
+© 2026 · La démo /garage est un exemple fictif assumé pour illustration
+</p>
 </div>
 </footer>
 
-<script>
-const chatLog = document.getElementById("chatLog");
-const chatInput = document.getElementById("chatInput");
-const sendChat = document.getElementById("sendChat");
-const chatStatus = document.getElementById("chatStatus");
-const leadForm = document.getElementById("leadForm");
-const formStatus = document.getElementById("formStatus");
+<!-- STICKY MOBILE CTA -->
+<div class="sticky-mobile">
+<a class="sticky-call" href="tel:+33605800594">📞 Appeler</a>
+<a class="sticky-wa" href="https://wa.me/33605800594?text=Bonjour%2C%20je%20veux%20discuter%20de%20mon%20projet%20de%20site%20pour%20mon%20garage." target="_blank" rel="noopener">💬 WhatsApp</a>
+</div>
 
-function addMsg(text, type) {
-const div = document.createElement("div");
-div.className = `msg ${type}`;
-div.textContent = text;
-chatLog.appendChild(div);
+<script>
+// UUID polyfill (Safari ancien)
+function generateUUID(){
+if (typeof crypto !== 'undefined' && crypto.randomUUID) return crypto.randomUUID();
+return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c){
+var r = Math.random()*16|0, v = c=='x' ? r : (r&0x3|0x8);
+return v.toString(16);
+});
+}
+
+// FAQ
+document.querySelectorAll('.faq-question').forEach(btn => {
+btn.addEventListener('click', () => {
+const item = btn.closest('.faq-item');
+const wasOpen = item.classList.contains('open');
+document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+if (!wasOpen) item.classList.add('open');
+});
+});
+
+// BONUS IA TOGGLE
+const bonusToggle = document.getElementById('bonusToggle');
+const bonusContent = document.getElementById('bonusContent');
+bonusToggle.addEventListener('click', () => {
+bonusToggle.classList.toggle('open');
+bonusContent.classList.toggle('open');
+});
+
+// CHAT IA
+const chatLog = document.getElementById('chatLog');
+const chatInput = document.getElementById('chatInput');
+const chatSend = document.getElementById('chatSend');
+const chatSuggestions = document.getElementById('chatSuggestions');
+const sessionId = generateUUID();
+let isChatLoading = false;
+let typingEl = null;
+
+function addMessage(text, type){
+const msg = document.createElement('div');
+msg.className = 'msg ' + type;
+msg.textContent = text;
+chatLog.appendChild(msg);
 chatLog.scrollTop = chatLog.scrollHeight;
 }
+function showTyping(){
+if (typingEl) return;
+typingEl = document.createElement('div');
+typingEl.className = 'chat-typing';
+typingEl.innerHTML = '<span></span><span></span><span></span>';
+chatLog.appendChild(typingEl);
+chatLog.scrollTop = chatLog.scrollHeight;
+}
+function hideTyping(){
+if (typingEl){ typingEl.remove(); typingEl = null; }
+}
 
-document.querySelectorAll("[data-demo]").forEach(btn => {
-btn.addEventListener("click", () => {
-chatInput.value = btn.getAttribute("data-demo");
-});
-});
+async function sendChat(message){
+if (isChatLoading || !message) return;
 
-sendChat.addEventListener("click", async () => {
-const text = chatInput.value.trim();
-if (!text) return;
+addMessage(message, 'user');
+chatInput.value = '';
+if (chatSuggestions) chatSuggestions.style.display = 'none';
+isChatLoading = true;
+chatInput.disabled = true;
+chatSend.disabled = true;
+showTyping();
 
-addMsg(text, "user");
-chatInput.value = "";
-chatStatus.textContent = "Réflexion en cours...";
-
-try {
+try{
 const controller = new AbortController();
-const timer = setTimeout(() => controller.abort(), 15000);
+const timer = setTimeout(() => controller.abort(), 20000);
 
-const res = await fetch("/api/chat-garage", {
-method: "POST",
-headers: { "Content-Type": "application/json" },
-body: JSON.stringify({ message: text, sessionId: crypto.randomUUID() }),
+const res = await fetch('/api/chat-garage', {
+method:'POST',
+headers:{'Content-Type':'application/json'},
+body: JSON.stringify({ message, sessionId }),
 signal: controller.signal
 });
-
 clearTimeout(timer);
-
-if (!res.ok) throw new Error("chat_error");
-
+hideTyping();
+if (!res.ok) throw new Error('chat_error');
 const data = await res.json();
-addMsg(data.reply || "Bonjour, comment puis-je vous aider ?", "bot");
-} catch (e) {
-addMsg("Désolé, une erreur est survenue. Pouvez-vous reformuler ?", "bot");
+addMessage(data.reply || 'Bonjour, comment puis-je vous aider ?', 'bot');
+} catch(e){
+hideTyping();
+addMessage('Désolé, une erreur est survenue. Contactez le garage par téléphone.', 'bot');
 } finally {
-chatStatus.textContent = "";
+isChatLoading = false;
+chatInput.disabled = false;
+chatSend.disabled = false;
+chatInput.focus();
+}
+}
+
+chatSend.addEventListener('click', () => sendChat(chatInput.value.trim()));
+chatInput.addEventListener('keydown', (e) => {
+if (e.key === 'Enter' && !e.shiftKey){
+e.preventDefault();
+sendChat(chatInput.value.trim());
 }
 });
+if (chatSuggestions){
+chatSuggestions.addEventListener('click', (e) => {
+const btn = e.target.closest('.chat-suggestion');
+if (!btn) return;
+sendChat(btn.dataset.msg);
+});
+}
 
-leadForm.addEventListener("submit", async (e) => {
+// FORMULAIRE LEAD — VRAI FETCH API (corrigé)
+const leadForm = document.getElementById('leadForm');
+const formStatus = document.getElementById('formStatus');
+
+leadForm.addEventListener('submit', async (e) => {
 e.preventDefault();
-formStatus.textContent = "Envoi en cours...";
+formStatus.className = 'form-status show';
+formStatus.textContent = 'Envoi en cours...';
 
 const fd = new FormData(leadForm);
 const payload = Object.fromEntries(fd.entries());
+payload.source = 'index';
 
-try {
-const res = await fetch("/api/lead-garage", {
-method: "POST",
-headers: { "Content-Type": "application/json" },
+try{
+const res = await fetch('/api/lead-garage', {
+method:'POST',
+headers:{'Content-Type':'application/json'},
 body: JSON.stringify(payload)
 });
 
-if (!res.ok) throw new Error("lead_error");
+if (!res.ok) throw new Error('lead_error');
 
 leadForm.reset();
-formStatus.textContent = "Merci. Votre demande a bien été envoyée.";
-} catch (err) {
-formStatus.textContent = "Le formulaire n'a pas pu être envoyé. Réessayez plus tard.";
+formStatus.className = 'form-status show success';
+formStatus.textContent = '✓ Merci ! Je vous recontacte dans la journée.';
+} catch(err){
+formStatus.className = 'form-status show error';
+formStatus.textContent = '✗ Erreur. Contactez-moi au 06 05 80 05 94.';
 }
 });
 </script>
+
 </body>
 </html>
