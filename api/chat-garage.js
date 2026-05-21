@@ -1,3 +1,4 @@
+// Rate limiting in-memory
 const RATE_WINDOW_MS = 60 * 1000;
 const MAX_CALLS_PER_WINDOW = 15;
 const MAX_MESSAGE_LENGTH = 500;
@@ -14,7 +15,9 @@ if (now > entry.resetAt) store.delete(key);
 
 function getIp(req) {
 const xf = req.headers["x-forwarded-for"];
-if (typeof xf === "string" && xf.length > 0) return xf.split(",")[0].trim();
+if (typeof xf === "string" && xf.length > 0) {
+return xf.split(",")[0].trim();
+}
 return req.socket?.remoteAddress || "unknown";
 }
 
@@ -58,8 +61,45 @@ return { intent: "hours", urgent: false };
 return { intent: "general", urgent: false };
 }
 
-function buildSystemPrompt() {
-return `Tu es l'assistante virtuelle d'un garage automobile à Lyon (démo).
+export default async function handler(req, res) {
+res.setHeader("Access-Control-Allow-Origin", "*");
+res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+
+if (req.method === "OPTIONS") return res.status(200).end();
+
+if (req.method !== "POST") {
+return res.status(405).json({ ok: false, error: "Method not allowed" });
+}
+
+try {
+const ip = getIp(req);
+if (isRateLimited(ip)) {
+return res.status(429).json({
+ok: false,
+error: "Trop de messages. Réessayez dans 1 minute.",
+retryAfter: 60
+});
+}
+
+// FIX: utilise ANTHROPIC_API_KEY (nom officiel Anthropic)
+if (!process.env.ANTHROPIC_API_KEY) {
+console.error("ANTHROPIC_API_KEY is not configured");
+return res.status(500).json({
+ok: false,
+error: "Configuration serveur. Contactez le garage directement."
+});
+}
+
+const body = req.body || {};
+const message = sanitize(body.message, MAX_MESSAGE_LENGTH);
+const sessionId = sanitize(body.sessionId, 100);
+
+if (!message) {
+return res.status(400).json({ ok: false, error: "Message requis" });
+}
+
+const systemPrompt = `Tu es l'assistante virtuelle d'un garage automobile à Lyon (démo).
 
 TON RÔLE :
 - Accueillir chaleureusement le client
@@ -87,124 +127,36 @@ RÈGLES IMPORTANTES :
 - Tu invites toujours à appeler pour les cas concrets
 - Tu ne promets jamais un prix exact, juste des ordres de grandeur
 - Pour les pannes urgentes : suggère un rappel rapide`;
-}
 
-async function callAnthropic(message, model) {
-const res = await fetch("https://api.anthropic.com/v1/messages", {
+const claudeResponse = await fetch("https://api.anthropic.com/v1/messages", {
 method: "POST",
 headers: {
+// FIX: utilise ANTHROPIC_API_KEY
 "x-api-key": process.env.ANTHROPIC_API_KEY,
 "anthropic-version": "2023-06-01",
 "content-type": "application/json"
 },
 body: JSON.stringify({
-model,
-max_tokens: 180,
-system: buildSystemPrompt(),
-messages: [{ role: "user", content: message }]
+model: "claude-haiku-4-5-20251001",
+max_tokens: 200,
+system: systemPrompt,
+messages: [
+{ role: "user", content: message }
+]
 })
 });
 
-const raw = await res.text();
-let data = null;
-try {
-data = JSON.parse(raw);
-} catch (_) {}
-
-return { ok: res.ok, status: res.status, raw, data };
-}
-
-function extractReply(data) {
-const content = data?.content;
-if (Array.isArray(content)) {
-for (const part of content) {
-if (part && typeof part.text === "string" && part.text.trim()) {
-return part.text.trim();
-}
-}
-}
-return "";
-}
-
-function fallbackReply(message) {
-const intent = detectIntent(message).intent;
-
-if (intent === "hours") return "Bien sûr. Le garage est ouvert du lundi au vendredi de 8h à 19h, le samedi de 9h à 17h, et fermé le dimanche. Pour confirmer, appelez le garage directement.";
-if (intent === "pricing") return "Pour les tarifs, le mieux est de nous appeler pour un devis rapide. Nous pouvons vous donner un ordre de grandeur selon votre besoin.";
-if (intent === "appointment") return "Bien sûr. Pour prendre rendez-vous, appelez directement le garage afin de choisir le créneau le plus pratique.";
-if (intent === "breakdown") return "Si votre véhicule est en panne, appelez le garage tout de suite pour un rappel rapide et une prise en charge adaptée.";
-if (intent === "diagnostic") return "Décrivez brièvement le symptôme au garage par téléphone, afin d'obtenir un premier avis rapide et de convenir d'un passage.";
-return "Merci pour votre message. Pour une réponse rapide et précise, appelez directement le garage.";
-}
-
-export default async function handler(req, res) {
-res.setHeader("Access-Control-Allow-Origin", "*");
-res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
-res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-
-if (req.method === "OPTIONS") return res.status(200).end();
-
-if (req.method !== "POST") {
-return res.status(405).json({ ok: false, error: "Method not allowed" });
-}
-
-try {
-const ip = getIp(req);
-if (isRateLimited(ip)) {
-return res.status(429).json({
+if (!claudeResponse.ok) {
+const errorText = await claudeResponse.text();
+console.error("Claude API error:", claudeResponse.status, errorText);
+return res.status(502).json({
 ok: false,
-error: "Trop de messages. Réessayez dans 1 minute.",
-retryAfter: 60
+error: "Le service IA est temporairement indisponible. Contactez le garage au 04 00 00 00 00."
 });
 }
 
-const apiKey = process.env.ANTHROPIC_API_KEY;
-if (!apiKey) {
-console.error("[chat-garage] Missing ANTHROPIC_API_KEY");
-return res.status(500).json({
-ok: false,
-error: "Configuration serveur. Contactez le garage directement.",
-reply: "Le service est temporairement indisponible. Contactez le garage directement.",
-source: "fallback-no-key"
-});
-}
-
-const body = req.body || {};
-const message = sanitize(body.message, MAX_MESSAGE_LENGTH);
-const sessionId = sanitize(body.sessionId, 100);
-
-if (!message) {
-return res.status(400).json({ ok: false, error: "Message requis" });
-}
-
-const modelsToTry = [
-"claude-sonnet-4-6",
-"claude-haiku-4-5",
-"claude-haiku-4-5-20251001"
-];
-
-let lastError = null;
-
-for (const model of modelsToTry) {
-try {
-const result = await callAnthropic(message, model);
-
-if (!result.ok) {
-lastError = {
-model,
-status: result.status,
-raw: result.raw
-};
-console.error("[chat-garage] Anthropic error", model, result.status, result.raw);
-continue;
-}
-
-const reply = extractReply(result.data);
-if (!reply) {
-lastError = { model, status: result.status, raw: result.raw, reason: "empty_reply" };
-console.error("[chat-garage] Empty reply", model, result.raw);
-continue;
-}
+const data = await claudeResponse.json();
+const reply = data?.content?.[0]?.text?.trim() || "Bonjour, comment puis-je vous aider ?";
 
 const intentData = detectIntent(message);
 
@@ -213,39 +165,14 @@ ok: true,
 reply,
 intent: intentData.intent,
 urgent: intentData.urgent,
-sessionId,
-modelUsed: model
-});
-} catch (err) {
-lastError = { model, error: String(err?.message || err) };
-console.error("[chat-garage] Fetch exception", model, err);
-}
-}
-
-const fallback = fallbackReply(message);
-console.error("[chat-garage] All models failed", lastError);
-
-const intentData = detectIntent(message);
-return res.status(200).json({
-ok: true,
-reply: fallback,
-intent: intentData.intent,
-urgent: intentData.urgent,
-sessionId,
-modelUsed: "fallback",
-degraded: true
+sessionId
 });
 
 } catch (error) {
-console.error("[chat-garage] handler crash:", error);
-return res.status(200).json({
-ok: true,
-reply: "Le service est temporairement indisponible. Contactez le garage directement.",
-intent: "general",
-urgent: false,
-degraded: true,
-modelUsed: "fallback-crash"
+console.error("chat-garage error:", error);
+return res.status(500).json({
+ok: false,
+error: "Erreur serveur. Contactez le garage au 04 00 00 00 00."
 });
 }
 }
-
