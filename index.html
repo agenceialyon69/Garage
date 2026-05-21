@@ -1,4 +1,3 @@
-      
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -60,7 +59,6 @@ a{color:inherit;text-decoration:none}
 button{cursor:pointer;font:inherit;border:none;background:none}
 .wrap{width:min(var(--max),calc(100% - 32px));margin:0 auto}
 
-/* HEADER */
 header{
 position:sticky;top:0;z-index:50;padding:14px 0;background:rgba(10,15,28,.88);
 backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line);
@@ -78,7 +76,6 @@ background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#0a0f1c;f
 padding:9px 16px;background:var(--whatsapp);color:#0a0f1c!important;border-radius:999px;font-weight:700;font-size:.9rem
 }
 
-/* HERO */
 .hero{padding:86px 0 44px;text-align:center}
 .hero h1{
 font-size:clamp(2.2rem,5.5vw,3.8rem);line-height:1.05;letter-spacing:-.035em;font-weight:800;margin-bottom:18px;
@@ -101,7 +98,6 @@ transition:transform .15s;
 .dot{width:8px;height:8px;border-radius:50%;background:var(--success);animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
 
-/* SECTIONS */
 section{padding:28px 0}
 .section-title{font-size:clamp(1.45rem,3vw,1.9rem);font-weight:800;margin-bottom:8px;letter-spacing:-.02em}
 .section-lead{color:var(--muted);font-size:1rem;max-width:58ch;margin-bottom:18px}
@@ -114,7 +110,6 @@ background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.015));
 border:1px solid var(--line);border-radius:var(--radius);padding:22px;
 }
 
-/* VALUE GRID 4 */
 .value-grid,.portfolio-grid,.contact-grid{display:grid;gap:14px}
 .value-grid{grid-template-columns:repeat(4,1fr)}
 .value-card{padding:22px;background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:var(--radius)}
@@ -125,7 +120,6 @@ display:flex;align-items:center;justify-content:center;font-size:1.25rem;margin-
 .value-card h3{font-size:1rem;margin-bottom:6px}
 .value-card p{color:var(--muted);font-size:.92rem}
 
-/* OFFER */
 .offer-card{
 position:relative;padding:28px;border-radius:var(--radius);border:1px solid rgba(34,211,238,.4);
 background:linear-gradient(180deg,rgba(34,211,238,.08),rgba(125,211,252,.02));max-width:540px;margin:0 auto;
@@ -144,7 +138,6 @@ border-radius:999px;font-size:.74rem;font-weight:700;text-transform:uppercase;
 font-size:.84rem;color:var(--muted);padding:12px;background:rgba(0,0,0,.2);border-radius:var(--radius-sm);margin-top:12px;
 }
 
-/* PORTFOLIO */
 .portfolio-grid{grid-template-columns:1fr 1fr}
 .portfolio-card{padding:0;overflow:hidden}
 .portfolio-thumb{
@@ -160,7 +153,6 @@ content:"";position:absolute;inset:0;background:radial-gradient(circle at top ri
 .portfolio-content h3{font-size:1rem;margin-bottom:6px}
 .portfolio-content p{color:var(--muted);font-size:.88rem;margin-bottom:12px}
 
-/* BONUS IA */
 .bonus-toggle{
 width:100%;padding:16px 20px;background:rgba(255,255,255,.03);
 border:1px solid var(--line);border-radius:var(--radius);
@@ -212,7 +204,6 @@ display:flex;align-items:center;justify-content:center;font-weight:900;cursor:po
 }
 .chat-send:disabled{opacity:.5;cursor:not-allowed}
 
-/* FAQ */
 .faq-item{border-bottom:1px solid var(--line);padding:14px 0}
 .faq-question{
 width:100%;display:flex;justify-content:space-between;align-items:center;text-align:left;
@@ -224,10 +215,8 @@ font-weight:600;font-size:.95rem;color:var(--text);
 .faq-answer{max-height:0;overflow:hidden;transition:max-height .25s ease;color:var(--muted);font-size:.9rem}
 .faq-item.open .faq-answer{max-height:240px;padding-top:8px}
 
-/* MINIBLOCK */
 .miniblock p{color:var(--muted);margin-top:10px}
 
-/* CONTACT */
 .contact-grid{grid-template-columns:1fr 1fr;margin-top:12px}
 .contact-info{padding:22px}
 .contact-row{display:flex;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
@@ -250,13 +239,11 @@ font-size:.88rem;padding:10px;border-radius:var(--radius-sm);text-align:center;d
 .form-status.success{background:rgba(34,197,94,.1);color:var(--success);border:1px solid rgba(34,197,94,.3)}
 .form-status.error{background:rgba(251,113,133,.1);color:#fda4af;border:1px solid rgba(251,113,133,.3)}
 
-/* FOOTER */
 footer{
 padding:28px 0 34px;border-top:1px solid var(--line);margin-top:28px;
 color:var(--muted-2);text-align:center;font-size:.84rem;
 }
 
-/* STICKY MOBILE */
 .sticky-mobile{
 position:fixed;bottom:14px;left:14px;right:14px;display:none;gap:10px;z-index:999;
 }
@@ -287,7 +274,6 @@ header{position:static}
 </head>
 <body>
 
-<!-- HEADER -->
 <header>
 <div class="wrap nav">
 <div class="brand">
@@ -306,7 +292,6 @@ Sites Garages Lyon
 
 <main>
 
-<!-- HERO -->
 <section class="hero">
 <div class="wrap">
 <h1>Plus d'appels clients pour <span>votre garage à Lyon</span>.</h1>
@@ -323,7 +308,6 @@ Sites Garages Lyon
 </div>
 </section>
 
-<!-- BÉNÉFICES (4 cards) -->
 <section id="valeur">
 <div class="wrap">
 <span class="section-pill">Bénéfices</span>
@@ -354,7 +338,6 @@ Sites Garages Lyon
 </div>
 </section>
 
-<!-- SEO LOCAL -->
 <section>
 <div class="wrap">
 <div class="card miniblock">
@@ -367,7 +350,6 @@ J'aide les garages indépendants de Lyon, Vénissieux, Villeurbanne, Bron et Sai
 </div>
 </section>
 
-<!-- PORTFOLIO -->
 <section id="portfolio">
 <div class="wrap">
 <span class="section-pill">Portfolio</span>
@@ -403,7 +385,6 @@ J'aide les garages indépendants de Lyon, Vénissieux, Villeurbanne, Bron et Sai
 </div>
 </section>
 
-<!-- OFFRE (position basse) -->
 <section id="offre">
 <div class="wrap">
 <span class="section-pill">Offre de lancement</span>
@@ -426,13 +407,11 @@ Je construis mon offre locale pour les garages indépendants de Lyon. Pour mes 3
 <li>Livraison 7 jours</li>
 </ul>
 <div class="offer-note">Tarif standard : 490€. En échange du tarif réduit : retour honnête + autorisation portfolio.</div>
-<div class="offer-note">📍 Offre réservée aux garages indépendants autour de Lyon.</div>
 <a class="btn btn-primary" href="https://wa.me/33605800594?text=Bonjour%2C%20je%20suis%20int%C3%A9ress%C3%A9%20par%20l%27offre%20%C3%A0%20290%E2%82%AC%20pour%20mon%20garage." target="_blank" rel="noopener" style="width:100%;justify-content:center;margin-top:14px">💬 Réserver ma place</a>
 </div>
 </div>
 </section>
 
-<!-- BONUS IA (accordéon) -->
 <section>
 <div class="wrap">
 <button class="bonus-toggle" id="bonusToggle">
@@ -464,7 +443,6 @@ Optionnel. Le cœur de l'offre reste le site qui fait appeler.
 </div>
 </section>
 
-<!-- FAQ -->
 <section>
 <div class="wrap">
 <span class="section-pill">FAQ</span>
@@ -490,7 +468,6 @@ Optionnel. Le cœur de l'offre reste le site qui fait appeler.
 </div>
 </section>
 
-<!-- POURQUOI MOI -->
 <section>
 <div class="wrap card miniblock">
 <span class="section-pill">Pourquoi moi ?</span>
@@ -503,7 +480,6 @@ Vous échangez directement avec la personne qui crée votre site.
 </div>
 </section>
 
-<!-- CONTACT -->
 <section id="contact">
 <div class="wrap">
 <span class="section-pill">Contact direct</span>
@@ -549,7 +525,6 @@ Vous échangez directement avec la personne qui crée votre site.
 
 </main>
 
-<!-- FOOTER -->
 <footer>
 <div class="wrap">
 <p><strong>Mamadou Tafsir Bah</strong> · Sites web pour garages à Lyon</p>
@@ -560,14 +535,12 @@ Vous échangez directement avec la personne qui crée votre site.
 </div>
 </footer>
 
-<!-- STICKY MOBILE CTA -->
 <div class="sticky-mobile">
 <a class="sticky-call" href="tel:+33605800594">📞 Appeler</a>
 <a class="sticky-wa" href="https://wa.me/33605800594?text=Bonjour%2C%20je%20veux%20discuter%20de%20mon%20projet%20de%20site%20pour%20mon%20garage." target="_blank" rel="noopener">💬 WhatsApp</a>
 </div>
 
 <script>
-// UUID polyfill (Safari ancien)
 function generateUUID(){
 if (typeof crypto !== 'undefined' && crypto.randomUUID) return crypto.randomUUID();
 return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c){
@@ -576,7 +549,6 @@ return v.toString(16);
 });
 }
 
-// FAQ
 document.querySelectorAll('.faq-question').forEach(btn => {
 btn.addEventListener('click', () => {
 const item = btn.closest('.faq-item');
@@ -586,7 +558,6 @@ if (!wasOpen) item.classList.add('open');
 });
 });
 
-// BONUS IA TOGGLE
 const bonusToggle = document.getElementById('bonusToggle');
 const bonusContent = document.getElementById('bonusContent');
 bonusToggle.addEventListener('click', () => {
@@ -594,7 +565,6 @@ bonusToggle.classList.toggle('open');
 bonusContent.classList.toggle('open');
 });
 
-// CHAT IA
 const chatLog = document.getElementById('chatLog');
 const chatInput = document.getElementById('chatInput');
 const chatSend = document.getElementById('chatSend');
@@ -674,7 +644,6 @@ sendChat(btn.dataset.msg);
 });
 }
 
-// FORMULAIRE LEAD — VRAI FETCH API (corrigé)
 const leadForm = document.getElementById('leadForm');
 const formStatus = document.getElementById('formStatus');
 
