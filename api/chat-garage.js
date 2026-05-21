@@ -82,8 +82,8 @@ retryAfter: 60
 });
 }
 
-if (!process.env.CLAUDE_API_KEY) {
-console.error("CLAUDE_API_KEY is not configured");
+if (!process.env.ANTHOROPIC_API_KEY) {
+console.error("ANTHOROPIC_API_KEY is not configured");
 return res.status(500).json({
 ok: false,
 error: "Configuration serveur. Contactez le garage directement."
