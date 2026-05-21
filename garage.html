@@ -1,204 +1,391 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="utf-8" />
+<meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Développeur web basé à Lyon — sites simples pour garages indépendants</title>
-<meta name="description" content="Sites simples, clairs et crédibles pour garages indépendants à Lyon. Offre de lancement, preuve technique avec Claire et contact direct." />
+<title>Garage Martin Lyon — Démo · Entretien et réparation auto</title>
+<meta name="description" content="Démonstration fictive d'un site pour garage à Lyon." />
+<meta name="robots" content="noindex,nofollow">
+
 <style>
 :root{
---bg:#0b1220;
---panel:#101a2d;
---panel-2:#0f1728;
---text:#eaf0ff;
---muted:#a8b3c7;
---line:rgba(255,255,255,.08);
---accent:#7dd3fc;
---accent-2:#22c55e;
---white:#fff;
---shadow:0 16px 40px rgba(0,0,0,.25);
---radius:20px;
---max:1120px;
+--bg:#f8fafc; --surface:#fff; --text:#0f172a; --muted:#475569;
+--line:#e2e8f0; --primary:#dc2626; --primary-dark:#b91c1c;
+--success:#16a34a; --whatsapp:#25d366; --warning:#f59e0b;
+--shadow:0 10px 30px rgba(0,0,0,.08); --radius:14px; --max:1140px;
 }
-*{box-sizing:border-box}
+*{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{
-margin:0;
-font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-background:radial-gradient(circle at top, #15213a 0%, var(--bg) 40%);
-color:var(--text);
-line-height:1.6;
+font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Inter,sans-serif;
+background:var(--bg);color:var(--text);line-height:1.6;
 }
 a{color:inherit;text-decoration:none}
-.wrap{width:min(var(--max),calc(100% - 40px));margin:0 auto}
-header{padding:20px 0;position:sticky;top:0;background:rgba(11,18,32,.82);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);z-index:20}
-.nav{display:flex;align-items:center;justify-content:space-between;gap:16px}
-.brand{font-weight:800;letter-spacing:.2px}
-.nav a{color:var(--muted);margin-left:18px}
-.hero{padding:84px 0 60px}
-.grid{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:start}
-.eyebrow{display:inline-block;padding:8px 12px;border:1px solid var(--line);border-radius:999px;color:var(--accent);background:rgba(125,211,252,.08);font-size:.92rem}
-h1{font-size:clamp(2.25rem,5vw,4.3rem);line-height:1.02;margin:18px 0 16px;letter-spacing:-.04em}
-.subtitle{font-size:1.08rem;color:var(--muted);max-width:60ch}
-.actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:28px}
-.btn{padding:14px 18px;border-radius:14px;font-weight:700;border:1px solid var(--line);display:inline-flex;align-items:center;justify-content:center}
-.btn.primary{background:var(--white);color:#0b1220}
-.btn.secondary{background:rgba(255,255,255,.03)}
-.card{background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
-.hero-card{padding:24px}
-.stat{display:grid;gap:10px}
-.stat-item{padding:16px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.03)}
-.stat-item strong{display:block;font-size:1.05rem;margin-bottom:4px}
-section{padding:18px 0 28px}
-.section-title{font-size:1.7rem;margin:0 0 14px}
-.muted{color:var(--muted)}
-.cols{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
-.box{padding:24px}
-.offer{display:grid;grid-template-columns:1fr auto;gap:18px;align-items:center}
-.price{font-size:2rem;font-weight:900}
-.price small{display:block;color:var(--muted);font-size:1rem;font-weight:600}
-.pill{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(34,197,94,.12);color:#86efac;font-size:.92rem;border:1px solid rgba(34,197,94,.25)}
-.portfolio{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-.mock{height:190px;border-radius:16px;background:linear-gradient(135deg,#16233d,#0d1526);border:1px solid var(--line);margin-bottom:14px;display:flex;align-items:end;padding:14px;color:var(--muted);font-size:.95rem}
-.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-form{display:grid;gap:12px}
-input,textarea{
-width:100%;padding:14px 15px;border-radius:14px;border:1px solid var(--line);
-background:#0d1526;color:var(--text);font:inherit;outline:none
+.wrap{width:min(var(--max),calc(100% - 32px));margin:0 auto}
+
+.demo-banner{
+background:#fef3c7;border-bottom:2px solid var(--warning);
+padding:10px 16px;text-align:center;font-size:.9rem;
+color:#78350f;font-weight:600;
 }
-textarea{min-height:140px;resize:vertical}
-footer{padding:34px 0 48px;color:var(--muted);border-top:1px solid var(--line);margin-top:24px}
-.small{font-size:.94rem}
+.demo-banner a{color:#b45309;text-decoration:underline;margin-left:6px}
+
+header{
+background:var(--surface);border-bottom:1px solid var(--line);
+padding:14px 0;position:sticky;top:0;z-index:40;
+}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.1rem}
+.brand-icon{
+width:38px;height:38px;background:var(--primary);color:#fff;
+border-radius:9px;display:flex;align-items:center;justify-content:center;
+font-weight:900;font-size:1rem;
+}
+.brand-name span{color:var(--primary);font-weight:900}
+.nav-links{display:flex;gap:22px;align-items:center;font-size:.95rem}
+.nav-links a{color:var(--muted)}
+.nav-links a:hover{color:var(--primary)}
+.nav-phone{
+background:var(--primary);color:#fff!important;
+padding:9px 18px;border-radius:8px;font-weight:700;font-size:.92rem;
+}
+
+.hero{
+background:linear-gradient(135deg,#dc2626 0%,#b91c1c 100%);
+color:#fff;padding:64px 0;position:relative;overflow:hidden;
+}
+.hero::before{
+content:"🔧";position:absolute;font-size:20rem;opacity:.05;
+right:-50px;top:-30px;
+}
+.hero-grid{
+display:grid;grid-template-columns:1.2fr .8fr;gap:36px;
+align-items:center;position:relative;z-index:1;
+}
+.hero h1{
+font-size:clamp(2rem,4.5vw,3.4rem);line-height:1.1;
+font-weight:900;letter-spacing:-.02em;margin-bottom:18px;
+}
+.hero-lead{font-size:1.1rem;opacity:.95;margin-bottom:24px;max-width:55ch}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:24px}
+.btn{
+padding:14px 22px;border-radius:10px;font-weight:700;font-size:.96rem;
+display:inline-flex;align-items:center;gap:8px;border:0;cursor:pointer;
+transition:transform .15s;
+}
+.btn:hover{transform:translateY(-1px)}
+.btn-white{background:#fff;color:var(--primary)}
+.btn-whatsapp{background:var(--whatsapp);color:#0a0f1c}
+.hero-trust{display:flex;gap:18px;flex-wrap:wrap;font-size:.88rem;opacity:.92}
+.hero-trust span{display:flex;align-items:center;gap:6px}
+
+.hero-card{
+background:#fff;border-radius:14px;padding:24px;color:var(--text);
+box-shadow:0 20px 50px rgba(0,0,0,.25);
+}
+.hero-card h3{font-size:1.05rem;margin-bottom:14px;color:var(--primary)}
+.hero-card-row{
+display:flex;justify-content:space-between;padding:10px 0;
+border-bottom:1px solid var(--line);
+}
+.hero-card-row:last-child{border-bottom:none}
+.hero-card-row span:first-child{color:var(--muted);font-size:.92rem}
+.hero-card-row span:last-child{font-weight:700;font-size:.92rem}
+.hero-card-row.open span:last-child{color:var(--success)}
+
+section{padding:54px 0}
+.section-title{
+font-size:clamp(1.6rem,3.5vw,2.2rem);font-weight:800;
+margin-bottom:12px;letter-spacing:-.02em;text-align:center;
+}
+.section-title span{color:var(--primary)}
+.section-lead{color:var(--muted);text-align:center;max-width:60ch;margin:0 auto 36px}
+
+.services{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.service{
+background:var(--surface);border:1px solid var(--line);
+border-radius:var(--radius);padding:24px;transition:transform .15s,box-shadow .15s;
+}
+.service:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+.service-icon{
+width:48px;height:48px;background:#fee2e2;color:var(--primary);
+border-radius:10px;display:flex;align-items:center;justify-content:center;
+font-size:1.4rem;margin-bottom:14px;
+}
+.service h3{font-size:1.05rem;margin-bottom:6px}
+.service p{color:var(--muted);font-size:.92rem;margin-bottom:10px}
+.service-price{
+display:inline-block;background:#fef3c7;color:#92400e;
+padding:4px 10px;border-radius:6px;font-size:.85rem;font-weight:700;
+}
+
+.why-us{
+background:var(--surface);padding:54px 0;
+border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+}
+.why-list{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.why-item{text-align:center;padding:14px}
+.why-icon{font-size:2.2rem;margin-bottom:10px}
+.why-item h4{font-size:1rem;margin-bottom:6px}
+.why-item p{color:var(--muted);font-size:.88rem}
+
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.info-card{
+background:var(--surface);border:1px solid var(--line);
+border-radius:var(--radius);padding:26px;
+}
+.info-card h3{font-size:1.1rem;margin-bottom:14px;color:var(--primary)}
+.hours-row{
+display:flex;justify-content:space-between;padding:10px 0;
+border-bottom:1px solid var(--line);font-size:.94rem;
+}
+.hours-row:last-child{border-bottom:none}
+.hours-row .closed{color:#dc2626;font-weight:600}
+
+.contact-info-row{
+display:flex;align-items:center;gap:14px;padding:12px 0;
+border-bottom:1px solid var(--line);
+}
+.contact-info-row:last-child{border-bottom:none}
+.contact-info-icon{
+width:36px;height:36px;background:#fee2e2;color:var(--primary);
+border-radius:50%;display:flex;align-items:center;justify-content:center;
+}
+.contact-info-text strong{display:block;font-size:.95rem}
+.contact-info-text span{color:var(--muted);font-size:.86rem}
+
+.cta-section{
+background:linear-gradient(135deg,var(--primary),var(--primary-dark));
+color:#fff;padding:54px 0;text-align:center;
+}
+.cta-section h2{font-size:clamp(1.6rem,3.5vw,2.2rem);font-weight:900;margin-bottom:14px}
+.cta-section p{max-width:50ch;margin:0 auto 28px;opacity:.95}
+.cta-section .hero-cta{justify-content:center;margin-bottom:0}
+
+footer{
+background:#0f172a;color:#94a3b8;padding:36px 0 24px;
+font-size:.88rem;text-align:center;
+}
+footer a{color:#7dd3fc}
+
 @media (max-width:900px){
-.grid,.cols,.portfolio,.contact-grid,.offer{grid-template-columns:1fr}
-header{position:static}
-.nav{flex-direction:column;align-items:flex-start}
-.nav div{display:flex;flex-wrap:wrap;gap:12px}
-.nav a{margin-left:0}
-.hero{padding-top:48px}
+.hero-grid,.services,.why-list,.info-grid{grid-template-columns:1fr}
+.services{grid-template-columns:repeat(2,1fr)}
+.nav-links{display:none}
+.hero{padding:48px 0}
+}
+@media (max-width:560px){
+.services,.why-list{grid-template-columns:1fr}
+.hero-cta{flex-direction:column}
+.btn{width:100%;justify-content:center}
 }
 </style>
 </head>
 <body>
+
+<div class="demo-banner">
+⚠️ Cette page est un EXEMPLE FICTIF de démonstration · pas un vrai garage
+<a href="/">← Voir mes services</a>
+</div>
+
 <header>
 <div class="wrap nav">
-<div class="brand">Développeur web — Lyon</div>
-<div>
-<a href="#offre">Offre</a>
-<a href="#projet">Claire</a>
+<a class="brand" href="#">
+<div class="brand-icon">M</div>
+<div class="brand-name">Garage <span>Martin</span> Lyon</div>
+</a>
+<nav class="nav-links">
+<a href="#services">Services</a>
+<a href="#horaires">Horaires</a>
 <a href="#contact">Contact</a>
-</div>
+</nav>
+<a class="nav-phone" href="tel:+33400000000">📞 04 00 00 00 00</a>
 </div>
 </header>
 
 <main>
+
 <section class="hero">
-<div class="wrap grid">
+<div class="wrap hero-grid">
 <div>
-<span class="eyebrow">Sites simples pour garages indépendants</span>
-<h1>Je crée des sites simples pour garages indépendants à Lyon.</h1>
-<p class="subtitle">
-Un site clair, crédible et facile à comprendre pour présenter votre garage, rassurer vos clients et faciliter la prise de contact.
+<h1>Votre garage de confiance à Lyon depuis 2018</h1>
+<p class="hero-lead">
+Entretien, réparation, pneus, climatisation, contrôle technique. Nous prenons soin de votre véhicule comme du nôtre.
 </p>
-<div class="actions">
-<a class="btn primary" href="#offre">Voir l’offre de lancement</a>
-<a class="btn secondary" href="#contact">Me contacter</a>
+<div class="hero-cta">
+<a class="btn btn-white" href="tel:+33400000000">📞 Appeler</a>
+<a class="btn btn-whatsapp" href="https://wa.me/33400000000">💬 WhatsApp</a>
+</div>
+<div class="hero-trust">
+<span>⭐ 4.8/5 sur 127 avis Google</span>
+<span>🛠️ Toutes marques</span>
+<span>📍 Lyon 8ème</span>
 </div>
 </div>
-<aside class="card hero-card">
-<div class="stat">
-<div class="stat-item">
-<strong>Développeur web basé à Lyon</strong>
-<span class="muted">Sites vitrines simples, clairs et crédibles.</span>
+<div class="hero-card">
+<h3>📅 Aujourd'hui</h3>
+<div class="hero-card-row open">
+<span>Statut</span>
+<span>● Ouvert maintenant</span>
 </div>
-<div class="stat-item">
-<strong>Travail direct</strong>
-<span class="muted">Simplicité, rapidité et clarté sur chaque projet.</span>
+<div class="hero-card-row">
+<span>Horaires</span>
+<span>8h00 - 19h00</span>
 </div>
-<div class="stat-item">
-<strong>Offre de lancement</strong>
-<span class="muted">490 € + 99 €/mois, pour démarrer vite.</span>
+<div class="hero-card-row">
+<span>Devis gratuit</span>
+<span>✓ Sous 24h</span>
+</div>
+<div class="hero-card-row">
+<span>Toutes marques</span>
+<span>✓ Oui</span>
 </div>
 </div>
-</aside>
 </div>
 </section>
 
-<section>
-<div class="wrap cols">
-<article class="card box">
-<h2 class="section-title">Qui je suis</h2>
-<p class="muted">
-Je suis développeur web basé à Lyon. Je construis actuellement mes premiers projets clients locaux, avec une approche simple, honnête et orientée résultat.
-</p>
-<p class="muted">
-Je travaille chaque projet de façon directe et je privilégie la simplicité, la rapidité et la clarté.
-</p>
-</article>
-<article class="card box" id="offre">
-<h2 class="section-title">Offre de lancement</h2>
-<p class="muted">
-Je vous propose un site simple et clair pour présenter votre garage, inspirer confiance et faciliter le contact.
-</p>
-<div class="offer">
-<div class="price">490 €<small>de mise en place</small></div>
-<div>
-<div class="pill">puis 99 €/mois</div>
-<p class="muted small" style="margin:10px 0 0;">Idéal pour démarrer vite avec une présence propre, moderne et crédible.</p>
-</div>
-</div>
-</article>
-</div>
-</section>
-
-<section id="projet">
+<section id="services">
 <div class="wrap">
-<h2 class="section-title">Projet web développé récemment</h2>
-<div class="portfolio">
-<article class="card box">
-<div class="mock">Claire — assistante virtuelle pour cabinets dentaires</div>
-<h3>Claire</h3>
-<p class="muted">HTML/CSS • Vercel • Supabase • IA</p>
-</article>
-<article class="card box">
-<div class="mock">Démo garage — maquette fictive et explicite</div>
-<h3>RéceptionZen Garage</h3>
-<p class="muted">Landing page locale pour présentation et contact.</p>
-</article>
-<article class="card box">
-<div class="mock">Version mobile simple et claire</div>
-<h3>Focus conversion</h3>
-<p class="muted">Lecture rapide, offre visible, contact immédiat.</p>
-</article>
+<h2 class="section-title">Nos <span>services</span></h2>
+<p class="section-lead">Tout ce dont votre véhicule a besoin.</p>
+<div class="services">
+<div class="service">
+<div class="service-icon">🛢️</div>
+<h3>Vidange & entretien</h3>
+<p>Vidange, filtres, courroie, plaquettes.</p>
+<span class="service-price">À partir de 89€</span>
+</div>
+<div class="service">
+<div class="service-icon">🔧</div>
+<h3>Réparation mécanique</h3>
+<p>Embrayage, transmission, moteur.</p>
+<span class="service-price">Devis gratuit</span>
+</div>
+<div class="service">
+<div class="service-icon">🛞</div>
+<h3>Pneumatiques</h3>
+<p>Montage, équilibrage, géométrie.</p>
+<span class="service-price">À partir de 25€/pneu</span>
+</div>
+<div class="service">
+<div class="service-icon">❄️</div>
+<h3>Climatisation</h3>
+<p>Recharge gaz, diagnostic, désinfection.</p>
+<span class="service-price">À partir de 65€</span>
+</div>
+<div class="service">
+<div class="service-icon">📋</div>
+<h3>Contrôle technique</h3>
+<p>Préparation et contre-visite.</p>
+<span class="service-price">Diagnostic 39€</span>
+</div>
+<div class="service">
+<div class="service-icon">🚗</div>
+<h3>Diagnostic électronique</h3>
+<p>Voyants moteur, lecture OBD.</p>
+<span class="service-price">À partir de 49€</span>
+</div>
 </div>
 </div>
 </section>
 
-<section id="contact">
-<div class="wrap contact-grid">
-<div class="card box">
-<h2 class="section-title">Contact</h2>
-<p class="muted">Décrivez votre garage, je vous réponds avec une proposition simple et claire.</p>
-<p class="small">Téléphone : 0605800594<br>Email : contact@claireassistante.fr</p>
+<section class="why-us">
+<div class="wrap">
+<h2 class="section-title">Pourquoi nous <span>choisir</span></h2>
+<p class="section-lead">Une équipe de mécaniciens expérimentés.</p>
+<div class="why-list">
+<div class="why-item">
+<div class="why-icon">🛠️</div>
+<h4>15 ans d'expérience</h4>
+<p>Mécaniciens certifiés toutes marques</p>
 </div>
-<div class="card box">
-<form>
-<input type="text" placeholder="Nom du garage" />
-<input type="text" placeholder="Votre nom" />
-<input type="email" placeholder="Votre email" />
-<textarea placeholder="Décrivez votre besoin"></textarea>
-<button class="btn primary" type="button">Envoyer</button>
-</form>
+<div class="why-item">
+<div class="why-icon">💰</div>
+<h4>Prix transparents</h4>
+<p>Devis détaillé avant intervention</p>
+</div>
+<div class="why-item">
+<div class="why-icon">⚡</div>
+<h4>Rapidité</h4>
+<p>Diagnostic en 30 min, RDV sous 48h</p>
+</div>
+<div class="why-item">
+<div class="why-icon">🔒</div>
+<h4>Garantie 1 an</h4>
+<p>Sur pièces et main-d'œuvre</p>
+</div>
 </div>
 </div>
 </section>
+
+<section id="horaires">
+<div class="wrap">
+<h2 class="section-title">Informations <span>pratiques</span></h2>
+<p class="section-lead">Pour votre prochaine visite.</p>
+<div class="info-grid">
+<div class="info-card">
+<h3>🕐 Horaires d'ouverture</h3>
+<div class="hours-row"><span>Lundi - Vendredi</span><span style="color:var(--success);font-weight:700">8h00 - 19h00</span></div>
+<div class="hours-row"><span>Samedi</span><span>9h00 - 17h00</span></div>
+<div class="hours-row"><span>Dimanche</span><span class="closed">Fermé</span></div>
+</div>
+<div class="info-card" id="contact">
+<h3>📍 Nous trouver</h3>
+<div class="contact-info-row">
+<div class="contact-info-icon">📍</div>
+<div class="contact-info-text">
+<strong>Adresse</strong>
+<span>123 rue de la République, 69008 Lyon</span>
+</div>
+</div>
+<div class="contact-info-row">
+<div class="contact-info-icon">📞</div>
+<div class="contact-info-text">
+<strong>Téléphone</strong>
+<span>04 00 00 00 00</span>
+</div>
+</div>
+<div class="contact-info-row">
+<div class="contact-info-icon">📧</div>
+<div class="contact-info-text">
+<strong>Email</strong>
+<span>contact@garage-martin-lyon.fr</span>
+</div>
+</div>
+<div class="contact-info-row">
+<div class="contact-info-icon">🚌</div>
+<div class="contact-info-text">
+<strong>Accès</strong>
+<span>Métro Sans Souci · Bus C16, C25</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="cta-section">
+<div class="wrap">
+<h2>Besoin d'un devis ou d'un RDV ?</h2>
+<p>Contactez-nous, réponse sous 24h ouvrées.</p>
+<div class="hero-cta">
+<a class="btn btn-white" href="tel:+33400000000">📞 04 00 00 00 00</a>
+<a class="btn btn-whatsapp" href="https://wa.me/33400000000">💬 WhatsApp</a>
+</div>
+</div>
+</section>
+
 </main>
 
 <footer>
-<div class="wrap small">
-Garage Martin Lyon est un exemple fictif de maquette de présentation. Photos, noms et contenus sont fournis à titre illustratif.
+<div class="wrap">
+<p style="margin-bottom:10px"><strong>Garage Martin Lyon</strong> — 123 rue de la République, 69008 Lyon</p>
+<p style="margin-bottom:14px">📞 04 00 00 00 00 · 📧 contact@garage-martin-lyon.fr</p>
+<p style="font-size:.82rem;color:#64748b;border-top:1px solid #1e293b;padding-top:14px;margin-top:14px">
+⚠️ Cette page est un EXEMPLE FICTIF de démonstration créé par <a href="/">Mamadou Tafsir Bah</a>. Aucune information n'est réelle.
+</p>
 </div>
 </footer>
+
 </body>
 </html>
-
