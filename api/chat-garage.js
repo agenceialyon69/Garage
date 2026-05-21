@@ -82,8 +82,8 @@ retryAfter: 60
 });
 }
 
-if (!process.env.ANTHOROPIC_API_KEY) {
-console.error("ANTHOROPIC_API_KEY is not configured");
+if (!process.env.ANTHROPIC_API_KEY) {
+console.error("ANTHROPIC_API_KEY is not configured");
 return res.status(500).json({
 ok: false,
 error: "Configuration serveur. Contactez le garage directement."
@@ -130,7 +130,7 @@ RÈGLES IMPORTANTES :
 const claudeResponse = await fetch("https://api.anthropic.com/v1/messages", {
 method: "POST",
 headers: {
-"x-api-key": process.env.CLAUDE_API_KEY,
+"x-api-key": process.env.ANTHROPIC_API_KEY,
 "anthropic-version": "2023-06-01",
 "content-type": "application/json"
 },
