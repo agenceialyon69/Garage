@@ -541,14 +541,6 @@ Vous échangez directement avec la personne qui crée votre site.
 </div>
 
 <script>
-function generateUUID(){
-if (typeof crypto !== 'undefined' && crypto.randomUUID) return crypto.randomUUID();
-return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c){
-var r = Math.random()*16|0, v = c=='x' ? r : (r&0x3|0x8);
-return v.toString(16);
-});
-}
-
 document.querySelectorAll('.faq-question').forEach(btn => {
 btn.addEventListener('click', () => {
 const item = btn.closest('.faq-item');
@@ -569,7 +561,7 @@ const chatLog = document.getElementById('chatLog');
 const chatInput = document.getElementById('chatInput');
 const chatSend = document.getElementById('chatSend');
 const chatSuggestions = document.getElementById('chatSuggestions');
-const sessionId = generateUUID();
+const conversationHistory = [];
 let isChatLoading = false;
 let typingEl = null;
 
@@ -607,17 +599,21 @@ try{
 const controller = new AbortController();
 const timer = setTimeout(() => controller.abort(), 20000);
 
+conversationHistory.push({ role: 'user', content: message });
+
 const res = await fetch('/api/chat-garage', {
 method:'POST',
 headers:{'Content-Type':'application/json'},
-body: JSON.stringify({ message, sessionId }),
+body: JSON.stringify({ messages: conversationHistory }),
 signal: controller.signal
 });
 clearTimeout(timer);
 hideTyping();
 if (!res.ok) throw new Error('chat_error');
 const data = await res.json();
-addMessage(data.reply || 'Bonjour, comment puis-je vous aider ?', 'bot');
+const reply = data.reply || 'Bonjour, comment puis-je vous aider ?';
+conversationHistory.push({ role: 'assistant', content: reply });
+addMessage(reply, 'bot');
 } catch(e){
 hideTyping();
 addMessage('Désolé, une erreur est survenue. Contactez le garage par téléphone.', 'bot');
@@ -663,11 +659,16 @@ headers:{'Content-Type':'application/json'},
 body: JSON.stringify(payload)
 });
 
-if (!res.ok) throw new Error('lead_error');
+const data = await res.json();
 
+if (data.ok){
 leadForm.reset();
 formStatus.className = 'form-status show success';
 formStatus.textContent = '✓ Merci ! Je vous recontacte dans la journée.';
+} else {
+formStatus.className = 'form-status show error';
+formStatus.textContent = '✗ ' + (data.error || 'Erreur. Contactez-moi au 06 05 80 05 94.');
+}
 } catch(err){
 formStatus.className = 'form-status show error';
 formStatus.textContent = '✗ Erreur. Contactez-moi au 06 05 80 05 94.';
@@ -677,3 +678,4 @@ formStatus.textContent = '✗ Erreur. Contactez-moi au 06 05 80 05 94.';
 
 </body>
 </html>
+
