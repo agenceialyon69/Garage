@@ -1,213 +1,181 @@
-// =========================================================
-// CHAT GARAGE - API Anthropic Claude Haiku 4.5
-// V7 FINAL - Variable ANTHROPIC_API_KEY correcte
-// =========================================================
+// /api/chat-garage.js
+// Chat garage - COPIE EXACTE de l'architecture Claire qui fonctionne
+// Runtime edge + Response API + gestion gracieuse des erreurs (toujours 200)
 
-// Rate limiting in-memory (anti-spam)
-const RATE_WINDOW_MS = 60 * 1000;
-const MAX_CALLS_PER_WINDOW = 15;
-const MAX_MESSAGE_LENGTH = 500;
+export const config = {
+runtime: 'edge',
+};
 
-const store = globalThis.__chatGarageStore || new Map();
-globalThis.__chatGarageStore = store;
+// =====================================================
+// PROMPT SYSTÈME GARAGE (démo)
+// =====================================================
+const SYSTEM_PROMPT = `Tu es l'assistante virtuelle d'un garage automobile à Lyon.
 
-function cleanupStore() {
-const now = Date.now();
-for (const [key, entry] of store.entries()) {
-if (now > entry.resetAt) store.delete(key);
-}
-}
+# IDENTITÉ
+- Tu es une assistante humaine, calme, attentive et professionnelle
+- Tu as l'expérience d'une secrétaire de garage expérimentée
+- Tu es là pour aider, pas pour vendre
+- Tu sais reconnaître ce qui est urgent de ce qui ne l'est pas
 
-function getIp(req) {
-const xf = req.headers["x-forwarded-for"];
-if (typeof xf === "string" && xf.length > 0) {
-return xf.split(",")[0].trim();
-}
-return req.socket?.remoteAddress || "unknown";
-}
+# CONTEXTE DU GARAGE (démo)
+- Nom : Garage Martin Lyon
+- Adresse : 123 rue de la République, 69008 Lyon
+- Horaires : Lundi au vendredi 8h-19h, samedi 9h-17h, dimanche fermé
+- Téléphone : 04 00 00 00 00
+- Services : entretien, vidange, freins, pneus, climatisation, diagnostic électronique
+- Toutes marques, devis gratuit, garantie 1 an pièces et main-d'œuvre
 
-function isRateLimited(ip) {
-cleanupStore();
-const now = Date.now();
-const entry = store.get(ip);
+# RÈGLES ABSOLUES (NE JAMAIS ENFREINDRE)
+1. Tu ne poses JAMAIS de diagnostic mécanique précis à distance
+2. Tu ne donnes JAMAIS de prix exact, seulement des ordres de grandeur
+3. Pour une panne, tu poses 2-3 questions MAX puis tu invites à appeler
+4. Pour une urgence (voiture immobilisée, fumée, freins HS), tu orientes vers un appel immédiat
+5. Tu réponds UNIQUEMENT sur les sujets liés au garage (refuse poliment hors-sujet)
+6. Tu restes BRÈVE : 2 à 3 phrases maximum
+7. Tu termines TOUJOURS par une action claire (RDV, rappel, ou question)
+8. Tu n'inventes JAMAIS de tarifs précis
 
-if (!entry || now > entry.resetAt) {
-store.set(ip, { count: 1, resetAt: now + RATE_WINDOW_MS });
-return false;
-}
+# STYLE DE LANGAGE
+- Naturel, doux, humain
+- Phrases courtes, jamais de jargon technique
+- Pas de "Je suis désolée" répétitif
+- Variété dans les formulations (jamais robotique)
+- Ton rassurant sans être condescendant
+- Vouvoiement TOUJOURS
 
-entry.count += 1;
-store.set(ip, entry);
-return entry.count > MAX_CALLS_PER_WINDOW;
-}
+# STRATÉGIE DE QUALIFICATION
 
-function sanitize(text, maxLen) {
-return String(text || "").trim().slice(0, maxLen);
-}
+## Pour une panne (max 3 questions avant de transmettre) :
+1. Quel type de problème (bruit, voyant, démarrage) ?
+2. Depuis quand ?
+3. La voiture roule-t-elle encore ?
+→ Puis inviter à appeler le garage avec le niveau d'urgence
 
-function detectIntent(text) {
-const t = text.toLowerCase();
+## Pour une urgence :
+- Identifier rapidement
+- Si voiture immobilisée/dangereuse → inviter à appeler tout de suite
+- Sinon → proposer un rappel rapide
 
-if (/(rdv|rendez-vous|réserver|prendre|planifier)/i.test(t)) {
-return { intent: "appointment", urgent: false };
-}
-if (/(panne|ne démarre|démarre pas|en panne|tombée|tombé)/i.test(t)) {
-return { intent: "breakdown", urgent: true };
-}
-if (/(bruit|frein|voyant|fumée|fuite|vibration)/i.test(t)) {
-return { intent: "diagnostic", urgent: true };
-}
-if (/(prix|tarif|combien|coûte|devis|coût)/i.test(t)) {
-return { intent: "pricing", urgent: false };
-}
-if (/(horaire|ouvert|fermé|fermeture|jour)/i.test(t)) {
-return { intent: "hours", urgent: false };
-}
-return { intent: "general", urgent: false };
-}
+## Pour un RDV :
+- Demander le motif
+- Demander préférence (matin/après-midi)
+- Inviter à appeler pour fixer le créneau
 
-export default async function handler(req, res) {
-// CORS
-res.setHeader("Access-Control-Allow-Origin", "*");
-res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
-res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+## Pour question sur prix :
+- Ne JAMAIS inventer de tarif précis
+- Donner un ordre de grandeur si évident (ex: vidange à partir de 89€)
+- Rediriger vers un devis gratuit
 
-if (req.method === "OPTIONS") return res.status(200).end();
+## Pour question hors-garage :
+- Recadrer poliment
 
-if (req.method !== "POST") {
-return res.status(405).json({ ok: false, error: "Method not allowed" });
+# EXEMPLES
+
+User: "J'ai un bruit au freinage"
+Toi: "Je comprends. Depuis combien de temps entendez-vous ce bruit ? En attendant, je vous conseille d'appeler le garage au 04 00 00 00 00 pour un diagnostic rapide."
+
+User: "Combien pour une vidange ?"
+Toi: "Une vidange démarre généralement autour de 89€ selon votre véhicule. Le garage établit un devis gratuit. Souhaitez-vous prendre rendez-vous ?"
+
+User: "Quels sont vos horaires ?"
+Toi: "Le garage est ouvert du lundi au vendredi de 8h à 19h, et le samedi de 9h à 17h. Souhaitez-vous passer ?"
+
+User: "Ma voiture ne démarre plus"
+Toi: "Je comprends, c'est embêtant. Le mieux est d'appeler directement le garage au 04 00 00 00 00 pour organiser un dépannage rapidement."
+
+# RAPPEL FINAL
+Tu es l'assistante du Garage Martin Lyon. Tu es professionnelle, humaine, brève. Tu accompagnes le client sans jamais te substituer au mécanicien. Tu termines toujours par une action.`;
+
+// =====================================================
+// FONCTION PRINCIPALE
+// =====================================================
+export default async function handler(req) {
+if (req.method !== 'POST') {
+return new Response(JSON.stringify({ error: 'Method not allowed' }), {
+status: 405,
+headers: { 'content-type': 'application/json' },
+});
 }
 
 try {
-// 1. Rate limiting
-const ip = getIp(req);
-if (isRateLimited(ip)) {
-return res.status(429).json({
-ok: false,
-error: "Trop de messages. Réessayez dans 1 minute.",
-retryAfter: 60
-});
+const body = await req.json();
+const { messages } = body;
+
+// Validation messages
+if (!Array.isArray(messages) || messages.length === 0) {
+return new Response(
+JSON.stringify({
+reply: "Bonjour. Comment puis-je vous aider aujourd'hui ?",
+}),
+{ status: 200, headers: { 'content-type': 'application/json' } }
+);
 }
 
-// 2. ✅ FIX CRITIQUE : ANTHROPIC_API_KEY (nom officiel Anthropic)
-// Support des 2 noms pour rétrocompatibilité
-const apiKey = process.env.ANTHROPIC_API_KEY || process.env.CLAUDE_API_KEY;
+// Limite historique (10 derniers messages)
+const recentMessages = messages.slice(-10).map((m) => ({
+role: m.role === 'assistant' ? 'assistant' : 'user',
+content: String(m.content || '').slice(0, 500),
+}));
 
-if (!apiKey) {
-console.error("❌ Aucune clé API configurée (ANTHROPIC_API_KEY ou CLAUDE_API_KEY)");
-return res.status(500).json({
-ok: false,
-error: "Configuration serveur. Contactez le garage directement."
-});
+// Vérification clé API
+if (!process.env.ANTHROPIC_API_KEY) {
+console.error('ANTHROPIC_API_KEY manquante');
+return new Response(
+JSON.stringify({
+reply:
+"Je rencontre une difficulté technique. Vous pouvez contacter directement le garage au 04 00 00 00 00.",
+}),
+{ status: 200, headers: { 'content-type': 'application/json' } }
+);
 }
 
-// DEBUG : log pour vérifier que la clé est bien chargée
-console.log("✅ Clé API détectée, longueur:", apiKey.length);
-
-// 3. Parse body
-const body = req.body || {};
-const message = sanitize(body.message, MAX_MESSAGE_LENGTH);
-const sessionId = sanitize(body.sessionId, 100);
-
-if (!message) {
-return res.status(400).json({ ok: false, error: "Message requis" });
-}
-
-// 4. System prompt
-const systemPrompt = `Tu es l'assistante virtuelle d'un garage automobile à Lyon (démo).
-
-TON RÔLE :
-- Accueillir chaleureusement le client
-- Comprendre son besoin (panne, RDV, prix, info)
-- Donner une réponse courte et claire
-- Toujours inviter à appeler le garage pour les cas concrets
-
-STYLE :
-- Français naturel et professionnel
-- 1 à 3 phrases maximum
-- Vouvoie toujours
-- Ne mentionne JAMAIS que tu es une IA
-- Pour les pannes, propose un rappel rapide
-- Pour les prix, donne un ordre de grandeur si possible
-
-CONTEXTE DU GARAGE (démo) :
-- Garage Martin Lyon, 123 rue de la République, 69008 Lyon
-- Téléphone : 04 00 00 00 00 (numéro fictif)
-- Horaires : Lun-Ven 8h-19h, Sam 9h-17h, Dim fermé
-- Spécialités : entretien, réparation, pneus, climatisation, diagnostic
-- Toutes marques, devis gratuit, garantie 1 an pièces+main-d'œuvre
-
-RÈGLES IMPORTANTES :
-- Tu ne fais JAMAIS de diagnostic technique précis
-- Tu invites toujours à appeler pour les cas concrets
-- Tu ne promets jamais un prix exact, juste des ordres de grandeur
-- Pour les pannes urgentes : suggère un rappel rapide`;
-
-// 5. Appel API Anthropic
-console.log("📤 Envoi requête à Anthropic API...");
-
-const claudeResponse = await fetch("https://api.anthropic.com/v1/messages", {
-method: "POST",
+// Appel Claude API
+const response = await fetch('https://api.anthropic.com/v1/messages', {
+method: 'POST',
 headers: {
-"x-api-key": apiKey,
-"anthropic-version": "2023-06-01",
-"content-type": "application/json"
+'content-type': 'application/json',
+'x-api-key': process.env.ANTHROPIC_API_KEY,
+'anthropic-version': '2023-06-01',
 },
 body: JSON.stringify({
-model: "claude-haiku-4-5-20251001",
+model: 'claude-haiku-4-5-20251001',
 max_tokens: 200,
-system: systemPrompt,
-messages: [
-{ role: "user", content: message }
-]
-})
+temperature: 0.4,
+system: SYSTEM_PROMPT,
+messages: recentMessages,
+}),
 });
 
-console.log("📥 Réponse Anthropic - Status:", claudeResponse.status);
-
-if (!claudeResponse.ok) {
-const errorText = await claudeResponse.text();
-console.error("❌ Erreur Anthropic API:", claudeResponse.status, errorText);
-
-// Messages d'erreur spécifiques selon le code
-let userMessage = "Le service IA est temporairement indisponible. Contactez le garage au 04 00 00 00 00.";
-
-if (claudeResponse.status === 401) {
-userMessage = "Erreur d'authentification API. Vérifiez la clé.";
-} else if (claudeResponse.status === 429) {
-userMessage = "Limite API atteinte. Réessayez dans 1 minute.";
-} else if (claudeResponse.status === 400) {
-userMessage = "Erreur de configuration (modèle ou crédit). Vérifiez votre compte Anthropic.";
+if (!response.ok) {
+const errorText = await response.text();
+console.error('Erreur Claude API:', response.status, errorText);
+return new Response(
+JSON.stringify({
+reply:
+"Je rencontre une difficulté momentanée. Pouvez-vous reformuler ?",
+}),
+{ status: 200, headers: { 'content-type': 'application/json' } }
+);
 }
 
-return res.status(502).json({
-ok: false,
-error: userMessage,
-debug: { status: claudeResponse.status }
+const data = await response.json();
+const reply =
+data?.content?.[0]?.text ||
+"Je peux vous aider sur les rendez-vous, horaires, tarifs ou une panne. Que souhaitez-vous ?";
+
+return new Response(JSON.stringify({ reply }), {
+status: 200,
+headers: { 'content-type': 'application/json' },
 });
-}
-
-const data = await claudeResponse.json();
-const reply = data?.content?.[0]?.text?.trim() || "Bonjour, comment puis-je vous aider ?";
-
-console.log("✅ Réponse générée avec succès");
-
-const intentData = detectIntent(message);
-
-return res.status(200).json({
-ok: true,
-reply,
-intent: intentData.intent,
-urgent: intentData.urgent,
-sessionId
-});
-
-} catch (error) {
-console.error("❌ chat-garage error:", error.message, error.stack);
-return res.status(500).json({
-ok: false,
-error: "Erreur serveur. Contactez le garage au 04 00 00 00 00.",
-debug: error.message
-});
+} catch (err) {
+console.error('Erreur fonction chat:', err);
+return new Response(
+JSON.stringify({
+reply:
+"Je rencontre une difficulté technique. Vous pouvez contacter directement le garage au 04 00 00 00 00.",
+}),
+{ status: 200, headers: { 'content-type': 'application/json' } }
+);
 }
 }
+
