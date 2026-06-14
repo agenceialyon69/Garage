@@ -232,6 +232,10 @@ border-radius:var(--radius-sm);color:var(--text);font:inherit;font-size:.92rem;o
 }
 input:focus,textarea:focus{border-color:var(--accent)}
 textarea{min-height:100px;resize:vertical}
+.hp-field{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.consent-row{display:flex;gap:10px;align-items:flex-start;margin:12px 0 4px;font-size:.82rem;color:var(--muted)}
+.consent-row input{width:auto;margin-top:3px;flex-shrink:0}
+.consent-row label{cursor:pointer}
 .form-status{
 font-size:.88rem;padding:10px;border-radius:var(--radius-sm);text-align:center;display:none;
 }
@@ -514,6 +518,15 @@ Vous échangez directement avec la personne qui crée votre site.
 <div>
 <label for="email">Email</label>
 <input id="email" type="email" name="email" placeholder="optionnel" />
+</div>
+<!-- Honeypot anti-bot : invisible pour les humains, ne pas remplir -->
+<div class="hp-field" aria-hidden="true">
+<label for="company_website">Ne pas remplir ce champ</label>
+<input id="company_website" type="text" name="company_website" tabindex="-1" autocomplete="off" />
+</div>
+<div class="consent-row">
+<input id="consent" type="checkbox" name="consent" required />
+<label for="consent">J'accepte d'être recontacté concernant ma demande. Mes coordonnées sont utilisées uniquement à cette fin et ne sont jamais cédées à des tiers.</label>
 </div>
 <button class="btn btn-primary" type="submit" style="width:100%;justify-content:center">Envoyer</button>
 <div class="form-status" id="formStatus"></div>

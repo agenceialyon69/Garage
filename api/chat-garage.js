@@ -2,6 +2,8 @@
 // Chat garage - COPIE EXACTE de l'architecture Claire qui fonctionne
 // Runtime edge + Response API + gestion gracieuse des erreurs (toujours 200)
 
+import { isAllowedOrigin, rateLimit, tooMany, forbidden } from './_utils.js';
+
 export const config = {
 runtime: 'edge',
 };
@@ -97,6 +99,17 @@ headers: { 'content-type': 'application/json' },
 });
 }
 
+// Anti-proxy ouvert : refuse les requêtes hors de notre domaine.
+if (!isAllowedOrigin(req)) {
+return forbidden();
+}
+
+// Anti-abus : limite par IP (protège la facture Anthropic).
+const rl = await rateLimit(req, 'chat', 20, 60);
+if (!rl.allowed) {
+return tooMany('Vous avez envoyé trop de messages. Merci de patienter une minute.');
+}
+
 try {
 const body = await req.json();
 const { messages } = body;
@@ -129,8 +142,13 @@ reply:
 );
 }
 
-// Appel Claude API
-const response = await fetch('https://api.anthropic.com/v1/messages', {
+// Appel Claude API (avec timeout serveur pour ne pas laisser la fonction pendre)
+const upstreamController = new AbortController();
+const upstreamTimer = setTimeout(() => upstreamController.abort(), 15000);
+
+let response;
+try {
+response = await fetch('https://api.anthropic.com/v1/messages', {
 method: 'POST',
 headers: {
 'content-type': 'application/json',
@@ -144,11 +162,15 @@ temperature: 0.4,
 system: SYSTEM_PROMPT,
 messages: recentMessages,
 }),
+signal: upstreamController.signal,
 });
+} finally {
+clearTimeout(upstreamTimer);
+}
 
 if (!response.ok) {
-const errorText = await response.text();
-console.error('Erreur Claude API:', response.status, errorText);
+// On ne logge que le statut (pas le corps) pour éviter toute fuite dans les logs.
+console.error('Erreur Claude API, statut:', response.status);
 return new Response(
 JSON.stringify({
 reply:
