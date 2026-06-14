@@ -3,389 +3,710 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Garage Martin Lyon — Démo · Entretien et réparation auto</title>
-<meta name="description" content="Démonstration fictive d'un site pour garage à Lyon." />
+<title>Garage Martin Lyon — Entretien & réparation auto toutes marques | Lyon 8ème</title>
+<meta name="description" content="Garage automobile indépendant à Lyon 8ème. Entretien, vidange, freins, pneus, climatisation et diagnostic toutes marques. Devis gratuit, garantie 1 an, RDV rapide." />
+<meta name="theme-color" content="#0b1220" />
 <meta name="robots" content="noindex,nofollow">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Garage Martin Lyon — Votre garage de confiance">
+<meta property="og:description" content="Entretien, réparation et pneus toutes marques à Lyon. Devis gratuit, garantie 1 an.">
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23dc2626'/><text x='50' y='68' font-size='58' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'>M</text></svg>">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "AutoRepair",
+  "name": "Garage Martin Lyon",
+  "image": "https://garage-martin-lyon.fr/og.jpg",
+  "telephone": "+33400000000",
+  "email": "contact@garage-martin-lyon.fr",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "123 rue de la République",
+    "addressLocality": "Lyon",
+    "postalCode": "69008",
+    "addressCountry": "FR"
+  },
+  "priceRange": "€€",
+  "areaServed": ["Lyon", "Vénissieux", "Bron", "Saint-Priest"],
+  "openingHoursSpecification": [
+    {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "08:00", "closes": "19:00"},
+    {"@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "09:00", "closes": "17:00"}
+  ],
+  "aggregateRating": {"@type": "AggregateRating", "ratingValue": "4.8", "reviewCount": "127"}
+}
+</script>
 
 <style>
 :root{
---bg:#f8fafc; --surface:#fff; --text:#0f172a; --muted:#475569;
---line:#e2e8f0; --primary:#dc2626; --primary-dark:#b91c1c;
---success:#16a34a; --whatsapp:#25d366; --warning:#f59e0b;
---shadow:0 10px 30px rgba(0,0,0,.08); --radius:14px; --max:1140px;
+  --ink:#0b0f19; --navy:#0b1220; --navy-2:#111a2e;
+  --body:#3b475c; --muted:#64748b; --muted-2:#94a3b8;
+  --bg:#ffffff; --soft:#f6f8fb; --soft-2:#eef2f7;
+  --line:#e6e9ef; --line-2:#dfe4ec;
+  --brand:#dc2626; --brand-dark:#b91c1c; --brand-soft:#fef2f2;
+  --gold:#f59e0b; --success:#16a34a; --whatsapp:#25d366;
+  --shadow-sm:0 1px 2px rgba(15,23,42,.06), 0 1px 3px rgba(15,23,42,.04);
+  --shadow:0 8px 24px rgba(15,23,42,.08);
+  --shadow-lg:0 24px 60px rgba(15,23,42,.16);
+  --radius:18px; --radius-sm:12px; --radius-lg:26px; --max:1180px;
+  --font:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{
-font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Inter,sans-serif;
-background:var(--bg);color:var(--text);line-height:1.6;
+  font-family:var(--font);background:var(--bg);color:var(--body);
+  line-height:1.65;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
 }
 a{color:inherit;text-decoration:none}
-.wrap{width:min(var(--max),calc(100% - 32px));margin:0 auto}
+img,svg{display:block;max-width:100%}
+h1,h2,h3,h4{color:var(--ink);line-height:1.12;letter-spacing:-.025em;font-weight:800}
+.wrap{width:min(var(--max),calc(100% - 40px));margin:0 auto}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;font-size:.78rem;font-weight:700;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--brand);margin-bottom:14px;
+}
+.eyebrow::before{content:"";width:22px;height:2px;background:var(--brand);border-radius:2px}
+.center{text-align:center}
+.center .eyebrow{justify-content:center}
 
-.demo-banner{
-background:#fef3c7;border-bottom:2px solid var(--warning);
-padding:10px 16px;text-align:center;font-size:.9rem;
-color:#78350f;font-weight:600;
-}
-.demo-banner a{color:#b45309;text-decoration:underline;margin-left:6px}
-
-header{
-background:var(--surface);border-bottom:1px solid var(--line);
-padding:14px 0;position:sticky;top:0;z-index:40;
-}
-.nav{display:flex;align-items:center;justify-content:space-between;gap:16px}
-.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.1rem}
-.brand-icon{
-width:38px;height:38px;background:var(--primary);color:#fff;
-border-radius:9px;display:flex;align-items:center;justify-content:center;
-font-weight:900;font-size:1rem;
-}
-.brand-name span{color:var(--primary);font-weight:900}
-.nav-links{display:flex;gap:22px;align-items:center;font-size:.95rem}
-.nav-links a{color:var(--muted)}
-.nav-links a:hover{color:var(--primary)}
-.nav-phone{
-background:var(--primary);color:#fff!important;
-padding:9px 18px;border-radius:8px;font-weight:700;font-size:.92rem;
-}
-
-.hero{
-background:linear-gradient(135deg,#dc2626 0%,#b91c1c 100%);
-color:#fff;padding:64px 0;position:relative;overflow:hidden;
-}
-.hero::before{
-content:"🔧";position:absolute;font-size:20rem;opacity:.05;
-right:-50px;top:-30px;
-}
-.hero-grid{
-display:grid;grid-template-columns:1.2fr .8fr;gap:36px;
-align-items:center;position:relative;z-index:1;
-}
-.hero h1{
-font-size:clamp(2rem,4.5vw,3.4rem);line-height:1.1;
-font-weight:900;letter-spacing:-.02em;margin-bottom:18px;
-}
-.hero-lead{font-size:1.1rem;opacity:.95;margin-bottom:24px;max-width:55ch}
-.hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:24px}
+/* Buttons */
 .btn{
-padding:14px 22px;border-radius:10px;font-weight:700;font-size:.96rem;
-display:inline-flex;align-items:center;gap:8px;border:0;cursor:pointer;
-transition:transform .15s;
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  padding:15px 26px;border-radius:999px;font-weight:700;font-size:.98rem;
+  border:1.5px solid transparent;cursor:pointer;transition:transform .18s ease,box-shadow .18s ease,background .18s;white-space:nowrap;
 }
-.btn:hover{transform:translateY(-1px)}
-.btn-white{background:#fff;color:var(--primary)}
-.btn-whatsapp{background:var(--whatsapp);color:#0a0f1c}
-.hero-trust{display:flex;gap:18px;flex-wrap:wrap;font-size:.88rem;opacity:.92}
-.hero-trust span{display:flex;align-items:center;gap:6px}
+.btn svg{width:18px;height:18px}
+.btn-primary{background:var(--brand);color:#fff;box-shadow:0 10px 24px rgba(220,38,38,.30)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 34px rgba(220,38,38,.40);background:var(--brand-dark)}
+.btn-wa{background:var(--whatsapp);color:#06281a;box-shadow:0 10px 24px rgba(37,211,102,.28)}
+.btn-wa:hover{transform:translateY(-2px)}
+.btn-ghost{background:transparent;color:var(--ink);border-color:var(--line-2)}
+.btn-ghost:hover{border-color:var(--ink);transform:translateY(-2px)}
+.btn-light{background:#fff;color:var(--ink)}
+.btn-light:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg)}
+.btn-lg{padding:17px 32px;font-size:1.02rem}
 
-.hero-card{
-background:#fff;border-radius:14px;padding:24px;color:var(--text);
-box-shadow:0 20px 50px rgba(0,0,0,.25);
+/* Demo banner */
+.demo-banner{
+  background:#fff7ed;border-bottom:1px solid #fed7aa;color:#9a3412;
+  font-size:.82rem;font-weight:600;text-align:center;padding:9px 16px;
 }
-.hero-card h3{font-size:1.05rem;margin-bottom:14px;color:var(--primary)}
-.hero-card-row{
-display:flex;justify-content:space-between;padding:10px 0;
-border-bottom:1px solid var(--line);
-}
-.hero-card-row:last-child{border-bottom:none}
-.hero-card-row span:first-child{color:var(--muted);font-size:.92rem}
-.hero-card-row span:last-child{font-weight:700;font-size:.92rem}
-.hero-card-row.open span:last-child{color:var(--success)}
+.demo-banner a{color:var(--brand-dark);text-decoration:underline;margin-left:6px;font-weight:700}
 
-section{padding:54px 0}
-.section-title{
-font-size:clamp(1.6rem,3.5vw,2.2rem);font-weight:800;
-margin-bottom:12px;letter-spacing:-.02em;text-align:center;
+/* Header */
+header{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.86);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:14px 0}
+.brand{display:flex;align-items:center;gap:11px;font-weight:800;font-size:1.12rem;color:var(--ink)}
+.brand-mark{
+  width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,var(--brand),var(--brand-dark));
+  color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:1.15rem;
+  box-shadow:0 6px 16px rgba(220,38,38,.3);
 }
-.section-title span{color:var(--primary)}
-.section-lead{color:var(--muted);text-align:center;max-width:60ch;margin:0 auto 36px}
+.brand small{display:block;font-size:.68rem;font-weight:600;color:var(--muted);letter-spacing:.04em}
+.nav-links{display:flex;gap:28px;align-items:center}
+.nav-links a{color:var(--body);font-size:.94rem;font-weight:600;transition:color .15s}
+.nav-links a:hover{color:var(--brand)}
+.nav-actions{display:flex;align-items:center;gap:12px}
+.nav-phone{display:flex;align-items:center;gap:8px;font-weight:800;color:var(--ink);font-size:.98rem}
+.nav-phone svg{width:17px;height:17px;color:var(--brand)}
 
-.services{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+/* Hero */
+.hero{position:relative;background:radial-gradient(120% 120% at 80% 0%,#16243f 0%,var(--navy) 55%);color:#fff;overflow:hidden;padding:84px 0 96px}
+.hero::after{content:"";position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Cpath d='M0 39h40M39 0v40' stroke='%23ffffff' stroke-opacity='0.035' stroke-width='1'/%3E%3C/svg%3E");pointer-events:none}
+.hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center}
+.hero h1{color:#fff;font-size:clamp(2.3rem,5vw,3.7rem);font-weight:800;margin-bottom:20px}
+.hero h1 .hl{color:#fca5a5;background:linear-gradient(120deg,#f87171,#fca5a5);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.hero p{font-size:1.14rem;color:#cbd5e1;max-width:52ch;margin-bottom:30px}
+.hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:30px}
+.hero-trust{display:flex;gap:26px;flex-wrap:wrap}
+.hero-trust .ht{display:flex;align-items:center;gap:10px}
+.hero-trust .ht b{color:#fff;font-size:1.32rem;font-weight:800;letter-spacing:-.02em}
+.hero-trust .ht span{font-size:.82rem;color:#94a3b8;line-height:1.25}
+.stars{display:inline-flex;gap:2px;color:var(--gold)}
+.stars svg{width:15px;height:15px}
+
+/* Hero card */
+.hero-card{background:#fff;border-radius:var(--radius-lg);padding:26px;color:var(--body);box-shadow:var(--shadow-lg)}
+.hero-card-top{display:flex;align-items:center;justify-content:space-between;padding-bottom:16px;border-bottom:1px solid var(--line);margin-bottom:6px}
+.hero-card-top h3{font-size:1.08rem}
+.badge-open{display:inline-flex;align-items:center;gap:7px;background:#ecfdf5;color:#047857;font-size:.8rem;font-weight:700;padding:6px 12px;border-radius:999px}
+.badge-open .pulse{width:8px;height:8px;border-radius:50%;background:#10b981;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.45;transform:scale(.8)}}
+.hc-row{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--soft-2)}
+.hc-row:last-of-type{border-bottom:none}
+.hc-row .l{display:flex;align-items:center;gap:11px;color:var(--muted);font-size:.92rem}
+.hc-row .l svg{width:18px;height:18px;color:var(--brand)}
+.hc-row .v{font-weight:700;color:var(--ink);font-size:.92rem}
+.hero-card .btn{width:100%;margin-top:16px}
+
+/* Trust strip */
+.trust-strip{background:var(--soft);border-bottom:1px solid var(--line);padding:22px 0}
+.trust-strip .wrap{display:flex;align-items:center;justify-content:center;gap:14px 40px;flex-wrap:wrap}
+.trust-strip span{font-size:.86rem;font-weight:700;color:var(--muted);letter-spacing:.02em;text-transform:uppercase}
+.trust-logos{display:flex;gap:30px;flex-wrap:wrap;justify-content:center;align-items:center;opacity:.62}
+.trust-logos b{font-size:1.18rem;font-weight:800;color:var(--ink);letter-spacing:.04em}
+
+/* Sections */
+section{padding:80px 0}
+.section-head{max-width:62ch;margin:0 auto 48px}
+.section-head h2{font-size:clamp(1.8rem,3.6vw,2.6rem);margin-bottom:14px}
+.section-head p{font-size:1.08rem;color:var(--muted)}
+
+/* Services */
+.services{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
 .service{
-background:var(--surface);border:1px solid var(--line);
-border-radius:var(--radius);padding:24px;transition:transform .15s,box-shadow .15s;
+  position:relative;background:var(--bg);border:1px solid var(--line);border-radius:var(--radius);
+  padding:28px;transition:transform .2s ease,box-shadow .2s ease,border-color .2s;overflow:hidden;
 }
-.service:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
-.service-icon{
-width:48px;height:48px;background:#fee2e2;color:var(--primary);
-border-radius:10px;display:flex;align-items:center;justify-content:center;
-font-size:1.4rem;margin-bottom:14px;
-}
-.service h3{font-size:1.05rem;margin-bottom:6px}
-.service p{color:var(--muted);font-size:.92rem;margin-bottom:10px}
-.service-price{
-display:inline-block;background:#fef3c7;color:#92400e;
-padding:4px 10px;border-radius:6px;font-size:.85rem;font-weight:700;
-}
+.service:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:transparent}
+.service-ic{width:54px;height:54px;border-radius:14px;background:var(--brand-soft);color:var(--brand);display:flex;align-items:center;justify-content:center;margin-bottom:18px}
+.service-ic svg{width:26px;height:26px}
+.service h3{font-size:1.16rem;margin-bottom:8px}
+.service p{color:var(--muted);font-size:.94rem;margin-bottom:16px}
+.service-price{display:inline-flex;align-items:center;gap:6px;font-size:.86rem;font-weight:700;color:var(--ink);background:var(--soft);padding:6px 13px;border-radius:999px}
+.service-price b{color:var(--brand)}
 
-.why-us{
-background:var(--surface);padding:54px 0;
-border-top:1px solid var(--line);border-bottom:1px solid var(--line);
-}
-.why-list{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+/* Why / values */
+.why{background:var(--soft)}
+.why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
 .why-item{text-align:center;padding:14px}
-.why-icon{font-size:2.2rem;margin-bottom:10px}
-.why-item h4{font-size:1rem;margin-bottom:6px}
-.why-item p{color:var(--muted);font-size:.88rem}
+.why-ic{width:62px;height:62px;margin:0 auto 16px;border-radius:50%;background:#fff;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;color:var(--brand);box-shadow:var(--shadow-sm)}
+.why-ic svg{width:28px;height:28px}
+.why-item h4{font-size:1.06rem;margin-bottom:6px}
+.why-item p{color:var(--muted);font-size:.92rem}
 
-.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-.info-card{
-background:var(--surface);border:1px solid var(--line);
-border-radius:var(--radius);padding:26px;
-}
-.info-card h3{font-size:1.1rem;margin-bottom:14px;color:var(--primary)}
-.hours-row{
-display:flex;justify-content:space-between;padding:10px 0;
-border-bottom:1px solid var(--line);font-size:.94rem;
-}
+/* Process */
+.process{background:var(--navy);color:#fff}
+.process .section-head h2{color:#fff}
+.process .section-head p{color:#94a3b8}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;position:relative}
+.step{background:var(--navy-2);border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);padding:30px 26px}
+.step-n{width:46px;height:46px;border-radius:12px;background:linear-gradient(135deg,var(--brand),var(--brand-dark));color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:1.2rem;margin-bottom:18px}
+.step h3{color:#fff;font-size:1.18rem;margin-bottom:8px}
+.step p{color:#94a3b8;font-size:.95rem}
+
+/* Reviews */
+.reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.review{background:var(--bg);border:1px solid var(--line);border-radius:var(--radius);padding:26px;box-shadow:var(--shadow-sm)}
+.review .stars{margin-bottom:14px}
+.review p{color:var(--body);font-size:.98rem;margin-bottom:18px}
+.reviewer{display:flex;align-items:center;gap:12px}
+.avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#cbd5e1,#94a3b8);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800}
+.reviewer b{display:block;color:var(--ink);font-size:.94rem}
+.reviewer span{font-size:.82rem;color:var(--muted)}
+
+/* Stats band */
+.stats{background:linear-gradient(135deg,var(--brand),var(--brand-dark));color:#fff;padding:60px 0}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center}
+.stat b{display:block;font-size:clamp(2.2rem,4vw,3rem);font-weight:900;letter-spacing:-.03em}
+.stat span{font-size:.94rem;opacity:.9}
+
+/* Info / contact */
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.info-card{background:var(--bg);border:1px solid var(--line);border-radius:var(--radius);padding:30px;box-shadow:var(--shadow-sm)}
+.info-card h3{font-size:1.24rem;margin-bottom:20px;display:flex;align-items:center;gap:10px}
+.info-card h3 svg{width:22px;height:22px;color:var(--brand)}
+.hours-row{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--soft-2);font-size:.96rem}
 .hours-row:last-child{border-bottom:none}
-.hours-row .closed{color:#dc2626;font-weight:600}
+.hours-row.today{font-weight:700}
+.hours-row .open{color:var(--success);font-weight:700}
+.hours-row .closed{color:var(--brand);font-weight:600}
+.contact-row{display:flex;align-items:flex-start;gap:14px;padding:14px 0;border-bottom:1px solid var(--soft-2)}
+.contact-row:last-child{border-bottom:none}
+.contact-ic{flex-shrink:0;width:42px;height:42px;border-radius:11px;background:var(--brand-soft);color:var(--brand);display:flex;align-items:center;justify-content:center}
+.contact-ic svg{width:19px;height:19px}
+.contact-row strong{display:block;color:var(--ink);font-size:.96rem}
+.contact-row span{color:var(--muted);font-size:.9rem}
+.map-card{margin-top:18px;border-radius:var(--radius-sm);overflow:hidden;border:1px solid var(--line);position:relative;height:170px;background:
+  linear-gradient(0deg,rgba(11,18,32,.04),rgba(11,18,32,.04)),
+  repeating-linear-gradient(45deg,#eef2f7 0 18px,#e6e9ef 18px 19px),
+  repeating-linear-gradient(-45deg,#eef2f7 0 18px,#e6e9ef 18px 19px)}
+.map-pin{position:absolute;top:50%;left:50%;transform:translate(-50%,-100%);color:var(--brand)}
+.map-pin svg{width:38px;height:38px;filter:drop-shadow(0 6px 10px rgba(0,0,0,.25))}
+.map-card .btn{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);padding:9px 18px;font-size:.86rem}
 
-.contact-info-row{
-display:flex;align-items:center;gap:14px;padding:12px 0;
-border-bottom:1px solid var(--line);
-}
-.contact-info-row:last-child{border-bottom:none}
-.contact-info-icon{
-width:36px;height:36px;background:#fee2e2;color:var(--primary);
-border-radius:50%;display:flex;align-items:center;justify-content:center;
-}
-.contact-info-text strong{display:block;font-size:.95rem}
-.contact-info-text span{color:var(--muted);font-size:.86rem}
+/* FAQ */
+.faq{background:var(--soft)}
+.faq-list{max-width:780px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
+.faq-item{background:#fff;border:1px solid var(--line);border-radius:var(--radius-sm);overflow:hidden}
+.faq-q{width:100%;display:flex;align-items:center;justify-content:space-between;gap:14px;padding:20px 22px;text-align:left;font-weight:700;color:var(--ink);font-size:1.02rem;background:none;border:none;cursor:pointer}
+.faq-q .ic{flex-shrink:0;width:24px;height:24px;border-radius:50%;background:var(--brand-soft);color:var(--brand);display:flex;align-items:center;justify-content:center;font-weight:900;transition:transform .2s}
+.faq-item.open .faq-q .ic{transform:rotate(45deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease}
+.faq-a p{padding:0 22px 20px;color:var(--muted);font-size:.96rem}
 
-.cta-section{
-background:linear-gradient(135deg,var(--primary),var(--primary-dark));
-color:#fff;padding:54px 0;text-align:center;
-}
-.cta-section h2{font-size:clamp(1.6rem,3.5vw,2.2rem);font-weight:900;margin-bottom:14px}
-.cta-section p{max-width:50ch;margin:0 auto 28px;opacity:.95}
-.cta-section .hero-cta{justify-content:center;margin-bottom:0}
+/* Final CTA */
+.final{position:relative;background:radial-gradient(120% 140% at 50% 0%,#16243f,var(--navy));color:#fff;text-align:center;overflow:hidden}
+.final h2{color:#fff;font-size:clamp(1.9rem,4vw,2.8rem);margin-bottom:14px}
+.final p{color:#cbd5e1;max-width:50ch;margin:0 auto 30px;font-size:1.08rem}
+.final .hero-cta{justify-content:center}
 
-footer{
-background:#0f172a;color:#94a3b8;padding:36px 0 24px;
-font-size:.88rem;text-align:center;
-}
-footer a{color:#7dd3fc}
+/* Footer */
+footer{background:var(--ink);color:#94a3b8;padding:56px 0 30px;font-size:.9rem}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:34px;margin-bottom:36px}
+.foot-brand{display:flex;align-items:center;gap:11px;color:#fff;font-weight:800;font-size:1.1rem;margin-bottom:14px}
+footer h5{color:#fff;font-size:.82rem;text-transform:uppercase;letter-spacing:.1em;margin-bottom:14px}
+footer ul{list-style:none}
+footer li{padding:5px 0}
+footer a:hover{color:#fff}
+.foot-bottom{border-top:1px solid rgba(255,255,255,.1);padding-top:22px;text-align:center;font-size:.82rem;color:#64748b}
+.foot-bottom .seo{max-width:80ch;margin:0 auto 14px;line-height:1.6}
 
-@media (max-width:900px){
-.hero-grid,.services,.why-list,.info-grid{grid-template-columns:1fr}
-.services{grid-template-columns:repeat(2,1fr)}
-.nav-links{display:none}
-.hero{padding:48px 0}
+/* Sticky mobile */
+.sticky-mobile{position:fixed;left:12px;right:12px;bottom:12px;z-index:90;display:none;gap:10px}
+.sticky-mobile a{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;padding:15px;border-radius:14px;font-weight:800;box-shadow:0 12px 30px rgba(0,0,0,.25)}
+.sticky-mobile svg{width:18px;height:18px}
+.sm-call{background:var(--brand);color:#fff}
+.sm-wa{background:var(--whatsapp);color:#06281a}
+
+/* Reveal animation */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}*{scroll-behavior:auto!important}}
+
+/* Responsive */
+@media (max-width:960px){
+  .hero-grid{grid-template-columns:1fr;gap:36px}
+  .services,.reviews-grid,.steps{grid-template-columns:1fr 1fr}
+  .why-grid,.stats-grid{grid-template-columns:1fr 1fr}
+  .info-grid,.foot-grid{grid-template-columns:1fr}
+  .nav-links{display:none}
 }
-@media (max-width:560px){
-.services,.why-list{grid-template-columns:1fr}
-.hero-cta{flex-direction:column}
-.btn{width:100%;justify-content:center}
+@media (max-width:600px){
+  section{padding:56px 0}
+  .services,.reviews-grid,.steps,.why-grid{grid-template-columns:1fr}
+  .stats-grid{grid-template-columns:1fr 1fr;gap:30px 16px}
+  .hero{padding:60px 0 72px}
+  .hero-cta .btn{width:100%}
+  .nav-phone span{display:none}
+  .sticky-mobile{display:flex}
+  body{padding-bottom:80px}
 }
 </style>
 </head>
 <body>
 
 <div class="demo-banner">
-⚠️ Cette page est un EXEMPLE FICTIF de démonstration · pas un vrai garage
-<a href="/">← Voir mes services</a>
+  Exemple fictif de démonstration — pas un vrai garage.
+  <a href="/">← Voir mes services</a>
 </div>
 
 <header>
-<div class="wrap nav">
-<a class="brand" href="#">
-<div class="brand-icon">M</div>
-<div class="brand-name">Garage <span>Martin</span> Lyon</div>
-</a>
-<nav class="nav-links">
-<a href="#services">Services</a>
-<a href="#horaires">Horaires</a>
-<a href="#contact">Contact</a>
-</nav>
-<a class="nav-phone" href="tel:+33400000000">📞 04 00 00 00 00</a>
-</div>
+  <div class="wrap nav">
+    <a class="brand" href="#top">
+      <span class="brand-mark">M</span>
+      <span>Garage Martin Lyon<small>Entretien · Réparation · Pneus</small></span>
+    </a>
+    <nav class="nav-links">
+      <a href="#services">Services</a>
+      <a href="#process">Comment ça marche</a>
+      <a href="#avis">Avis</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="nav-actions">
+      <a class="nav-phone" href="tel:+33400000000">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></svg>
+        <span>04 00 00 00 00</span>
+      </a>
+      <a class="btn btn-primary" href="#contact">Devis gratuit</a>
+    </div>
+  </div>
 </header>
 
-<main>
+<main id="top">
 
+<!-- HERO -->
 <section class="hero">
-<div class="wrap hero-grid">
-<div>
-<h1>Votre garage de confiance à Lyon depuis 2018</h1>
-<p class="hero-lead">
-Entretien, réparation, pneus, climatisation, contrôle technique. Nous prenons soin de votre véhicule comme du nôtre.
-</p>
-<div class="hero-cta">
-<a class="btn btn-white" href="tel:+33400000000">📞 Appeler</a>
-<a class="btn btn-whatsapp" href="https://wa.me/33400000000">💬 WhatsApp</a>
-</div>
-<div class="hero-trust">
-<span>⭐ 4.8/5 sur 127 avis Google</span>
-<span>🛠️ Toutes marques</span>
-<span>📍 Lyon 8ème</span>
-</div>
-</div>
-<div class="hero-card">
-<h3>📅 Aujourd'hui</h3>
-<div class="hero-card-row open">
-<span>Statut</span>
-<span>● Ouvert maintenant</span>
-</div>
-<div class="hero-card-row">
-<span>Horaires</span>
-<span>8h00 - 19h00</span>
-</div>
-<div class="hero-card-row">
-<span>Devis gratuit</span>
-<span>✓ Sous 24h</span>
-</div>
-<div class="hero-card-row">
-<span>Toutes marques</span>
-<span>✓ Oui</span>
-</div>
-</div>
-</div>
+  <div class="wrap hero-grid">
+    <div class="reveal in">
+      <span class="eyebrow" style="color:#fca5a5">Garage indépendant · Lyon 8ème</span>
+      <h1>Votre voiture entre <span class="hl">de bonnes mains</span>, depuis 2009.</h1>
+      <p>Entretien, réparation, pneus et climatisation — toutes marques. Diagnostic honnête, devis gratuit et garantie 1 an pièces et main-d'œuvre.</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary btn-lg" href="tel:+33400000000">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></svg>
+          Appeler le garage
+        </a>
+        <a class="btn btn-wa btn-lg" href="https://wa.me/33400000000" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm5.8 14.13c-.25.7-1.44 1.33-1.99 1.39-.51.06-1.15.08-1.86-.12-.43-.13-.98-.31-1.69-.61-2.97-1.28-4.91-4.27-5.06-4.47-.15-.2-1.21-1.61-1.21-3.07s.77-2.18 1.04-2.48c.27-.3.59-.37.79-.37.2 0 .39.002.56.01.18.008.42-.07.66.5.25.6.84 2.06.91 2.21.07.15.12.33.02.53-.1.2-.15.32-.3.5-.15.18-.31.39-.44.53-.15.15-.3.31-.13.6.17.3.76 1.25 1.63 2.02 1.12.99 2.06 1.3 2.36 1.45.3.15.47.13.65-.08.18-.2.74-.86.94-1.16.2-.3.39-.25.66-.15.27.1 1.71.81 2 .96.3.15.5.22.56.35.07.13.07.7-.18 1.4Z"/></svg>
+          WhatsApp
+        </a>
+      </div>
+      <div class="hero-trust">
+        <div class="ht">
+          <div>
+            <span class="stars" aria-label="4.8 sur 5">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 17.27 6.18 3.73-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 17.27 6.18 3.73-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 17.27 6.18 3.73-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 17.27 6.18 3.73-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 17.27 6.18 3.73-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            </span>
+            <b>4,8/5</b>
+            <span>127 avis Google</span>
+          </div>
+        </div>
+        <div class="ht"><div><b>15 ans</b><span>d'expérience</span></div></div>
+        <div class="ht"><div><b>1 an</b><span>de garantie</span></div></div>
+      </div>
+    </div>
+
+    <aside class="hero-card reveal in" aria-label="Informations du jour">
+      <div class="hero-card-top">
+        <h3>Aujourd'hui</h3>
+        <span class="badge-open"><span class="pulse"></span> Ouvert</span>
+      </div>
+      <div class="hc-row">
+        <span class="l"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> Horaires</span>
+        <span class="v">8h00 – 19h00</span>
+      </div>
+      <div class="hc-row">
+        <span class="l"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 11 3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg> Devis gratuit</span>
+        <span class="v">sous 24h</span>
+      </div>
+      <div class="hc-row">
+        <span class="l"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.4 8.7 8 10 4.6-1.3 8-5 8-10V5l-8-3Z"/></svg> Toutes marques</span>
+        <span class="v">Oui</span>
+      </div>
+      <div class="hc-row">
+        <span class="l"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h18M3 6h18M3 18h18"/></svg> Véhicule de prêt</span>
+        <span class="v">sur demande</span>
+      </div>
+      <a class="btn btn-primary" href="#contact">Prendre rendez-vous</a>
+    </aside>
+  </div>
 </section>
 
+<!-- TRUST STRIP -->
+<div class="trust-strip">
+  <div class="wrap">
+    <span>Toutes marques entretenues</span>
+    <div class="trust-logos">
+      <b>Renault</b><b>Peugeot</b><b>Citroën</b><b>Volkswagen</b><b>BMW</b><b>Audi</b><b>Toyota</b>
+    </div>
+  </div>
+</div>
+
+<!-- SERVICES -->
 <section id="services">
-<div class="wrap">
-<h2 class="section-title">Nos <span>services</span></h2>
-<p class="section-lead">Tout ce dont votre véhicule a besoin.</p>
-<div class="services">
-<div class="service">
-<div class="service-icon">🛢️</div>
-<h3>Vidange & entretien</h3>
-<p>Vidange, filtres, courroie, plaquettes.</p>
-<span class="service-price">À partir de 89€</span>
-</div>
-<div class="service">
-<div class="service-icon">🔧</div>
-<h3>Réparation mécanique</h3>
-<p>Embrayage, transmission, moteur.</p>
-<span class="service-price">Devis gratuit</span>
-</div>
-<div class="service">
-<div class="service-icon">🛞</div>
-<h3>Pneumatiques</h3>
-<p>Montage, équilibrage, géométrie.</p>
-<span class="service-price">À partir de 25€/pneu</span>
-</div>
-<div class="service">
-<div class="service-icon">❄️</div>
-<h3>Climatisation</h3>
-<p>Recharge gaz, diagnostic, désinfection.</p>
-<span class="service-price">À partir de 65€</span>
-</div>
-<div class="service">
-<div class="service-icon">📋</div>
-<h3>Contrôle technique</h3>
-<p>Préparation et contre-visite.</p>
-<span class="service-price">Diagnostic 39€</span>
-</div>
-<div class="service">
-<div class="service-icon">🚗</div>
-<h3>Diagnostic électronique</h3>
-<p>Voyants moteur, lecture OBD.</p>
-<span class="service-price">À partir de 49€</span>
-</div>
-</div>
-</div>
+  <div class="wrap">
+    <div class="section-head center reveal">
+      <span class="eyebrow">Nos prestations</span>
+      <h2>Tout ce dont votre véhicule a besoin</h2>
+      <p>Un atelier équipé et des mécaniciens certifiés pour l'entretien comme pour les réparations les plus techniques.</p>
+    </div>
+    <div class="services">
+      <article class="service reveal">
+        <div class="service-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 22h13v-7H3zM16 18h2a3 3 0 0 0 3-3v-3l-3-4M6 15V9a2 2 0 0 1 2-2h4l4 4"/><path d="M9 7V4h3"/></svg></div>
+        <h3>Vidange & entretien</h3>
+        <p>Vidange, filtres, courroie de distribution, plaquettes et révision constructeur.</p>
+        <span class="service-price">dès <b>89€</b></span>
+      </article>
+      <article class="service reveal">
+        <div class="service-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18v3h3l6.3-6.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2-2 2.6-2.6Z"/></svg></div>
+        <h3>Réparation mécanique</h3>
+        <p>Embrayage, transmission, distribution, moteur. Diagnostic précis avant toute intervention.</p>
+        <span class="service-price">devis <b>gratuit</b></span>
+      </article>
+      <article class="service reveal">
+        <div class="service-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.2"/></svg></div>
+        <h3>Pneumatiques</h3>
+        <p>Montage, équilibrage, géométrie et stockage saisonnier. Toutes dimensions en stock.</p>
+        <span class="service-price">dès <b>25€</b>/pneu</span>
+      </article>
+      <article class="service reveal">
+        <div class="service-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M2 12h20M5 5l14 14M19 5 5 19"/></svg></div>
+        <h3>Climatisation</h3>
+        <p>Recharge de gaz, contrôle d'étanchéité, désinfection et diagnostic du circuit.</p>
+        <span class="service-price">dès <b>65€</b></span>
+      </article>
+      <article class="service reveal">
+        <div class="service-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M9 7h6M9 11h6M9 15h4"/></svg></div>
+        <h3>Pré-contrôle technique</h3>
+        <p>Préparation au contrôle technique et prise en charge complète des contre-visites.</p>
+        <span class="service-price">diagnostic <b>39€</b></span>
+      </article>
+      <article class="service reveal">
+        <div class="service-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l2 5 4-14 2 7h6"/></svg></div>
+        <h3>Diagnostic électronique</h3>
+        <p>Lecture des codes défaut (OBD), voyants moteur, électronique embarquée.</p>
+        <span class="service-price">dès <b>49€</b></span>
+      </article>
+    </div>
+  </div>
 </section>
 
-<section class="why-us">
-<div class="wrap">
-<h2 class="section-title">Pourquoi nous <span>choisir</span></h2>
-<p class="section-lead">Une équipe de mécaniciens expérimentés.</p>
-<div class="why-list">
-<div class="why-item">
-<div class="why-icon">🛠️</div>
-<h4>15 ans d'expérience</h4>
-<p>Mécaniciens certifiés toutes marques</p>
-</div>
-<div class="why-item">
-<div class="why-icon">💰</div>
-<h4>Prix transparents</h4>
-<p>Devis détaillé avant intervention</p>
-</div>
-<div class="why-item">
-<div class="why-icon">⚡</div>
-<h4>Rapidité</h4>
-<p>Diagnostic en 30 min, RDV sous 48h</p>
-</div>
-<div class="why-item">
-<div class="why-icon">🔒</div>
-<h4>Garantie 1 an</h4>
-<p>Sur pièces et main-d'œuvre</p>
-</div>
-</div>
-</div>
+<!-- WHY -->
+<section class="why">
+  <div class="wrap">
+    <div class="section-head center reveal">
+      <span class="eyebrow">Pourquoi nous choisir</span>
+      <h2>Un garage en qui vous pouvez avoir confiance</h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-item reveal">
+        <div class="why-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.4 8.7 8 10 4.6-1.3 8-5 8-10V5l-8-3Z"/><path d="m9 12 2 2 4-4"/></svg></div>
+        <h4>Garantie 1 an</h4>
+        <p>Sur les pièces et la main-d'œuvre, sans exception.</p>
+      </div>
+      <div class="why-item reveal">
+        <div class="why-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+        <h4>Prix transparents</h4>
+        <p>Devis détaillé et validé avant toute intervention.</p>
+      </div>
+      <div class="why-item reveal">
+        <div class="why-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+        <h4>Rapidité</h4>
+        <p>Diagnostic en 30 min et rendez-vous sous 48h.</p>
+      </div>
+      <div class="why-item reveal">
+        <div class="why-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/></svg></div>
+        <h4>Équipe certifiée</h4>
+        <p>Des mécaniciens formés, toutes marques.</p>
+      </div>
+    </div>
+  </div>
 </section>
 
-<section id="horaires">
-<div class="wrap">
-<h2 class="section-title">Informations <span>pratiques</span></h2>
-<p class="section-lead">Pour votre prochaine visite.</p>
-<div class="info-grid">
-<div class="info-card">
-<h3>🕐 Horaires d'ouverture</h3>
-<div class="hours-row"><span>Lundi - Vendredi</span><span style="color:var(--success);font-weight:700">8h00 - 19h00</span></div>
-<div class="hours-row"><span>Samedi</span><span>9h00 - 17h00</span></div>
-<div class="hours-row"><span>Dimanche</span><span class="closed">Fermé</span></div>
-</div>
-<div class="info-card" id="contact">
-<h3>📍 Nous trouver</h3>
-<div class="contact-info-row">
-<div class="contact-info-icon">📍</div>
-<div class="contact-info-text">
-<strong>Adresse</strong>
-<span>123 rue de la République, 69008 Lyon</span>
-</div>
-</div>
-<div class="contact-info-row">
-<div class="contact-info-icon">📞</div>
-<div class="contact-info-text">
-<strong>Téléphone</strong>
-<span>04 00 00 00 00</span>
-</div>
-</div>
-<div class="contact-info-row">
-<div class="contact-info-icon">📧</div>
-<div class="contact-info-text">
-<strong>Email</strong>
-<span>contact@garage-martin-lyon.fr</span>
-</div>
-</div>
-<div class="contact-info-row">
-<div class="contact-info-icon">🚌</div>
-<div class="contact-info-text">
-<strong>Accès</strong>
-<span>Métro Sans Souci · Bus C16, C25</span>
-</div>
-</div>
-</div>
-</div>
-</div>
+<!-- PROCESS -->
+<section class="process" id="process">
+  <div class="wrap">
+    <div class="section-head center reveal">
+      <span class="eyebrow">Comment ça marche</span>
+      <h2>Trois étapes, zéro mauvaise surprise</h2>
+      <p>De la prise de contact à la reprise du véhicule, vous savez toujours où vous en êtes.</p>
+    </div>
+    <div class="steps">
+      <div class="step reveal">
+        <div class="step-n">1</div>
+        <h3>Vous nous contactez</h3>
+        <p>Par téléphone, WhatsApp ou le formulaire. On identifie votre besoin et on fixe un créneau.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-n">2</div>
+        <h3>Diagnostic & devis</h3>
+        <p>On inspecte votre véhicule et on vous remet un devis clair. Rien n'est lancé sans votre accord.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-n">3</div>
+        <h3>Réparation garantie</h3>
+        <p>Intervention par nos mécaniciens, puis reprise du véhicule avec 1 an de garantie.</p>
+      </div>
+    </div>
+  </div>
 </section>
 
-<section class="cta-section">
-<div class="wrap">
-<h2>Besoin d'un devis ou d'un RDV ?</h2>
-<p>Contactez-nous, réponse sous 24h ouvrées.</p>
-<div class="hero-cta">
-<a class="btn btn-white" href="tel:+33400000000">📞 04 00 00 00 00</a>
-<a class="btn btn-whatsapp" href="https://wa.me/33400000000">💬 WhatsApp</a>
-</div>
-</div>
+<!-- REVIEWS -->
+<section id="avis">
+  <div class="wrap">
+    <div class="section-head center reveal">
+      <span class="eyebrow">Avis clients</span>
+      <h2>Ils nous font confiance</h2>
+      <p>Note moyenne de 4,8/5 sur 127 avis Google vérifiés.</p>
+    </div>
+    <div class="reviews-grid">
+      <article class="review reveal">
+        <span class="stars">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 17.27 6.18 3.73-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 17.27 6.18 3.73-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 17.27 6.18 3.73-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 17.27 6.18 3.73-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 17.27 6.18 3.73-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+        </span>
+        <p>« Diagnostic honnête et devis respecté à l'euro près. On m'a même évité un changement de pièce inutile. Je recommande les yeux fermés. »</p>
+        <div class="reviewer"><span class="avatar">SL</span><div><b>Sophie L.</b><span>Cliente depuis 3 ans</span></div></div>
+      </article>
+      <article class="review reveal">
+        <span class="stars">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 17.27 6.18 3.73-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 17.27 6.18 3.73-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 17.27 6.18 3.73-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 17.27 6.18 3.73-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 17.27 6.18 3.73-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+        </span>
+        <p>« Pneus changés en moins d'une heure, prix imbattable et accueil au top. Enfin un garage où je me sens en confiance. »</p>
+        <div class="reviewer"><span class="avatar">KD</span><div><b>Karim D.</b><span>Avis Google</span></div></div>
+      </article>
+      <article class="review reveal">
+        <span class="stars">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 17.27 6.18 3.73-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 17.27 6.18 3.73-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 17.27 6.18 3.73-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 17.27 6.18 3.73-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 17.27 6.18 3.73-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+        </span>
+        <p>« Mon voyant moteur s'est allumé un vendredi soir, ils m'ont reçue le samedi matin. Réactivité et professionnalisme. »</p>
+        <div class="reviewer"><span class="avatar">MB</span><div><b>Marie B.</b><span>Cliente fidèle</span></div></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats">
+  <div class="wrap stats-grid">
+    <div class="stat reveal"><b>15+</b><span>ans d'expérience</span></div>
+    <div class="stat reveal"><b>4 800+</b><span>véhicules entretenus</span></div>
+    <div class="stat reveal"><b>4,8/5</b><span>note moyenne</span></div>
+    <div class="stat reveal"><b>1 an</b><span>de garantie</span></div>
+  </div>
+</section>
+
+<!-- CONTACT / INFO -->
+<section id="contact">
+  <div class="wrap">
+    <div class="section-head center reveal">
+      <span class="eyebrow">Infos pratiques</span>
+      <h2>Nous trouver & nous contacter</h2>
+    </div>
+    <div class="info-grid">
+      <div class="info-card reveal">
+        <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> Horaires d'ouverture</h3>
+        <div class="hours-row today"><span>Lundi – Vendredi</span><span class="open">8h00 – 19h00</span></div>
+        <div class="hours-row"><span>Samedi</span><span>9h00 – 17h00</span></div>
+        <div class="hours-row"><span>Dimanche</span><span class="closed">Fermé</span></div>
+        <div style="margin-top:18px;display:flex;gap:10px;flex-wrap:wrap">
+          <a class="btn btn-primary" href="tel:+33400000000" style="flex:1">Appeler maintenant</a>
+          <a class="btn btn-wa" href="https://wa.me/33400000000" target="_blank" rel="noopener" style="flex:1">WhatsApp</a>
+        </div>
+      </div>
+      <div class="info-card reveal">
+        <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg> Coordonnées</h3>
+        <div class="contact-row">
+          <span class="contact-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></span>
+          <div><strong>Adresse</strong><span>123 rue de la République, 69008 Lyon</span></div>
+        </div>
+        <div class="contact-row">
+          <span class="contact-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></svg></span>
+          <div><strong>Téléphone</strong><span>04 00 00 00 00</span></div>
+        </div>
+        <div class="contact-row">
+          <span class="contact-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg></span>
+          <div><strong>Email</strong><span>contact@garage-martin-lyon.fr</span></div>
+        </div>
+        <div class="contact-row">
+          <span class="contact-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6v12M16 6v12"/><rect x="3" y="6" width="18" height="12" rx="2"/></svg></span>
+          <div><strong>Accès</strong><span>Métro Sans Souci · Bus C16, C25 · Parking sur place</span></div>
+        </div>
+        <div class="map-card">
+          <span class="map-pin"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg></span>
+          <a class="btn btn-light" href="https://www.google.com/maps/search/?api=1&query=123+rue+de+la+République+69008+Lyon" target="_blank" rel="noopener">Voir sur Google Maps</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+  <div class="wrap">
+    <div class="section-head center reveal">
+      <span class="eyebrow">FAQ</span>
+      <h2>Questions fréquentes</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item reveal">
+        <button class="faq-q">Faut-il prendre rendez-vous ? <span class="ic">+</span></button>
+        <div class="faq-a"><p>C'est conseillé pour être sûr d'être pris en charge rapidement, mais nous accueillons aussi les urgences. Appelez-nous, on trouve toujours une solution.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q">Le devis est-il vraiment gratuit ? <span class="ic">+</span></button>
+        <div class="faq-a"><p>Oui, totalement. Nous établissons un devis détaillé gratuit et aucune intervention n'est lancée sans votre accord écrit ou verbal.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q">Travaillez-vous sur toutes les marques ? <span class="ic">+</span></button>
+        <div class="faq-a"><p>Oui. Nos mécaniciens sont formés et équipés pour intervenir sur toutes les marques, françaises comme étrangères, essence, diesel et hybride.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q">Proposez-vous un véhicule de prêt ? <span class="ic">+</span></button>
+        <div class="faq-a"><p>Sur demande et selon disponibilité, nous mettons à disposition un véhicule de courtoisie pour les immobilisations les plus longues.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q">Quels moyens de paiement acceptez-vous ? <span class="ic">+</span></button>
+        <div class="faq-a"><p>Carte bancaire, espèces et virement. Un paiement en plusieurs fois est possible pour les réparations importantes, parlez-en avec nous.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final">
+  <div class="wrap reveal">
+    <h2>Un bruit, un voyant, un entretien à prévoir ?</h2>
+    <p>Ne laissez pas un petit problème en devenir un gros. Contactez-nous, on s'occupe du reste.</p>
+    <div class="hero-cta">
+      <a class="btn btn-light btn-lg" href="tel:+33400000000">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></svg>
+        04 00 00 00 00
+      </a>
+      <a class="btn btn-wa btn-lg" href="https://wa.me/33400000000" target="_blank" rel="noopener">Écrire sur WhatsApp</a>
+    </div>
+  </div>
 </section>
 
 </main>
 
 <footer>
-<div class="wrap">
-<p style="margin-bottom:10px"><strong>Garage Martin Lyon</strong> — 123 rue de la République, 69008 Lyon</p>
-<p style="margin-bottom:14px">📞 04 00 00 00 00 · 📧 contact@garage-martin-lyon.fr</p>
-<p style="font-size:.82rem;color:#64748b;border-top:1px solid #1e293b;padding-top:14px;margin-top:14px">
-⚠️ Cette page est un EXEMPLE FICTIF de démonstration créé par <a href="/">Mamadou Tafsir Bah</a>. Aucune information n'est réelle.
-</p>
-</div>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-brand"><span class="brand-mark">M</span> Garage Martin Lyon</div>
+        <p>Votre garage automobile indépendant à Lyon 8ème. Entretien, réparation et pneus toutes marques, avec la transparence en plus.</p>
+      </div>
+      <div>
+        <h5>Services</h5>
+        <ul>
+          <li><a href="#services">Vidange & entretien</a></li>
+          <li><a href="#services">Réparation mécanique</a></li>
+          <li><a href="#services">Pneumatiques</a></li>
+          <li><a href="#services">Climatisation</a></li>
+          <li><a href="#services">Diagnostic électronique</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Contact</h5>
+        <ul>
+          <li>123 rue de la République, 69008 Lyon</li>
+          <li><a href="tel:+33400000000">04 00 00 00 00</a></li>
+          <li><a href="mailto:contact@garage-martin-lyon.fr">contact@garage-martin-lyon.fr</a></li>
+          <li>Lun–Ven 8h-19h · Sam 9h-17h</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <p class="seo">Garage automobile à Lyon 8ème — entretien, vidange, freins, embrayage, pneus, climatisation et diagnostic électronique toutes marques. Intervention rapide à Lyon, Vénissieux, Bron et Saint-Priest. Devis gratuit et garantie 1 an.</p>
+      <p>Exemple fictif de démonstration réalisé par <a href="/">Mamadou Tafsir Bah</a> — aucune information n'est réelle. © 2026</p>
+    </div>
+  </div>
 </footer>
+
+<div class="sticky-mobile">
+  <a class="sm-call" href="tel:+33400000000">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></svg>
+    Appeler
+  </a>
+  <a class="sm-wa" href="https://wa.me/33400000000" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Z"/></svg>
+    WhatsApp
+  </a>
+</div>
+
+<script>
+// FAQ accordion
+document.querySelectorAll('.faq-q').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    var item = btn.closest('.faq-item');
+    var open = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(function(i){
+      i.classList.remove('open');
+      i.querySelector('.faq-a').style.maxHeight = null;
+    });
+    if(!open){
+      item.classList.add('open');
+      var a = item.querySelector('.faq-a');
+      a.style.maxHeight = a.scrollHeight + 'px';
+    }
+  });
+});
+
+// Scroll reveal
+var io = new IntersectionObserver(function(entries){
+  entries.forEach(function(e){
+    if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+  });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal:not(.in)').forEach(function(el){ io.observe(el); });
+</script>
 
 </body>
 </html>
