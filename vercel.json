@@ -4,6 +4,10 @@
 {
 "source": "/garage",
 "destination": "/garage.html"
+},
+{
+"source": "/mentions-legales",
+"destination": "/legal.html"
 }
 ],
 "headers": [
